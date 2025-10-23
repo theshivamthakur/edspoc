@@ -16,33 +16,13 @@
       "cards",
       "card",
       "columns",
-      "fragment",
-      "footer",
-      "header"
+      "fragment"
     ]
   },
   {
-    "id": "sidebarMenuItems",
+    "id": "cards",
     "components": [
-      "sidebarMenuItem"
-    ]
-  },
-  {
-    "id": "footerBrandListItems",
-    "components": [
-      "footerBrandListItem"
-    ]
-  },
-  {
-    "id": "footerSocialItems",
-    "components": [
-      "footerSocialItem"
-    ]
-  },
-  {
-    "id": "footerLeftLinks",
-    "components": [
-      "footerLeftLink"
+      "card"
     ]
   },
   {
@@ -58,16 +38,6 @@
       "image",
       "button",
       "title"
-    ]
-  },
-  {
-    "id": "header",
-    "components": [
-      "sidebarMenuItem",
-      "footerBrandListItem",
-      "footerLeftLink",
-      "footerSocialItem",
-      "footerBrandListItem"
     ]
   }
 ]

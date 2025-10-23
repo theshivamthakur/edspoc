@@ -51,9 +51,7 @@
         "cards",
         "card",
         "columns",
-        "fragment",
-        "footer",
-        "header"
+        "fragment"
       ]
     }
   ]
