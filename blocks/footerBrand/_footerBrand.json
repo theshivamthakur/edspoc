@@ -1,0 +1,106 @@
+{
+        "definitions": [
+            {
+                "title": "Footer Brand",
+                "id": "footerBrand",
+                "icon": "footer-brand-icon",
+                "category": "content",
+                "plugins": {
+                    "xwalk": {
+                        "page": {
+                            "resourceType": "core/franklin/components/block/v1/block",
+                            "template": {
+                                "model": "footerBrand",
+                                "name": "Footer Brand"
+                            }
+                        }
+                    }
+                }
+            }
+        ],
+        "models": [
+            {
+                "id": "footerBrand",
+                "description": "Block model for Footer Brand rendering",
+                "fields": [
+                    {
+                        "component": "aem-content",
+                        "label": "Primary Logo Link",
+                        "name": "primaryLogoLink",
+                        "valueType": "string"
+                    },
+                    {
+                        "component": "reference",
+                        "label": "Primary Logo Image",
+                        "name": "primaryLogoImage",
+                        "valueType": "string"
+                    },
+                    {
+                        "component": "reference",
+                        "label": "Secondary Logo Image",
+                        "name": "secondaryLogoImage",
+                        "valueType": "string"
+                    },
+                    {
+                        "component": "container",
+                        "fields": [
+                            {
+                                "component": "aem-content",
+                                "label": "Link Href",
+                                "name": "linkHref",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "text",
+                                "label": "Link Text",
+                                "name": "linkText",
+                                "valueType": "string"
+                            }
+                        ],
+                        "label": "Footer Navigation Links",
+                        "multi": true,
+                        "name": "footerNavLinks"
+                    },
+                    {
+                        "component": "container",
+                        "fields": [
+                            {
+                                "component": "aem-content",
+                                "label": "Social Link Href",
+                                "name": "socialLinkHref",
+                                "valueType": "string"
+                            },
+                            {
+                                "component": "reference",
+                                "label": "Social Icon Image",
+                                "name": "socialIconImage",
+                                "valueType": "string"
+                            }
+                        ],
+                        "label": "Footer Social Links",
+                        "multi": true,
+                        "name": "footerSocialLinks"
+                    },
+                    {
+                        "component": "aem-content",
+                        "label": "Left Section Link Href",
+                        "name": "leftSectionLinkHref",
+                        "valueType": "string"
+                    },
+                    {
+                        "component": "text",
+                        "label": "Left Section Link Text",
+                        "name": "leftSectionLinkText",
+                        "valueType": "string"
+                    },
+                    {
+                        "component": "text",
+                        "label": "Copyright Text",
+                        "name": "copyrightText",
+                        "valueType": "string"
+                    }
+                ]
+            }
+        ],
+        "filters": []
+    }
