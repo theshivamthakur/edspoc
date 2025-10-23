@@ -16,7 +16,7 @@
       "cards",
       "columns",
       "fragment",
-      "header"
+      "footer"
     ]
   },
   {
@@ -56,15 +56,6 @@
       "image",
       "button",
       "title"
-    ]
-  },
-  {
-    "id": "header",
-    "components": [
-      "sidebarMenuItem",
-      "footerBrandListItem",
-      "footerSocialItem",
-      "footerLeftLink"
     ]
   }
 ]
