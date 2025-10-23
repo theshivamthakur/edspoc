@@ -14,9 +14,9 @@
       "title",
       "hero",
       "cards",
-      "card",
       "columns",
-      "fragment"
+      "fragment",
+      "header"
     ]
   },
   {
