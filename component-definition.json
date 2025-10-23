@@ -218,6 +218,51 @@
           }
         },
         {
+          "title": "FooterBrandListItem",
+          "id": "footerBrandListItem",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "model": "footerBrandListItem",
+                  "name": "FooterBrandListItem"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "FooterSocialItem",
+          "id": "footerSocialItem",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "model": "footerSocialItem",
+                  "name": "FooterSocialItem"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "FooterLeftLink",
+          "id": "footerLeftLink",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "model": "footerLeftLink",
+                  "name": "FooterLeftLink"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Hero",
           "id": "hero",
           "plugins": {
