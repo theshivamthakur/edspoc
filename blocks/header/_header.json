@@ -170,27 +170,9 @@
   ],
   "filters": [
     {
-      "id": "sidebarMenuItems",
+      "id": "header",
       "components": [
         "sidebarMenuItem"
-      ]
-    },
-    {
-      "id": "footerBrandListItems",
-      "components": [
-        "footerBrandListItem"
-      ]
-    },
-    {
-      "id": "footerSocialItems",
-      "components": [
-        "footerSocialItem"
-      ]
-    },
-    {
-      "id": "footerLeftLinks",
-      "components": [
-        "footerLeftLink"
       ]
     }
   ]
