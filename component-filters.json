@@ -63,7 +63,11 @@
   {
     "id": "header",
     "components": [
-      "sidebarMenuItem"
+      "sidebarMenuItem",
+      "footerBrandListItem",
+      "footerLeftLink",
+      "footerSocialItem",
+      "footerBrandListItem"
     ]
   }
 ]
