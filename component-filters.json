@@ -15,7 +15,8 @@
       "hero",
       "cards",
       "columns",
-      "fragment"
+      "fragment",
+      "footerBrand"
     ]
   },
   {
@@ -37,6 +38,30 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "sidebarMenuItems",
+    "components": [
+      "sidebarMenuItem"
+    ]
+  },
+  {
+    "id": "footerBrandListItems",
+    "components": [
+      "footerBrandListItem"
+    ]
+  },
+  {
+    "id": "footerSocialItems",
+    "components": [
+      "footerSocialItem"
+    ]
+  },
+  {
+    "id": "footerLeftLinks",
+    "components": [
+      "footerLeftLink"
     ]
   }
 ]
