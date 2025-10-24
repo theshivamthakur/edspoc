@@ -3,7 +3,7 @@ export default function decorate(block) {
   
   // Get all direct child rows
   const rows = [...block.children];
-  
+    console.log('Decorating:', rows);
   rows.forEach((row) => {
     const cell = row.firstElementChild;
     if (!cell) return;
