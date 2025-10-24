@@ -1,82 +1,115 @@
-export default async function decorate(b) {
-  b.classList.add('header-block');
+export default function decorate(block) {
+  block.classList.add('header-block');
   
-  // Handle directly authored content first
-  const appName = b.querySelector('[data-aue-prop="appName"]');
-  if(appName) appName.classList.add('header-block-app-name');
+  // Get all direct child rows
+  const rows = [...block.children];
   
-  const logoImg = b.querySelector('[data-aue-prop="logoImg"]');
-  if(logoImg) logoImg.classList.add('header-block-logo-img');
-  
-  const loginBtn = b.querySelector('.button-container a');
-  if(loginBtn) loginBtn.classList.add('header-block-login-btn');
-  
-  const copyright = b.querySelector('[data-aue-prop="copyright"]');
-  if(copyright) copyright.classList.add('header-block-copyright');
-  
-  // Wait for child components to load
-  const childComponents = b.querySelectorAll('[data-aue-type="component"]');
-  
-  // Use MutationObserver to watch for when child components are populated
-  const observer = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-      if (mutation.addedNodes.length) {
-        decorateChildComponents(b);
-      }
-    });
+  rows.forEach((row) => {
+    const cell = row.firstElementChild;
+    if (!cell) return;
+    
+    // Handle app name
+    const appName = cell.querySelector('[data-aue-prop="appName"]');
+    if (appName) {
+      appName.classList.add('header-block-app-name');
+    }
+    
+    // Handle logo
+    const logoImg = cell.querySelector('[data-aue-prop="logoImg"]');
+    if (logoImg) {
+      logoImg.classList.add('header-block-logo-img');
+    }
+    
+    // Handle login link
+    const loginLink = cell.querySelector('.button-container a');
+    if (loginLink) {
+      loginLink.classList.add('header-block-login-btn');
+    }
+    
+    // Handle copyright
+    const copyright = cell.querySelector('[data-aue-prop="copyright"]');
+    if (copyright) {
+      copyright.classList.add('header-block-copyright');
+    }
+    
+    // Handle multifield containers
+    const componentContainer = cell.querySelector('[data-aue-type="component"]');
+    if (componentContainer) {
+      const resource = componentContainer.getAttribute('data-aue-resource');
+      
+      // Set up observer for when content loads
+      const observer = new MutationObserver(() => {
+        decorateMultifield(componentContainer, resource);
+      });
+      
+      observer.observe(componentContainer, { 
+        childList: true, 
+        subtree: true 
+      });
+      
+      // Also try immediate decoration
+      setTimeout(() => decorateMultifield(componentContainer, resource), 100);
+      setTimeout(() => decorateMultifield(componentContainer, resource), 500);
+      setTimeout(() => decorateMultifield(componentContainer, resource), 1000);
+    }
   });
-  
-  childComponents.forEach(component => {
-    observer.observe(component, { childList: true, subtree: true });
-  });
-  
-  // Also try decorating immediately in case they're already loaded
-  setTimeout(() => decorateChildComponents(b), 100);
-  
-  // Try again after a longer delay to catch slower loading components
-  setTimeout(() => decorateChildComponents(b), 500);
 }
 
-function decorateChildComponents(b) {
-  // Navigation menu items
-  const menuItems = b.querySelectorAll('.header-sidebar-menu-item');
-  menuItems.forEach(item => {
-    if (!item.classList.contains('header-block-menu-item')) {
+function decorateMultifield(container, resource) {
+  console.log('Decorating:', resource);
+console.log('Container HTML:', container.innerHTML);
+  if (!container.firstElementChild) return;
+  
+  // Navigation multifield
+  if (resource.includes('navigation')) {
+    // Each navigation item should be in a row > cell structure
+    const items = container.querySelectorAll(':scope > div > div');
+    items.forEach(item => {
       item.classList.add('header-block-menu-item');
-      const a = item.querySelector('a.header-sidebar-menu-link');
-      if(a) a.classList.add('header-block-menu-link');
-      const img = item.querySelector('img.header-sidebar-menu-icon');
-      if(img) img.classList.add('header-block-menu-icon');
-    }
-  });
+      
+      const link = item.querySelector('[data-aue-prop="menuLink"]');
+      if (link) {
+        const anchor = link.querySelector('a');
+        if (anchor) anchor.classList.add('header-block-menu-link');
+      }
+      
+      const icon = item.querySelector('[data-aue-prop="menuIcon"]');
+      if (icon) {
+        const img = icon.querySelector('img');
+        if (img) img.classList.add('header-block-menu-icon');
+      }
+    });
+  }
   
-  // Footer lists
-  const footerLists = b.querySelectorAll('.header-footer-list');
-  footerLists.forEach(list => {
-    if (!list.classList.contains('header-block-footer-list')) {
-      list.classList.add('header-block-footer-list');
-    }
-  });
+  // Footer menus multifield
+  if (resource.includes('footerMenus')) {
+    container.classList.add('header-block-footer-list');
+    
+    const items = container.querySelectorAll(':scope > div > div');
+    items.forEach(item => {
+      const link = item.querySelector('[data-aue-prop="footerLink"]');
+      if (link) {
+        const anchor = link.querySelector('a');
+        if (anchor) anchor.classList.add('header-block-footer-link');
+      }
+    });
+  }
   
-  const footerLinks = b.querySelectorAll('.header-footer-list-item--link');
-  footerLinks.forEach(link => {
-    if (!link.classList.contains('header-block-footer-link')) {
-      link.classList.add('header-block-footer-link');
-    }
-  });
-  
-  // Social links
-  const socialLinks = b.querySelectorAll('.header-footer-brand-right--link');
-  socialLinks.forEach(link => {
-    if (!link.classList.contains('header-block-social-link')) {
-      link.classList.add('header-block-social-link');
-    }
-  });
-  
-  const socialIcons = b.querySelectorAll('.header-footer-brand-right--link img');
-  socialIcons.forEach(img => {
-    if (!img.classList.contains('header-block-social-icon')) {
-      img.classList.add('header-block-social-icon');
-    }
-  });
+  // Social links multifield
+  if (resource.includes('socialLinks')) {
+    const items = container.querySelectorAll(':scope > div > div');
+    items.forEach(item => {
+      const link = item.querySelector('[data-aue-prop="socialLink"]');
+      if (link) {
+        const anchor = link.querySelector('a');
+        if (anchor) anchor.classList.add('header-block-social-link');
+      }
+      
+      const icon = item.querySelector('[data-aue-prop="socialIcon"]');
+      if (icon) {
+        const img = icon.querySelector('img');
+        if (img) img.classList.add('header-block-social-icon');
+      }
+    });
+  }
 }
