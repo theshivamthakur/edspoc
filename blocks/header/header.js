@@ -1,16 +1,24 @@
 export default function decorate(block) {
-  console.log('Total rows:', block.children.children.length);
-  
-  [...block.children].forEach((row, i) => {
-    console.log(`Row ${i}:`, row.outerHTML);
-    console.log(`Row ${i} has ${row.children.children.length} cells`);
+  console.log('Debugging EDS block structure...');
+  console.log('Total top-level children:', block.children.length);
+
+  function logStructure(element, level = 0) {
+    const indent = '  '.repeat(level);
+    const tagName = element.tagName ? element.tagName.toLowerCase() : 'text';
+    const content = element.textContent.trim().replace(/\s+/g, ' ').slice(0, 80);
+
+    console.log(`${indent}${tagName}: ${content ? `"${content}"` : '[empty]'}`);
     
-    [...row.children].forEach((child) => {
-      [...child.children].forEach((cell, j) => {
-      console.log(`  Cell ${j}:`, cell.innerHTML);
-    })
-    });
+    // Log dataset or attributes if useful for multifields
+    if (element.dataset && Object.keys(element.dataset).length) {
+      console.log(`${indent}  dataset:`, element.dataset);
+    }
+    
+    [...element.children].forEach(child => logStructure(child, level + 1));
+  }
+
+  [...block.children].forEach((child, i) => {
+    console.log(`\nRow ${i}:`);
+    logStructure(child, 1);
   });
-  
-  // Don't add any decoration yet, just log
 }
