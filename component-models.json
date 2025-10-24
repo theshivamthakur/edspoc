@@ -190,91 +190,13 @@
     ]
   },
   {
-    "id": "header",
+    "id": "sidebarMenuItem",
     "description": "",
     "fields": [
       {
         "component": "text",
         "label": "App Name",
         "name": "appName",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "sidebarMenuItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Text",
-        "name": "text",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Icon",
-        "name": "icon",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerBrandListItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Text",
-        "name": "text",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerSocialItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Social Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Icon",
-        "name": "icon",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerLeftLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Text",
-        "name": "text",
         "valueType": "string"
       }
     ]
