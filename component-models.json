@@ -223,7 +223,7 @@
         ],
         "label": "Navigation Menu",
         "multi": true,
-        "name": "navigation"
+        "name": "navigation/item"
       },
       {
         "component": "aem-content",
@@ -255,7 +255,7 @@
         ],
         "label": "Footer Menus",
         "multi": true,
-        "name": "footerMenus"
+        "name": "footerMenus/item"
       },
       {
         "component": "container",
@@ -275,7 +275,7 @@
         ],
         "label": "Social Links",
         "multi": true,
-        "name": "socialLinks"
+        "name": "socialLinks/item"
       },
       {
         "component": "text",
