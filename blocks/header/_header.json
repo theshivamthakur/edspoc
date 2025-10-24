@@ -46,12 +46,5 @@
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "header",
-      "components": [
-        "sidebarMenuItem"
-      ]
-    }
-  ]
+  "filters": []
 }
