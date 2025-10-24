@@ -50,7 +50,6 @@
             }
           ],
           "label": "Navigation Menu",
-          "multi": true,
           "name": "navigation/item"
         },
         {
@@ -82,7 +81,6 @@
             }
           ],
           "label": "Footer Menus",
-          "multi": true,
           "name": "footerMenus/item"
         },
         {
@@ -102,7 +100,6 @@
             }
           ],
           "label": "Social Links",
-          "multi": true,
           "name": "socialLinks/item"
         },
         {
