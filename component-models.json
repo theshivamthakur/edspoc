@@ -202,7 +202,7 @@
         "component": "container",
         "label": "Navigation Menu",
         "multi": true,
-        "name": "navigation",
+        "name": "block/navigation",
         "fields": [
           {
             "component": "aem-content",

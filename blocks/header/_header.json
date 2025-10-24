@@ -30,7 +30,7 @@
           "component": "container",
           "label": "Navigation Menu",
           "multi": true,
-          "name": "navigation",
+          "name": "block/navigation",
           "fields": [
             {
               "component": "aem-content",
@@ -66,7 +66,7 @@
         },
         {
           "component": "container",
-                    "label": "Footer Menus",
+          "label": "Footer Menus",
           "multi": true,
           "name": "footerMenus",
           "fields": [
