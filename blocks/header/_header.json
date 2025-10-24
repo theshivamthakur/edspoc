@@ -34,22 +34,26 @@
               "component": "aem-content",
               "label": "Menu Link",
               "name": "menuLink",
+              "value":"",
               "valueType": "string"
             },
             {
               "component": "text",
               "label": "Menu Label",
               "name": "menuLabel",
+              "value":"",
               "valueType": "string"
             },
             {
               "component": "aem-content",
               "label": "Menu Icon",
               "name": "menuIcon",
+               "value":"",
               "valueType": "string"
             }
           ],
           "label": "Navigation Menu",
+          "multi": true,
           "name": "navigation/item"
         },
         {
@@ -71,16 +75,19 @@
               "component": "aem-content",
               "label": "Footer Link",
               "name": "footerLink",
+               "value":"",
               "valueType": "string"
             },
             {
               "component": "text",
               "label": "Footer Label",
               "name": "footerLabel",
+               "value":"",
               "valueType": "string"
             }
           ],
           "label": "Footer Menus",
+          "multi": true,
           "name": "footerMenus/item"
         },
         {
@@ -90,17 +97,20 @@
               "component": "aem-content",
               "label": "Social Link",
               "name": "socialLink",
+               "value":"",
               "valueType": "string"
             },
             {
               "component": "aem-content",
               "label": "Social Icon",
               "name": "socialIcon",
+               "value":"",
               "valueType": "string"
             }
           ],
           "label": "Social Links",
-          "name": "socialLinks/item"
+          "multi": true,
+          "name": "socialLinks"
         },
         {
           "component": "text",
