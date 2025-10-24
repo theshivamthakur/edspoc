@@ -1,4 +1,7 @@
 export default function decorate(b){
+  console.log('Block element:', b);
+  console.log('Block innerHTML:', b.innerHTML);
+  console.log('Block children:', b.children);
   b.classList.add('header-block');
   const appName = b.querySelector('.header-app-name');
   if(appName) appName.classList.add('header-block-app-name');
