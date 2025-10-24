@@ -19,7 +19,6 @@
   "models": [
     {
       "id": "header",
-      "description": "",
       "fields": [
         {
           "component": "text",
@@ -29,6 +28,9 @@
         },
         {
           "component": "container",
+          "label": "Navigation Menu",
+          "multi": true,
+          "name": "navigation",
           "fields": [
             {
               "component": "aem-content",
@@ -48,10 +50,7 @@
               "name": "menuIcon",
               "valueType": "string"
             }
-          ],
-          "label": "Navigation Menu",
-          "multi": true,
-          "name": "navigation"
+          ]
         },
         {
           "component": "aem-content",
@@ -67,6 +66,9 @@
         },
         {
           "component": "container",
+                    "label": "Footer Menus",
+          "multi": true,
+          "name": "footerMenus",
           "fields": [
             {
               "component": "aem-content",
@@ -80,10 +82,7 @@
               "name": "footerLabel",
               "valueType": "string"
             }
-          ],
-          "label": "Footer Menus",
-          "multi": true,
-          "name": "footerMenus"
+          ]
         },
         {
           "component": "container",
