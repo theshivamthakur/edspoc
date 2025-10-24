@@ -30,7 +30,7 @@
           "component": "container",
           "label": "Navigation Menu",
           "multi": true,
-          "name": "navigation",
+          "name": "navigation/item0",
           "fields": [
             {
               "component": "aem-content",
@@ -68,7 +68,7 @@
           "component": "container",
           "label": "Footer Menus",
           "multi": true,
-          "name": "footerMenus",
+          "name": "footerMenus/item0",
           "fields": [
             {
               "component": "aem-content",
@@ -90,7 +90,7 @@
             {
               "component": "aem-content",
               "label": "Social Link",
-              "name": "socialLink",
+              "name": "socialLink/item",
               "valueType": "string"
             },
             {
@@ -102,7 +102,7 @@
           ],
           "label": "Social Links",
           "multi": true,
-          "name": "socialLinks"
+          "name": "socialLinks/item0"
         },
         {
           "component": "text",
