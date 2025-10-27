@@ -32,24 +32,25 @@
           "label": "Navigation Menu",
           "multi": true,
           "name": "navigation",
+          "valueType":"string[]",
           "fields": [
             {
               "component": "aem-content",
               "label": "Menu Link",
               "name": "../../menuLink",
-              "valueType": "string[]"
+              "valueType": "string"
             },
             {
               "component": "text",
               "label": "Menu Label",
               "name": "../../menuLabel",
-              "valueType": "string[]"
+              "valueType": "string"
             },
             {
               "component": "aem-content",
               "label": "Menu Icon",
               "name": "../../menuIcon",
-              "valueType": "string[]"
+              "valueType": "string"
             }
           ]
 
