@@ -204,24 +204,26 @@
         "label": "Navigation Menu",
         "multi": true,
         "name": "navigation",
-        "valueType": "string[]",
         "fields": [
           {
             "component": "aem-content",
             "label": "Menu Link",
-            "name": "../../menuLink",
+            "name": "menuLink",
+            "value": "",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "Menu Label",
-            "name": "../../menuLabel",
+            "name": "menuLabel",
+            "value": "",
             "valueType": "string"
           },
           {
             "component": "aem-content",
             "label": "Menu Icon",
-            "name": "../../menuIcon",
+            "name": "menuIcon",
+            "value": "",
             "valueType": "string"
           }
         ]
@@ -248,13 +250,13 @@
             "component": "aem-content",
             "label": "Footer Link",
             "name": "footerLink",
-            "valueType": "string[]"
+            "valueType": "string"
           },
           {
             "component": "text",
             "label": "Footer Label",
             "name": "footerLabel",
-            "valueType": "string[]"
+            "valueType": "string"
           }
         ]
       },
@@ -268,13 +270,13 @@
             "component": "aem-content",
             "label": "Social Link",
             "name": "socialLink",
-            "valueType": "string[]"
+            "valueType": "string"
           },
           {
             "component": "aem-content",
             "label": "Social Icon",
             "name": "socialIcon",
-            "valueType": "string[]"
+            "valueType": "string"
           }
         ]
       },
