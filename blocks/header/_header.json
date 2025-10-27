@@ -54,7 +54,7 @@
           ],
           "label": "Navigation Menu",
           "multi": true,
-          "name": "item/navigation"
+          "name": "navigation"
         },
         {
           "component": "aem-content",
