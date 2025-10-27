@@ -208,19 +208,19 @@
           {
             "component": "aem-content",
             "label": "Menu Link",
-            "name": "menuLink",
+            "name": "navigation/menuLink",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "Menu Label",
-            "name": "menuLabel",
+            "name": "navigation/menuLabel",
             "valueType": "string"
           },
           {
             "component": "aem-content",
             "label": "Menu Icon",
-            "name": "menuIcon",
+            "name": "navigation/menuIcon",
             "valueType": "string"
           }
         ]
@@ -246,7 +246,7 @@
           {
             "component": "aem-content",
             "label": "Footer Link",
-            "name": "footerLink",
+            "name": "footerMenus/footerLink",
             "valueType": "string"
           },
           {
