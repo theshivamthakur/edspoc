@@ -31,25 +31,25 @@
           "component": "container",
           "label": "Navigation Menu",
           "multi": true,
-          "name": "navigation",
+          "name": "navigation/item",
           "fields": [
             {
               "component": "aem-content",
               "label": "Menu Link",
               "name": "menuLink",
-              "valueType": "string"
+              "valueType": "string[]"
             },
             {
               "component": "text",
               "label": "Menu Label",
               "name": "menuLabel",
-              "valueType": "string"
+              "valueType": "string[]"
             },
             {
               "component": "aem-content",
               "label": "Menu Icon",
               "name": "menuIcon",
-              "valueType": "string"
+              "valueType": "string[]"
             }
           ]
 
@@ -70,19 +70,19 @@
           "component": "container",
           "label": "Footer Menus",
           "multi": true,
-          "name": "footerMenus",
+          "name": "footerMenus/item",
           "fields": [
             {
               "component": "aem-content",
               "label": "Footer Link",
               "name": "footerLink",
-              "valueType": "string"
+              "valueType": "string[]"
             },
             {
               "component": "text",
               "label": "Footer Label",
               "name": "footerLabel",
-              "valueType": "string"
+              "valueType": "string[]"
             }
           ]
 
@@ -91,19 +91,19 @@
           "component": "container",
           "label": "Social Links",
           "multi": true,
-          "name": "socialLinks",
+          "name": "socialLinks/item",
           "fields": [
             {
               "component": "aem-content",
               "label": "Social Link",
               "name": "socialLink",
-              "valueType": "string"
+              "valueType": "string[]"
             },
             {
               "component": "aem-content",
               "label": "Social Icon",
               "name": "socialIcon",
-              "valueType": "string"
+              "valueType": "string[]"
             }
           ]
         },
