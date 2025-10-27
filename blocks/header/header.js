@@ -1,4 +1,4 @@
-import { readBlockConfig } from '../../scripts/scripts.js';
+import { readBlockConfig } from '../../scripts/aem.js';
 
 /**
  * Renders the header block with navigation, logo, and login
