@@ -34,24 +34,27 @@
               "component": "aem-content",
               "label": "Menu Link",
               "name": "menuLink",
+              "multi":true,
               "valueType": "string"
             },
             {
               "component": "text",
               "label": "Menu Label",
               "name": "menuLabel",
+              "multi":true,
               "valueType": "string"
             },
             {
               "component": "aem-content",
               "label": "Menu Icon",
               "name": "menuIcon",
+              "multi":true,
               "valueType": "string"
             }
           ],
           "label": "Navigation Menu",
           "multi": true,
-          "name": "navigation"
+          "name": "navigation/item"
         },
         {
           "component": "aem-content",
@@ -72,18 +75,20 @@
               "component": "aem-content",
               "label": "Footer Link",
               "name": "footerLink",
+                "multi":true,
               "valueType": "string"
             },
             {
               "component": "text",
               "label": "Footer Label",
               "name": "footerLabel",
+              "multi":true,
               "valueType": "string"
             }
           ],
           "label": "Footer Menus",
           "multi": true,
-          "name": "footerMenus"
+          "name": "footerMenus/item"
         },
         {
           "component": "container",
@@ -92,18 +97,20 @@
               "component": "aem-content",
               "label": "Social Link",
               "name": "socialLink",
+              "multi":true,
               "valueType": "string"
             },
             {
               "component": "aem-content",
               "label": "Social Icon",
               "name": "socialIcon",
+              "multi":true,
               "valueType": "string"
             }
           ],
           "label": "Social Links",
           "multi": true,
-          "name": "socialLinks"
+          "name": "socialLinks/item"
         },
         {
           "component": "text",
