@@ -520,6 +520,7 @@ function decorateSections(main) {
  * @param {*} content two dimensional array or string or object of content
  */
 function buildBlock(blockName, content) {
+  console.log("this is the blockname",blockname)
   const table = Array.isArray(content) ? content : [[content]];
   const blockEl = document.createElement('div');
   // build image block nested div structure
