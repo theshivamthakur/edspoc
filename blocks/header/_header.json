@@ -29,6 +29,9 @@
         },
         {
           "component": "container",
+          "label": "Navigation Menu",
+          "multi": true,
+          "name": "navigation",
           "fields": [
             {
               "component": "aem-content",
@@ -48,10 +51,8 @@
               "name": "menuIcon",
               "valueType": "string"
             }
-          ],
-          "label": "Navigation Menu",
-          "multi": true,
-          "name": "navigation"
+          ]
+
         },
         {
           "component": "aem-content",
@@ -67,6 +68,9 @@
         },
         {
           "component": "container",
+          "label": "Footer Menus",
+          "multi": true,
+          "name": "footerMenus",
           "fields": [
             {
               "component": "aem-content",
@@ -80,13 +84,14 @@
               "name": "footerLabel",
               "valueType": "string"
             }
-          ],
-          "label": "Footer Menus",
-          "multi": true,
-          "name": "footerMenus"
+          ]
+
         },
         {
           "component": "container",
+          "label": "Social Links",
+          "multi": true,
+          "name": "socialLinks",
           "fields": [
             {
               "component": "aem-content",
@@ -100,10 +105,7 @@
               "name": "socialIcon",
               "valueType": "string"
             }
-          ],
-          "label": "Social Links",
-          "multi": true,
-          "name": "socialLinks"
+          ]
         },
         {
           "component": "text",
