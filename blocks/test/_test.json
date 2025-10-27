@@ -10,7 +10,7 @@
             "template": {
               "model": "test",
               "name": "test",
-              "filter": "navigation"
+              "filter": "test"
             }
           }
         }
@@ -121,5 +121,11 @@
     }
   ],
   "filters": [
+    {
+      "id": "test",
+      "components": [
+        "test"
+      ]
+    }
   ]
 }
