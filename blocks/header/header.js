@@ -1,4 +1,4 @@
-// In /blocks/header/header.js
+
 
 export default async function decorate(block) {
   // ===== DEBUGGING: Capture initial state =====
