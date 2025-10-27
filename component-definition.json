@@ -167,7 +167,7 @@
                 "template": {
                   "model": "test",
                   "name": "test",
-                  "filter": "header"
+                  "filter": "navigation"
                 }
               }
             }
