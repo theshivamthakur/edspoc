@@ -230,6 +230,7 @@
         "label": "Navigation Menu",
         "multi": true,
         "name": "navigation",
+        "filter": "navigation",
         "fields": [
           {
             "component": "aem-content",
