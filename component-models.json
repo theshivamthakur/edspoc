@@ -222,7 +222,7 @@
           }
         ],
         "label": "Navigation Menu",
-        "multi": false,
+        "multi": true,
         "name": "navigation"
       },
       {
@@ -254,7 +254,7 @@
           }
         ],
         "label": "Footer Menus",
-        "multi": false,
+        "multi": true,
         "name": "footerMenus"
       },
       {
@@ -274,7 +274,7 @@
           }
         ],
         "label": "Social Links",
-        "multi": false,
+        "multi": true,
         "name": "socialLinks"
       },
       {
