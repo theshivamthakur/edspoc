@@ -226,7 +226,7 @@
         ],
         "label": "Navigation Menu",
         "multi": true,
-        "name": "navigation/item"
+        "name": "navigation"
       },
       {
         "component": "aem-content",
@@ -260,7 +260,7 @@
         ],
         "label": "Footer Menus",
         "multi": true,
-        "name": "footerMenus/item"
+        "name": "footerMenus"
       },
       {
         "component": "container",
