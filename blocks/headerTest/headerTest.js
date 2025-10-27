@@ -1,32 +1,30 @@
-// blocks/header/header.js (Conceptual)
-export default function decorate(block) {
-  // 1. Get the data exposed by the model (e.g., from a property named 'data')
-  const { navigation, appName, copyright } = block.data; 
-  console.log(block);
+// In /blocks/header/header.js
 
-  // 2. Create the main navigation container
-  const navContainer = document.createElement('ul');
-
-  // 3. Iterate over the multifield data
-  if (navigation && Array.isArray(navigation)) {
-    navigation.forEach((item) => {
-      const listItem = document.createElement('li');
-      const link = document.createElement('a');
-      
-      // 4. Read the semantic property names
-      link.href = item.menuLink || '#'; 
-      link.textContent = item.menuLabel || 'Menu Item'; 
-      
-      // (Handle menuIcon and other fields here)
-
-      listItem.append(link);
-      navContainer.append(listItem);
-    });
-  }
-
-  // 5. Clear the default block content and append your new HTML
-  block.innerHTML = ''; 
-  block.append(navContainer);
+export default async function decorate(block) {
+  // ===== DEBUGGING: Capture initial state =====
+  console.log('=== HEADER BLOCK DEBUGGING ===');
+  console.log('Initial HTML:', block.cloneNode(true).innerHTML);
   
-  // (Append other fields like appName and copyright text)
+  // Log all rows before processing
+  const rows = block.querySelectorAll(':scope > div');
+  console.log('Total rows found:', rows.length);
+  
+  rows.forEach((row, index) => {
+    const cols = [...row.children];
+    console.log(`Row ${index}:`, {
+      totalColumns: cols.length,
+      column0Content: cols[0]?.innerHTML || 'EMPTY',
+      column1Content: cols[1]?.innerHTML || 'EMPTY',
+      column0Text: cols[0]?.textContent.trim() || 'EMPTY',
+      column1Text: cols[1]?.textContent.trim() || 'EMPTY',
+    });
+  });
+  
+  // Try reading config
+  const config = readBlockConfig(block);
+  console.log('Parsed Config:', JSON.stringify(config, null, 2));
+  
+  // ===== YOUR DECORATION LOGIC STARTS HERE =====
+  
+  // ... rest of your code
 }
