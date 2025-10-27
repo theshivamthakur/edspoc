@@ -1,4 +1,4 @@
-export default function decorate(block) {
+export default function decorateBlocks(block) {
   console.log('Total rows:', block.children.length);
   
   [...block.children].forEach((row, i) => {
