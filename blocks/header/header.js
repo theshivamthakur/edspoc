@@ -1,7 +1,13 @@
 export default function decorate(block) {
- console.log("This is block",block)
- console.log([...block.children])
-  const model = window.XWalk.getBlockModelData
+const rawModel = block.getAttribute('data-aue-model');
+let modelData = null;
 
-console.log(model)
+if (rawModel) {
+  try {
+    modelData = JSON.parse(rawModel);
+    console.log('Parsed block model:', modelData);
+  } catch (e) {
+    console.error('Failed to parse block model', e, rawModel);
+  }
+}
 }
