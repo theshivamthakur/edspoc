@@ -1,26 +1,29 @@
-export default async function decorate(block) {
+export default function decorate(block) {
   const resource = block.getAttribute('data-aue-resource');
-  if (!resource) return;
+  const model = window.__aemModels?.[resource];
 
-  try {
-    const res = await fetch(`/aem/api/assets?resource=${encodeURIComponent(resource)}`);
-    const data = await res.json();
-    console.log('Fetched model:', data);
+  console.log('🔍 Rendering block', resource, model);
 
-    // ✅ Use the raw model data
-    const items = data?.updates?.[0]?.raw?.items || [];
+  // ✅ Clear the block first
+  block.innerHTML = '';
 
-    block.innerHTML = '';
-    items.forEach(({ title, description }) => {
-      const div = document.createElement('div');
-      div.className = 'test-item';
-      div.innerHTML = `
-        <h3>${title}</h3>
-        <p>${description}</p>
-      `;
-      block.appendChild(div);
-    });
-  } catch (err) {
-    console.error('Failed to render block:', err);
-  }
+  const items = model?.items || [
+    { title: 'Fallback Title 1', description: 'Fallback Description 1' },
+    { title: 'Fallback Title 2', description: 'Fallback Description 2' },
+  ];
+
+  const container = document.createElement('div');
+  container.className = 'test-items';
+
+  items.forEach(({ title, description }) => {
+    const item = document.createElement('div');
+    item.className = 'test-item';
+    item.innerHTML = `
+      <h3>${title}</h3>
+      <p>${description}</p>
+    `;
+    container.appendChild(item);
+  });
+
+  block.appendChild(container);
 }
