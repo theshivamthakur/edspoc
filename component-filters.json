@@ -41,6 +41,12 @@
     ]
   },
   {
-    "id": "test"
+    "id": "test",
+    "components": [
+      "text",
+      "image",
+      "button",
+      "title"
+    ]
   }
 ]
