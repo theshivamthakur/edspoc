@@ -42,14 +42,20 @@
   },
   {
     "id": "test",
-    "columns": [
+    "components": [
       {
-        "field": "title",
-        "label": "Title"
-      },
-      {
-        "field": "description",
-        "label": "Description"
+        "component": "container",
+        "name": "items",
+        "children": [
+          {
+            "component": "text",
+            "name": "title"
+          },
+          {
+            "component": "text",
+            "name": "description"
+          }
+        ]
       }
     ]
   }

@@ -45,11 +45,17 @@
     }
   ],
   "filters": [
-    {
+     {
       "id": "test",
-      "columns": [
-        { "field": "title", "label": "Title" },
-        { "field": "description", "label": "Description" }
+      "components": [
+        {
+          "component": "container",
+          "name": "items",
+          "children": [
+            { "component": "text", "name": "title" },
+            { "component": "text", "name": "description" }
+          ]
+        }
       ]
     }
   ]
