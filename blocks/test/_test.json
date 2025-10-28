@@ -24,95 +24,103 @@
       "fields": [
         {
           "component": "text",
-          "label": "App Name",
           "name": "appName",
+          "value": "",
+          "label": "App Name",
           "valueType": "string"
         },
         {
           "component": "container",
+          "name": "navigation",
           "label": "Navigation Menu",
           "multi": true,
-          "name": "navigation",
-          "valueType": "string",
           "fields": [
             {
               "component": "aem-content",
-              "label": "Menu Link",
               "name": "menuLink",
+              "value": "",
+              "label": "Menu Link",
               "valueType": "string"
             },
             {
               "component": "text",
-              "label": "Menu Label",
               "name": "menuLabel",
+              "value": "",
+              "label": "Menu Label",
               "valueType": "string"
             },
             {
               "component": "aem-content",
-              "label": "Menu Icon",
               "name": "menuIcon",
+              "value": "",
+              "label": "Menu Icon",
               "valueType": "string"
             }
           ]
         },
         {
           "component": "aem-content",
-          "label": "Logo Image",
           "name": "logoImg",
+          "value": "",
+          "label": "Logo Image",
           "valueType": "string"
         },
         {
           "component": "aem-content",
-          "label": "Login Link",
           "name": "loginLink",
+          "value": "",
+          "label": "Login Link",
           "valueType": "string"
         },
         {
           "component": "container",
+          "name": "footerMenus",
           "label": "Footer Menus",
           "multi": true,
-          "name": "footerMenus",
-          "valueType": "string",
           "fields": [
             {
               "component": "aem-content",
-              "label": "Footer Link",
               "name": "footerLink",
+              "value": "",
+              "label": "Footer Link",
               "valueType": "string"
             },
             {
               "component": "text",
-              "label": "Footer Label",
               "name": "footerLabel",
+              "value": "",
+              "label": "Footer Label",
               "valueType": "string"
             }
           ]
         },
         {
           "component": "container",
+          "name": "socialLinks",
           "label": "Social Links",
           "multi": true,
-          "name": "socialLinks",
-          "valueType": "string",
           "fields": [
             {
               "component": "aem-content",
-              "label": "Social Link",
               "name": "socialLink",
+              "value": "",
+              "label": "Social Link",
               "valueType": "string"
             },
             {
               "component": "aem-content",
-              "label": "Social Icon",
               "name": "socialIcon",
+              "value": "",
+              "label": "Social Icon",
               "valueType": "string"
             }
           ]
         },
         {
           "component": "text",
-          "label": "Copyright Text",
           "name": "copyright",
+          "value": "",
+          "label": "Copyright Text",
           "valueType": "string"
         }
       ]
