@@ -50,10 +50,13 @@
     {
       "id": "test",
       "components": [
-        "text",
-        "image",
-        "button",
-        "title"
+        "container"
+      ]
+    },
+    {
+      "id": "test",
+      "components": [
+        "text"
       ]
     }
   ]
