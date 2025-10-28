@@ -46,7 +46,7 @@
       {
         "component": "container",
         "name": "items",
-        "children": [
+        "fields": [
           {
             "component": "text",
             "name": "title"
