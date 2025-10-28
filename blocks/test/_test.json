@@ -48,17 +48,7 @@
   ],
   "filters": [
     {
-      "id": "test",
-     "components": [
-      {
-        "component": "container",
-        "name": "items",
-        "fields": [
-          "title",
-          "description"
-        ]
-      }
-    ]
+      "id": "test"
     }
   ]
 }
