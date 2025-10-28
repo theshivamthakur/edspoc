@@ -23,15 +23,22 @@
       "fields": [
         {
           "component": "container",
-          "name": "navigation",
-          "label": "Navigation Menu",
+          "name": "items",
+          "label": "Items",
           "multi": true,
           "fields": [
             {
               "component": "text",
-              "name": "menuLabel",
+              "name": "title",
               "value": "",
-              "label": "Menu Label",
+              "label": "Title",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "description",
+              "value": "",
+              "label": "Description",
               "valueType": "string"
             }
           ]
