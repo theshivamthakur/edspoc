@@ -11,14 +11,6 @@ export default function decorate(block) {
     const desc = cells[1]?.textContent?.trim() || '';
 
     console.log(`Item ${i + 1}:`, { title, desc });
-
-    // Optional: display nicely
-    row.innerHTML = `
-      <div class="item">
-        <h3>${title}</h3>
-        <p>${desc}</p>
-      </div>
-    `;
   });
 
   block.classList.add('test-block');
