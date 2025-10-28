@@ -224,6 +224,16 @@
         "name": "items",
         "label": "Items",
         "multi": true,
+        "value": [
+          {
+            "title": "First Item Title",
+            "description": "This is the description for the first item."
+          },
+          {
+            "title": "Second Item Title",
+            "description": "This is the description for the second item."
+          }
+        ],
         "fields": [
           {
             "component": "text",
