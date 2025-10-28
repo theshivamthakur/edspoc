@@ -39,5 +39,12 @@
       "button",
       "title"
     ]
+  },
+  {
+    "id": "test",
+    "components": [
+      "card",
+      "container"
+    ]
   }
 ]
