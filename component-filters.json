@@ -39,45 +39,5 @@
       "button",
       "title"
     ]
-  },
-  {
-    "id": "test",
-    "components": {
-      "text": {
-        "resource": "text"
-      },
-      "aem-content": {
-        "resource": "reference"
-      }
-    },
-    "fields": [
-      {
-        "name": "navigation",
-        "component": {
-          "resource": "container",
-          "attributes": {
-            "data-aue-type": "container"
-          }
-        }
-      },
-      {
-        "name": "footerMenus",
-        "component": {
-          "resource": "container",
-          "attributes": {
-            "data-aue-type": "container"
-          }
-        }
-      },
-      {
-        "name": "socialLinks",
-        "component": {
-          "resource": "container",
-          "attributes": {
-            "data-aue-type": "container"
-          }
-        }
-      }
-    ]
   }
 ]
