@@ -42,8 +42,9 @@
   },
   {
     "id": "test",
-    "components": [
-      "container"
+    "fields": [
+      "items.title",
+      "items.description"
     ]
   }
 ]
