@@ -235,21 +235,18 @@
             "component": "aem-content",
             "label": "Menu Link",
             "name": "menuLink",
-            "value": "",
             "valueType": "string"
           },
           {
             "component": "text",
             "label": "Menu Label",
             "name": "menuLabel",
-            "value": "",
             "valueType": "string"
           },
           {
             "component": "aem-content",
             "label": "Menu Icon",
             "name": "menuIcon",
-            "value": "",
             "valueType": "string"
           }
         ]

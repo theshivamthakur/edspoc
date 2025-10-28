@@ -38,25 +38,21 @@
               "component": "aem-content",
               "label": "Menu Link",
               "name": "menuLink",
-              "value":"",
               "valueType": "string"
             },
             {
               "component": "text",
               "label": "Menu Label",
               "name": "menuLabel",
-              "value":"",
               "valueType": "string"
             },
             {
               "component": "aem-content",
               "label": "Menu Icon",
               "name": "menuIcon",
-              "value":"",
               "valueType": "string"
             }
           ]
-
         },
         {
           "component": "aem-content",
@@ -89,7 +85,6 @@
               "valueType": "string"
             }
           ]
-
         },
         {
           "component": "container",
@@ -120,23 +115,46 @@
       ]
     }
   ],
- "filters": [
+  "filters": [
     {
       "id": "test",
       "components": {
-        "container": {
-          "resource": "container",
-          "attributes": {
-            "data-aue-type": "container"
-          }
-        },
         "text": {
           "resource": "text"
         },
         "aem-content": {
           "resource": "reference"
         }
-      }
+      },
+      "fields": [
+        {
+          "name": "navigation",
+          "component": {
+            "resource": "container",
+            "attributes": {
+              "data-aue-type": "container"
+            }
+          }
+        },
+        {
+          "name": "footerMenus",
+          "component": {
+            "resource": "container",
+            "attributes": {
+              "data-aue-type": "container"
+            }
+          }
+        },
+        {
+          "name": "socialLinks",
+          "component": {
+            "resource": "container",
+            "attributes": {
+              "data-aue-type": "container"
+            }
+          }
+        }
+      ]
     }
   ]
 }
