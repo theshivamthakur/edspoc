@@ -30,14 +30,12 @@
             {
               "component": "text",
               "name": "title",
-              "value": "",
               "label": "Title",
               "valueType": "string"
             },
             {
               "component": "text",
               "name": "description",
-              "value": "",
               "label": "Description",
               "valueType": "string"
             }
@@ -49,14 +47,9 @@
   "filters": [
     {
       "id": "test",
-      "components": [
-        "container"
-      ]
-    },
-    {
-      "id": "test",
-      "components": [
-        "text"
+      "columns": [
+        { "field": "title", "label": "Title" },
+        { "field": "description", "label": "Description" }
       ]
     }
   ]
