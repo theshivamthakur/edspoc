@@ -217,15 +217,7 @@
   },
   {
     "id": "test",
-    "description": "",
     "fields": [
-      {
-        "component": "text",
-        "name": "appName",
-        "value": "",
-        "label": "App Name",
-        "valueType": "string"
-      },
       {
         "component": "container",
         "name": "navigation",
@@ -233,92 +225,13 @@
         "multi": true,
         "fields": [
           {
-            "component": "aem-content",
-            "name": "menuLink",
-            "value": "",
-            "label": "Menu Link",
-            "valueType": "string"
-          },
-          {
             "component": "text",
             "name": "menuLabel",
             "value": "",
             "label": "Menu Label",
             "valueType": "string"
-          },
-          {
-            "component": "aem-content",
-            "name": "menuIcon",
-            "value": "",
-            "label": "Menu Icon",
-            "valueType": "string"
           }
         ]
-      },
-      {
-        "component": "aem-content",
-        "name": "logoImg",
-        "value": "",
-        "label": "Logo Image",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "name": "loginLink",
-        "value": "",
-        "label": "Login Link",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "name": "footerMenus",
-        "label": "Footer Menus",
-        "multi": true,
-        "fields": [
-          {
-            "component": "aem-content",
-            "name": "footerLink",
-            "value": "",
-            "label": "Footer Link",
-            "valueType": "string"
-          },
-          {
-            "component": "text",
-            "name": "footerLabel",
-            "value": "",
-            "label": "Footer Label",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "container",
-        "name": "socialLinks",
-        "label": "Social Links",
-        "multi": true,
-        "fields": [
-          {
-            "component": "aem-content",
-            "name": "socialLink",
-            "value": "",
-            "label": "Social Link",
-            "valueType": "string"
-          },
-          {
-            "component": "aem-content",
-            "name": "socialIcon",
-            "value": "",
-            "label": "Social Icon",
-            "valueType": "string"
-          }
-        ]
-      },
-      {
-        "component": "text",
-        "name": "copyright",
-        "value": "",
-        "label": "Copyright Text",
-        "valueType": "string"
       }
     ]
   }
