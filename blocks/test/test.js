@@ -1,58 +1,46 @@
-export default function decorate(block) {
-  console.group('🧩 Test Block Debug');
-  console.log('Block Element:', block);
-
+export default async function decorate(block) {
   const resource = block.getAttribute('data-aue-resource');
-  console.log('data-aue-resource:', resource);
+  if (!resource) return;
 
-  const childResources = [...block.querySelectorAll('[data-aue-resource]')];
-  console.log('Child data-aue-resource:', childResources.map(el => el.getAttribute('data-aue-resource')));
+  console.log('🔍 Fetching AEM data for:', resource);
 
-  // Check for the items container (container field)
-  const itemsContainer = block.querySelector('[data-aue-resource$="/items"]');
-  console.log('Items container found:', itemsContainer);
+  // Extract path after 'urn:aemconnection:'
+  const path = resource.replace('urn:aemconnection:', '');
+  const url = `${window.location.origin}/content/_aemconnection${path}.json`;
 
-  // Try to extract data from items container
-  if (itemsContainer) {
-    const possibleItems = [...itemsContainer.querySelectorAll(':scope > div, :scope > *')];
-    console.log('Inner content of itemsContainer:', possibleItems);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to fetch: ${response.status}`);
+    const data = await response.json();
 
-    const parsedItems = possibleItems.map((el) => {
-      const titleEl = el.querySelector('[data-aue-prop="title"], h3, p, div');
-      const descEl = el.querySelector('[data-aue-prop="description"], p, div:not(:first-child)');
-      const title = titleEl?.textContent?.trim();
-      const description = descEl?.textContent?.trim();
-      return { title, description };
-    }).filter(item => item.title || item.description);
+    console.log('✅ AEM block data:', data);
 
-    if (parsedItems.length) {
-      console.log('✅ Parsed Items from DOM:', parsedItems);
-
-      const wrapper = document.createElement('div');
-      wrapper.className = 'test-wrapper';
-      parsedItems.forEach(({ title, description }) => {
-        const item = document.createElement('div');
-        item.className = 'test-item';
-        item.innerHTML = `
-          <h3 class="test-title">${title || ''}</h3>
-          <p class="test-description">${description || ''}</p>
-        `;
-        wrapper.appendChild(item);
-      });
-
-      block.innerHTML = '';
-      block.appendChild(wrapper);
-      console.groupEnd();
+    const items = data?.items || [];
+    if (!items.length) {
+      console.warn('⚠️ No items found in AEM data.');
+      block.innerHTML = '<p style="color:red">⚠️ No data returned from AEM.</p>';
       return;
     }
-  }
 
-  // Nothing parsed — diagnostic message
-  console.warn('⚠️ No renderable items found in AEM DOM for this block.');
-  const msg = document.createElement('div');
-  msg.style.color = 'red';
-  msg.style.fontSize = '14px';
-  msg.textContent = '⚠️ No AEM model data found in rendered DOM.';
-  block.appendChild(msg);
-  console.groupEnd();
+    // Clear old DOM
+    block.innerHTML = '';
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'test-wrapper';
+
+    items.forEach(({ title, description }) => {
+      const item = document.createElement('div');
+      item.className = 'test-item';
+      item.innerHTML = `
+        <h3 class="test-title">${title || 'Untitled'}</h3>
+        <p class="test-description">${description || ''}</p>
+      `;
+      wrapper.appendChild(item);
+    });
+
+    block.appendChild(wrapper);
+  } catch (err) {
+    console.error('❌ Error rendering AEM data:', err);
+    block.innerHTML = '<p style="color:red">⚠️ Error fetching block data.</p>';
+  }
 }
