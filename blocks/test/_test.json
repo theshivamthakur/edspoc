@@ -20,6 +20,7 @@
   "models": [
     {
       "id": "test",
+      "filter":"test",
       "fields": [
         {
           "component": "container",
