@@ -49,10 +49,16 @@
   "filters": [
     {
       "id": "test",
-      "fields":[
-      "items.title",
-      "items.description"
-      ]
+     "components": [
+      {
+        "component": "container",
+        "name": "items",
+        "fields": [
+          "title",
+          "description"
+        ]
+      }
+    ]
     }
   ]
 }
