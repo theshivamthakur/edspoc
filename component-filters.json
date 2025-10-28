@@ -43,7 +43,6 @@
   {
     "id": "test",
     "components": [
-      "card",
       "container"
     ]
   }
