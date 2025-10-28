@@ -221,15 +221,22 @@
       {
         "component": "container",
         "name": "items",
+        "label": "Items",
         "multi": true,
         "fields": [
           {
             "component": "text",
-            "name": "title"
+            "name": "title",
+            "label": "Title",
+            "value": "Sample Title",
+            "valueType": "string"
           },
           {
             "component": "text",
-            "name": "description"
+            "name": "description",
+            "label": "Description",
+            "value": "Sample Description",
+            "valueType": "string"
           }
         ]
       }

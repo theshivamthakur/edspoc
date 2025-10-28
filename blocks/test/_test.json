@@ -24,10 +24,23 @@
         {
           "component": "container",
           "name": "items",
+          "label": "Items",
           "multi": true,
           "fields": [
-            { "component": "text", "name": "title" },
-            { "component": "text", "name": "description" }
+            {
+              "component": "text",
+              "name": "title",
+              "label": "Title",
+              "value": "Sample Title",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "description",
+              "label": "Description",
+              "value": "Sample Description",
+              "valueType": "string"
+            }
           ]
         }
       ]
@@ -40,9 +53,22 @@
         {
           "component": "container",
           "name": "items",
+          "multi": true,
+          "wrapper": "div",
+          "class": "test-item",
           "fields": [
-            { "component": "text", "name": "title" },
-            { "component": "text", "name": "description" }
+            {
+              "component": "text",
+              "name": "title",
+              "wrapper": "h3",
+              "class": "item-title"
+            },
+            {
+              "component": "text",
+              "name": "description",
+              "wrapper": "p",
+              "class": "item-description"
+            }
           ]
         }
       ]

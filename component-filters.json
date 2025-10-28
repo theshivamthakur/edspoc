@@ -46,14 +46,21 @@
       {
         "component": "container",
         "name": "items",
+        "multi": true,
+        "wrapper": "div",
+        "class": "test-item",
         "fields": [
           {
             "component": "text",
-            "name": "title"
+            "name": "title",
+            "wrapper": "h3",
+            "class": "item-title"
           },
           {
             "component": "text",
-            "name": "description"
+            "name": "description",
+            "wrapper": "p",
+            "class": "item-description"
           }
         ]
       }
