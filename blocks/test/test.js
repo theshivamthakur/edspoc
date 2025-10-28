@@ -1,41 +1,25 @@
 export default function decorate(block) {
-  // Always check what's already inside
-  console.log('Rendered block DOM:', block.innerHTML);
+  console.log('Test block rendering:', block);
 
-  // If AEM already rendered DOM with items, just enhance or style it
-  const items = block.querySelectorAll('.items .item');
+  // Each row = one container item
+  const rows = [...block.firstElementChild.children];
+  console.log('Total items:', rows.length);
 
-  if (items.length > 0) {
-    // Franklin editor already gave us the structure; we can just log or decorate it
-    items.forEach((item, index) => {
-      const title = item.querySelector('.title')?.textContent?.trim();
-      const desc = item.querySelector('.description')?.textContent?.trim();
-      console.log(`Item ${index + 1}:`, { title, desc });
-    });
-    return; // don’t overwrite DOM
-  }
+  rows.forEach((row, i) => {
+    const cells = [...row.children];
+    const title = cells[0]?.textContent?.trim() || '';
+    const desc = cells[1]?.textContent?.trim() || '';
 
-  // If DOM is empty (e.g., static rendering or local testing), fallback to mock data
-  console.warn('No AEM-authored DOM found; using fallback content.');
+    console.log(`Item ${i + 1}:`, { title, desc });
 
-  const mockItems = [
-    { title: 'First Item Title', description: 'This is the description for the first item.' },
-    { title: 'Second Item Title', description: 'This is the description for the second item.' },
-  ];
-
-  const container = document.createElement('div');
-  container.classList.add('items');
-
-  mockItems.forEach(({ title, description }) => {
-    const item = document.createElement('div');
-    item.classList.add('item');
-    item.innerHTML = `
-      <div class="title">${title}</div>
-      <div class="description">${description}</div>
+    // Optional: display nicely
+    row.innerHTML = `
+      <div class="item">
+        <h3>${title}</h3>
+        <p>${desc}</p>
+      </div>
     `;
-    container.appendChild(item);
   });
 
-  block.innerHTML = '';
-  block.appendChild(container);
+  block.classList.add('test-block');
 }

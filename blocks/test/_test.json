@@ -1,7 +1,7 @@
 {
   "definitions": [
     {
-      "title": "test",
+      "title": "Test",
       "id": "test",
       "plugins": {
         "xwalk": {
@@ -20,34 +20,25 @@
   "models": [
     {
       "id": "test",
-      "filter": "test",
       "fields": [
         {
           "component": "container",
           "name": "items",
           "label": "Items",
           "multi": true,
-          "value": [
-            {
-              "title": "First Item Title",
-              "description": "This is the description for the first item."
-            },
-            {
-              "title": "Second Item Title",
-              "description": "This is the description for the second item."
-            }
-          ],
           "fields": [
             {
               "component": "text",
               "name": "title",
               "label": "Title",
+              "value": "Sample Title",
               "valueType": "string"
             },
             {
               "component": "text",
               "name": "description",
               "label": "Description",
+              "value": "Sample Description",
               "valueType": "string"
             }
           ]
