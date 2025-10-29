@@ -222,14 +222,16 @@
         "component": "text",
         "name": "testtitle",
         "label": "Title",
-        "multi": true,
+        "multi": "true",
+        "value": "Sample Title",
         "valueType": "string"
       },
       {
         "component": "text",
         "name": "description",
         "label": "Description",
-        "multi": true,
+        "value": "Sample Description",
+        "multi": "true",
         "valueType": "string"
       }
     ]
