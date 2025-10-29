@@ -222,7 +222,6 @@
         "component": "container",
         "name": "items",
         "label": "Items",
-        "valueType": "string",
         "multi": true,
         "fields": [
           {
