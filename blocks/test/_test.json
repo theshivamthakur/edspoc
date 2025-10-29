@@ -22,7 +22,7 @@
       "fields": [
         {
           "component": "container",
-          "name": "items",
+          "name": "../items",
           "label": "Items",
           "multi": true,
           "fields": [
@@ -31,14 +31,14 @@
               "name": "testtitle",
               "label": "Title",
               "value": "Sample Title",
-              "valueType": "string[]"
+              "valueType": "string"
             },
             {
               "component": "text",
               "name": "description",
               "label": "Description",
               "value": "Sample Description",
-              "valueType": "string[]"
+              "valueType": "string"
             }
           ]
         }
