@@ -28,14 +28,14 @@
           "fields": [
             {
               "component": "text",
-              "name": "testtitle",
+              "name": "../testtitle",
               "label": "Title",
               "value": "Sample Title",
               "valueType": "string"
             },
             {
               "component": "text",
-              "name": "description",
+              "name": "../description",
               "label": "Description",
               "value": "Sample Description",
               "valueType": "string"
