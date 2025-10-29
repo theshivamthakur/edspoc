@@ -1,20 +1,20 @@
 export default function decorate(block) {
-  const title = block.querySelector('[data-field="testtitle"]');
-  const description = block.querySelector('[data-field="description"]');
-
-  const wrapper = document.createElement('div');
-  wrapper.classList.add('test-block');
-
-  const titleEl = document.createElement('h2');
-  titleEl.classList.add('test-title');
-  titleEl.textContent = title?.textContent;
-
-  const descEl = document.createElement('p');
-  descEl.classList.add('test-description');
-  descEl.textContent = description?.textContent;
-
-  wrapper.appendChild(titleEl);
-  wrapper.appendChild(descEl);
-  block.innerHTML = '';
-  block.appendChild(wrapper);
+  const rows = [...block.children];
+  console.log(block)
+  
+  rows.forEach((row) => {
+    const cells = [...row.children];
+    
+    // Title cell
+    if (cells[0]) {
+      cells[0].classList.add('test-title');
+    }
+    
+    // Description cell
+    if (cells[1]) {
+      cells[1].classList.add('test-description');
+    }
+  });
+  
+  block.classList.add('test-block');
 }
