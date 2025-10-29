@@ -16,7 +16,7 @@
       }
     }
   ],
-"models": [
+  "models": [
     {
       "id": "test",
       "fields": [
@@ -27,10 +27,10 @@
         },
         {
           "component": "container",
+          "type": "object",
           "name": "items",
           "label": "Items",
-          "multi": true,
-          "valueType":"object",
+          "layout": "vertical",
           "fields": [
             {
               "component": "text",
@@ -42,7 +42,8 @@
               "name": "description",
               "label": "Description"
             }
-          ]
+          ],
+          "multi": true
         }
       ]
     }
