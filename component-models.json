@@ -220,30 +220,25 @@
     "fields": [
       {
         "component": "text",
-        "name": "testtitle",
-        "label": "Title",
-        "value": "Sample Title",
-        "valueType": "string"
+        "name": "sectionTitle",
+        "label": "Section Title"
       },
       {
-        "component": "object",
+        "component": "container",
         "name": "items",
         "label": "Items",
         "multi": true,
+        "layout": "vertical",
         "fields": [
           {
             "component": "text",
             "name": "testtitle",
-            "label": "Title",
-            "value": "Sample Title",
-            "valueType": "string"
+            "label": "Title"
           },
           {
             "component": "text",
             "name": "description",
-            "label": "Description",
-            "value": "Sample Description",
-            "valueType": "string"
+            "label": "Description"
           }
         ]
       }
