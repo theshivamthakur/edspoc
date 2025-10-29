@@ -43,8 +43,7 @@
   {
     "id": "test",
     "components": [
-      "testtitle",
-      "description"
+      "hero"
     ]
   }
 ]
