@@ -30,7 +30,7 @@
           "name": "items",
           "label": "Items",
           "multi": true,
-          "layout": "vertical",
+          "valueType":"object",
           "fields": [
             {
               "component": "text",
