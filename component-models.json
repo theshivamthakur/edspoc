@@ -219,6 +219,13 @@
     "id": "test",
     "fields": [
       {
+        "component": "text",
+        "name": "testtitle",
+        "label": "Title",
+        "value": "Sample Title",
+        "valueType": "string"
+      },
+      {
         "component": "object",
         "name": "items",
         "label": "Items",
