@@ -1,27 +1,20 @@
 export default function decorate(block) {
-  // Get data attributes from AEM DOM if needed (for now, static fallback)
-  const titleText = block.querySelector('[data-field="testtitle"]')?.textContent || 'Sample Title';
-  const descText = block.querySelector('[data-field="description"]')?.textContent || 'Sample Description';
+  const title = block.querySelector('[data-field="testtitle"]');
+  const description = block.querySelector('[data-field="description"]');
 
-  // Clear existing content
-  block.innerHTML = '';
-
-  // Create wrapper
   const wrapper = document.createElement('div');
-  wrapper.className = 'test-block';
+  wrapper.classList.add('test-block');
 
-  // Title
-  const title = document.createElement('h2');
-  title.className = 'test-title';
-  title.textContent = titleText;
+  const titleEl = document.createElement('h2');
+  titleEl.classList.add('test-title');
+  titleEl.textContent = title?.textContent;
 
-  // Description
-  const desc = document.createElement('p');
-  desc.className = 'test-description';
-  desc.textContent = descText;
+  const descEl = document.createElement('p');
+  descEl.classList.add('test-description');
+  descEl.textContent = description?.textContent;
 
-  // Append elements
-  wrapper.appendChild(title);
-  wrapper.appendChild(desc);
+  wrapper.appendChild(titleEl);
+  wrapper.appendChild(descEl);
+  block.innerHTML = '';
   block.appendChild(wrapper);
 }

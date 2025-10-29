@@ -1,21 +1,20 @@
 .test-block {
-  border: 1px solid #ccc;
-  border-radius: 8px;
   padding: 16px;
-  max-width: 500px;
-  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
 }
 
-.test-block h2 {
+.test-title {
   font-size: 20px;
+  font-weight: bold;
+  color: #222;
   margin-bottom: 8px;
-  color: #333;
 }
 
-.test-block p {
+.test-description {
   font-size: 14px;
   color: #555;
-  margin: 4px 0;
+  line-height: 1.5;
 }
