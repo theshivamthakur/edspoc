@@ -1,9 +1,0 @@
-{
-  "filters": [
-    {
-      "id": "container",
-      "components": [
-        "text"]
-    }
-  ]
-}
