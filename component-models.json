@@ -220,19 +220,12 @@
     "fields": [
       {
         "component": "container",
-        "name": "items",
-        "template": {
-          "model": "test"
-        },
         "label": "Items",
         "multi": true,
         "fields": [
           {
             "component": "text",
             "name": "testtitle",
-            "template": {
-              "model": "test"
-            },
             "label": "Title",
             "value": "Sample Title",
             "valueType": "string"
@@ -240,9 +233,6 @@
           {
             "component": "text",
             "name": "description",
-            "template": {
-              "model": "test"
-            },
             "label": "Description",
             "value": "Sample Description",
             "valueType": "string"
