@@ -19,22 +19,29 @@
   "models": [
     {
       "id": "test",
-        "component": "container",
-        "name": "items",
-        "label": "Items",
-        "multi": true,
-        "fields": [
-          {
-            "component": "text",
-            "name": "testtitle",
-            "label": "Title"
-          },
-          {
-            "component": "text",
-            "name": "description",
-            "label": "Description"
-          }
-        ]
+       "container": {
+          "component": "container",
+          "name": "test",
+          "label": "Multi Text",
+          "multi": true,
+          "fields": [
+            {
+              "component": "reference",
+              "name": "image",
+              "value": "",
+              "label": "Sample Image",
+              "valueType": "string"
+            },
+            {
+              "component": "text",
+              "name": "alt",
+              "value": "",
+              "label": "Alt Text",
+              "valueType": "string"
+            }
+          ]
+  }
+
     }
   ],
   "filters": []
