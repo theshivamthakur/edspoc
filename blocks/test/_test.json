@@ -20,12 +20,16 @@
     {
       "id": "test",
       "fields": [
-      
+        {
+          "component": "group",
+          "name": "items",
+          "label": "Items",
+          "multi": true,
+          "fields": [
             {
               "component": "text",
               "name": "testtitle",
               "label": "Title",
-              "multi":"true",
               "value": "Sample Title",
               "valueType": "string"
             },
@@ -34,11 +38,10 @@
               "name": "description",
               "label": "Description",
               "value": "Sample Description",
-              "multi":"true",
               "valueType": "string"
             }
-          
-        
+          ]
+        }
       ]
     }
   ],

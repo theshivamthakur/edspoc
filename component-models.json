@@ -219,20 +219,26 @@
     "id": "test",
     "fields": [
       {
-        "component": "text",
-        "name": "testtitle",
-        "label": "Title",
-        "multi": "true",
-        "value": "Sample Title",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "description",
-        "label": "Description",
-        "value": "Sample Description",
-        "multi": "true",
-        "valueType": "string"
+        "component": "group",
+        "name": "items",
+        "label": "Items",
+        "multi": true,
+        "fields": [
+          {
+            "component": "text",
+            "name": "testtitle",
+            "label": "Title",
+            "value": "Sample Title",
+            "valueType": "string"
+          },
+          {
+            "component": "text",
+            "name": "description",
+            "label": "Description",
+            "value": "Sample Description",
+            "valueType": "string"
+          }
+        ]
       }
     ]
   }
