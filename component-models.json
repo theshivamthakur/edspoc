@@ -219,7 +219,7 @@
     "id": "test",
     "fields": [
       {
-        "component": "group",
+        "component": "object",
         "name": "items",
         "label": "Items",
         "multi": true,
