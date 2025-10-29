@@ -221,6 +221,7 @@
       {
         "component": "container",
         "name": "items",
+        "model": "test",
         "label": "Items",
         "multi": true,
         "fields": [
