@@ -220,7 +220,7 @@
     "fields": [
       {
         "component": "container",
-        "name": "../items",
+        "name": "items",
         "label": "Items",
         "multi": true,
         "fields": [
