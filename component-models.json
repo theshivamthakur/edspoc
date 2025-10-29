@@ -217,27 +217,23 @@
   },
   {
     "id": "test",
-    "container": {
-      "component": "container",
-      "name": "test",
-      "label": "Multi Text",
-      "multi": true,
-      "fields": [
-        {
-          "component": "reference",
-          "name": "image",
-          "value": "",
-          "label": "Sample Image",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "name": "alt",
-          "value": "",
-          "label": "Alt Text",
-          "valueType": "string"
-        }
-      ]
-    }
+    "fields": [
+      {
+        "component": "text",
+        "name": "testtitle",
+        "label": "Title",
+        "value": "Sample Title",
+        "multi": true,
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "description",
+        "label": "Description",
+        "value": "Sample Description",
+        "multi": true,
+        "valueType": "string"
+      }
+    ]
   }
 ]
