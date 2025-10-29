@@ -217,31 +217,20 @@
   },
   {
     "id": "test",
+    "component": "container",
+    "name": "items",
+    "label": "Items",
+    "multi": true,
     "fields": [
       {
         "component": "text",
-        "name": "sectionTitle",
-        "label": "Section Title"
+        "name": "testtitle",
+        "label": "Title"
       },
       {
-        "component": "container",
-        "type": "object",
-        "name": "items",
-        "label": "Items",
-        "layout": "vertical",
-        "fields": [
-          {
-            "component": "text",
-            "name": "testtitle",
-            "label": "Title"
-          },
-          {
-            "component": "text",
-            "name": "description",
-            "label": "Description"
-          }
-        ],
-        "multi": true
+        "component": "text",
+        "name": "description",
+        "label": "Description"
       }
     ]
   }
