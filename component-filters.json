@@ -39,5 +39,14 @@
       "button",
       "title"
     ]
+  },
+  {
+    "id": "header",
+    "components": [
+      "headerMenuItem",
+      "footerPrimaryLink",
+      "footerSecondaryLink",
+      "footerSocialLink"
+    ]
   }
 ]
