@@ -202,57 +202,68 @@
       },
       {
         "component": "text",
-        "label": "Label",
-        "name": "label",
+        "label": "Menu Text",
+        "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link",
-        "name": "link",
+        "label": "Link URL",
+        "name": "href",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Class",
+        "name": "class",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerListItem",
+    "id": "headerFooterListItem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Label",
-        "name": "label",
+        "label": "Footer List Text",
+        "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link",
-        "name": "link",
+        "label": "Footer List URL",
+        "name": "href",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Class",
+        "name": "class",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "socialLink",
+    "id": "headerSocialIcon",
     "description": "",
     "fields": [
-      {
-        "component": "text",
-        "label": "Platform",
-        "name": "platform",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
       {
         "component": "reference",
-        "label": "Icon",
-        "multi": false,
+        "label": "Social Icon",
         "name": "icon",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Social Link URL",
+        "name": "href",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Class",
+        "name": "class",
         "valueType": "string"
       }
     ]
