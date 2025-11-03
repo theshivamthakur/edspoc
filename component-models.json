@@ -194,74 +194,64 @@
     "description": "",
     "fields": [
       {
-        "component": "text",
-        "label": "Menu Item Text",
-        "name": "text",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "label": "Menu Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "label": "Menu Icon Image",
+        "component": "reference",
+        "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Label",
+        "name": "label",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerPrimaryLink",
+    "id": "footerListItem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Footer Primary Link Text",
-        "name": "text",
+        "label": "Label",
+        "name": "label",
         "valueType": "string"
       },
       {
-        "component": "aem-content",
-        "label": "Footer Primary Link URL",
+        "component": "text",
+        "label": "Link",
         "name": "link",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerSecondaryLink",
+    "id": "socialLink",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Footer Secondary Link Text",
-        "name": "text",
+        "label": "Platform",
+        "name": "platform",
         "valueType": "string"
       },
       {
-        "component": "aem-content",
-        "label": "Footer Secondary Link URL",
-        "name": "link",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerSocialLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "aem-content",
-        "label": "Social Link URL",
+        "component": "text",
+        "label": "Link",
         "name": "link",
         "valueType": "string"
       },
       {
-        "component": "aem-content",
-        "label": "Social Icon Image",
+        "component": "reference",
+        "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
       }

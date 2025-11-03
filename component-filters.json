@@ -44,10 +44,9 @@
   {
     "id": "header",
     "components": [
-      "headerMenuItem",
-      "footerPrimaryLink",
-      "footerSecondaryLink",
-      "footerSocialLink"
+      "sidebarMenuItem",
+      "footerListItem",
+      "socialLink"
     ]
   }
 ]
