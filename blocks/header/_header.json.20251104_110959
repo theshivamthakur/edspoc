@@ -16,45 +16,45 @@
       }
     },
     {
-      "title": "Menu Item",
-      "id": "menu-item",
+      "title": "Header Menu Item",
+      "id": "headerMenuItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "menu-item",
-              "name": "menu-item"
+              "model": "headerMenuItem",
+              "name": "headerMenuItem"
             }
           }
         }
       }
     },
     {
-      "title": "Footer Link",
-      "id": "footer-link",
+      "title": "Header Footer List Item",
+      "id": "headerFooterListItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "footer-link",
-              "name": "footer-link"
+              "model": "headerFooterListItem",
+              "name": "headerFooterListItem"
             }
           }
         }
       }
     },
     {
-      "title": "Social Link",
-      "id": "social-link",
+      "title": "Header Social Icon",
+      "id": "headerSocialIcon",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "social-link",
-              "name": "social-link"
+              "model": "headerSocialIcon",
+              "name": "headerSocialIcon"
             }
           }
         }
@@ -67,12 +67,6 @@
       "description": "",
       "fields": [
         {
-          "component": "text",
-          "label": "Link",
-          "name": "link",
-          "valueType": "string"
-        },
-        {
           "component": "reference",
           "label": "Icon",
           "multi": false,
@@ -81,99 +75,68 @@
         },
         {
           "component": "text",
-          "label": "Text",
+          "label": "Menu Text",
           "name": "text",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Data Link",
-          "name": "data-link",
+          "label": "Link URL",
+          "name": "href",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Class",
+          "name": "class",
           "valueType": "string"
         }
       ]
     },
     {
-      "id": "footer-link",
+      "id": "headerFooterListItem",
       "description": "",
       "fields": [
         {
           "component": "text",
-          "label": "Link",
-          "name": "link",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Text",
+          "label": "Footer List Text",
           "name": "text",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Data Link Region",
-          "name": "data-link-region",
+          "label": "Footer List URL",
+          "name": "href",
           "valueType": "string"
         },
         {
-          "component": "boolean",
-          "label": "Open in new tab",
-          "name": "open-in-new-tab",
-          "valueType": "boolean"
+          "component": "text",
+          "label": "Class",
+          "name": "class",
+          "valueType": "string"
         }
       ]
     },
     {
-      "id": "social-link",
+      "id": "headerSocialIcon",
       "description": "",
       "fields": [
-        {
-          "component": "text",
-          "label": "Link",
-          "name": "link",
-          "valueType": "string"
-        },
         {
           "component": "reference",
-          "label": "Icon",
-          "multi": false,
+          "label": "Social Icon",
           "name": "icon",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Aria Label",
-          "name": "aria-label",
+          "label": "Social Link URL",
+          "name": "href",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Data CTA Region",
-          "name": "data-cta-region",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Data CTA Label",
-          "name": "data-cta-label",
-          "valueType": "string"
-        },
-        {
-          "component": "boolean",
-          "label": "Open in new tab",
-          "name": "open-in-new-tab",
-          "valueType": "boolean"
-        },
-        {
-          "component": "text",
-          "label": "Data Platform Name",
-          "name": "data-platform-name",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Data Social Link Type",
-          "name": "data-social-linktype",
+          "label": "Class",
+          "name": "class",
           "valueType": "string"
         }
       ]
@@ -183,9 +146,9 @@
     {
       "id": "header",
       "components": [
-        "menu-item",
-        "footer-link",
-        "social-link"
+        "headerMenuItem",
+        "headerFooterListItem",
+        "headerSocialIcon"
       ]
     }
   ]
