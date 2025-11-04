@@ -37,15 +37,105 @@
       "description": "",
       "fields": [
         {
+          "component": "richtext",
+          "label": "Title",
+          "name": "title",
+          "valueType": "string"
+        },
+        {
           "component": "reference",
-          "label": "Media (Image or Video)",
-          "name": "media",
+          "label": "Image",
+          "name": "image",
           "valueType": "string"
         },
         {
           "component": "aem-content",
-          "label": "Call to Action",
-          "name": "cta",
+          "label": "Video Source (MP4)",
+          "name": "video",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Video Source (WebM)",
+          "name": "videoWebm",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Play Icon SVG",
+          "name": "playIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Pause Icon SVG",
+          "name": "pauseIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Mute Icon SVG",
+          "name": "muteIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Unmute Icon SVG",
+          "name": "unmuteIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "No Audio Icon SVG",
+          "name": "noAudioIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "CTA Text",
+          "name": "ctaText",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "CTA Link",
+          "name": "ctaLink",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Close Button Icon SVG",
+          "name": "closeButtonIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Popup Icon SVG",
+          "name": "popupIcon",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "Popup Title",
+          "name": "popupTitle",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "Popup Description",
+          "name": "popupDescription",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "Popup CTA Text",
+          "name": "popupCtaText",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "Popup CTA Icon SVG",
+          "name": "popupCtaIcon",
           "valueType": "string"
         }
       ]
