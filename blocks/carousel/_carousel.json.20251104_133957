@@ -37,15 +37,33 @@
       "description": "",
       "fields": [
         {
+          "component": "richtext",
+          "label": "Title",
+          "name": "title",
+          "valueType": "string"
+        },
+        {
           "component": "reference",
-          "label": "Media (Image or Video)",
-          "name": "media",
+          "label": "Image",
+          "name": "image",
           "valueType": "string"
         },
         {
           "component": "aem-content",
-          "label": "Call to Action",
-          "name": "cta",
+          "label": "Video URL",
+          "name": "video",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "CTA Text",
+          "name": "cta_text",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "CTA Link",
+          "name": "cta_link",
           "valueType": "string"
         }
       ]
