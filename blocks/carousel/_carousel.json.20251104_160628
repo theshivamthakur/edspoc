@@ -39,7 +39,6 @@
         {
           "component": "reference",
           "label": "Media (Image or Video)",
-          "multi": false,
           "name": "media",
           "valueType": "string"
         },
