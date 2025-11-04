@@ -177,15 +177,21 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Video",
+        "component": "aem-content",
+        "label": "Video URL",
         "name": "video",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "CTA Text",
+        "name": "cta_text",
         "valueType": "string"
       },
       {
         "component": "aem-content",
         "label": "CTA Link",
-        "name": "cta",
+        "name": "cta_link",
         "valueType": "string"
       }
     ]
