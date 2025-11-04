@@ -171,23 +171,6 @@
         "valueType": "string"
       },
       {
-        "component": "text",
-        "default": "image",
-        "label": "Media Type (image or video)",
-        "name": "mediaType",
-        "options": [
-          {
-            "name": "Image",
-            "value": "image"
-          },
-          {
-            "name": "Video",
-            "value": "video"
-          }
-        ],
-        "valueType": "string"
-      },
-      {
         "component": "richtext",
         "label": "CTA Text",
         "name": "ctaText",
