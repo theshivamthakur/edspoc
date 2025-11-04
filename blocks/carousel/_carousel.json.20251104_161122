@@ -39,13 +39,20 @@
         {
           "component": "reference",
           "label": "Media (Image or Video)",
+          "multi": false,
           "name": "media",
           "valueType": "string"
         },
         {
           "component": "richtext",
-          "label": "Call to Action",
-          "name": "cta",
+          "label": "CTA Text",
+          "name": "ctaText",
+          "valueType": "string"
+        },
+        {
+          "component": "aem-content",
+          "label": "CTA Link",
+          "name": "ctaLink",
           "valueType": "string"
         }
       ]
