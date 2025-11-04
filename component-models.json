@@ -165,44 +165,28 @@
     "description": "",
     "fields": [
       {
-        "component": "container",
-        "fields": [
-          {
-            "component": "aem-content",
-            "label": "Video Source (MP4)",
-            "name": "video",
-            "render": {
-              "hidden": true
-            },
-            "valueType": "string"
-          },
-          {
-            "component": "aem-content",
-            "label": "Video Source (WebM)",
-            "name": "video_webm",
-            "render": {
-              "hidden": true
-            },
-            "valueType": "string"
-          },
-          {
-            "component": "aem-content",
-            "label": "Image",
-            "name": "image",
-            "render": {
-              "hidden": true
-            },
-            "valueType": "string"
-          },
-          {
-            "component": "aem-content",
-            "label": "CTA",
-            "name": "cta",
-            "valueType": "string"
-          }
-        ],
-        "label": "Media",
-        "name": "media"
+        "component": "richtext",
+        "label": "Title",
+        "name": "title",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Image",
+        "name": "image",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Video",
+        "name": "video",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "CTA Link",
+        "name": "cta",
+        "valueType": "string"
       }
     ]
   },

@@ -3,74 +3,61 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const swiperWrapper = block.querySelector('.swiper-wrapper');
-  if (!swiperWrapper) return;
-
-  const ul = document.createElement('ul');
-  ul.classList.add('carousel-list');
-
-  [...swiperWrapper.children].forEach((slide) => {
-    if (slide.classList.contains('swiper-slide')) {
+  if (swiperWrapper) {
+    const ul = document.createElement('ul');
+    swiperWrapper.querySelectorAll('.swiper-slide').forEach((slide) => {
       const li = document.createElement('li');
       moveInstrumentation(slide, li);
-      li.classList.add('carousel-item');
-
-      const bannerDiv = slide.querySelector('.carousel-banner');
-      if (bannerDiv) {
-        const section = bannerDiv.querySelector('.carousel-banner-section');
-        if (section) {
-          const wrapper = section.querySelector('.carousel-banner-section__wrapper');
-          if (wrapper) {
-            const videoWrapper = wrapper.querySelector('.carousel-video-wrapper');
-            const img = wrapper.querySelector('img.carousel-banner-image');
-            const ctaDiv = wrapper.querySelector('.carousel-boing__banner--cta .carousel-banner-cta');
-
-            if (videoWrapper) {
-              const video = videoWrapper.querySelector('video.carousel-banner-video');
-              if (video) {
-                const videoContainer = document.createElement('div');
-                videoContainer.classList.add('carousel-video-container');
-                videoContainer.append(video);
-                li.append(videoContainer);
-              }
-            } else if (img) {
-              const picture = img.closest('picture');
-              if (picture) {
-                const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-                moveInstrumentation(img, optimizedPic.querySelector('img'));
-                li.append(optimizedPic);
-              } else {
-                li.append(img.cloneNode(true));
-              }
-            }
-
-            if (ctaDiv) {
-              const ctaContainer = document.createElement('div');
-              ctaContainer.classList.add('carousel-cta-container');
-              ctaContainer.append(ctaDiv.cloneNode(true));
-              li.append(ctaContainer);
-            }
+      const banner = slide.querySelector('.carousel-banner');
+      if (banner) {
+        const videoWrapper = banner.querySelector('.carousel-video-wrapper');
+        if (videoWrapper) {
+          const video = videoWrapper.querySelector('video');
+          if (video) {
+            li.append(video);
+            const playButton = videoWrapper.querySelector('.carousel-icon-play');
+            const pauseButton = videoWrapper.querySelector('.carousel-icon-pause');
+            const muteButton = videoWrapper.querySelector('.carousel-icon-mute');
+            const unmuteButton = videoWrapper.querySelector('.carousel-icon-unmute');
+            const noAudioIcon = videoWrapper.querySelector('.carousel-no-audio-icon');
+            if (playButton) li.append(playButton);
+            if (pauseButton) li.append(pauseButton);
+            if (muteButton) li.append(muteButton);
+            if (unmuteButton) li.append(unmuteButton);
+            if (noAudioIcon) li.append(noAudioIcon);
           }
+        }
+        const image = banner.querySelector('img');
+        if (image) {
+          const optimizedPic = createOptimizedPicture(image.src, image.alt, false, [{ width: '750' }]);
+          moveInstrumentation(image, optimizedPic.querySelector('img'));
+          li.append(optimizedPic);
+        }
+        const cta = banner.querySelector('.carousel-banner-cta');
+        if (cta) {
+          li.append(cta);
         }
       }
       ul.append(li);
-    }
-  });
-
-  block.textContent = '';
-  block.append(ul);
-
-  // Handle navigation buttons and pagination if needed
-  const nextButton = block.querySelector('.carousel-primary-swiper__buttonNext');
-  const prevButton = block.querySelector('.carousel-primary-swiper__buttonPrev');
-  const pagination = block.querySelector('.carousel-swiper-pagination');
-
-  if (nextButton) nextButton.remove();
-  if (prevButton) prevButton.remove();
-  if (pagination) pagination.remove();
-
-  // Remove original swiper structure
-  const swiperContainer = block.querySelector('.swiper.carousel-primary-swiper');
-  if (swiperContainer) {
-    swiperContainer.replaceWith(ul);
+    });
+    block.textContent = '';
+    block.append(ul);
   }
+
+  const actionsDiv = block.querySelector('.carousel-cmp-carousel__actions');
+  if (actionsDiv) {
+    actionsDiv.remove();
+  }
+
+  const swiperContainer = block.querySelector('.carousel-swiper-container');
+  if (swiperContainer) {
+    swiperContainer.remove();
+  }
+
+  const pagination = block.querySelector('.carousel-swiper-pagination');
+  if (pagination) {
+    pagination.remove();
+  }
+
+  block.classList.add('carousel-block');
 }
