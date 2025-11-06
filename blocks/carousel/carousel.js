@@ -231,23 +231,7 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(swiperContainer);
 
-  // Initialize Swiper
-  // eslint-disable-next-line import/no-unresolved, import/extensions
-  const swiper = new Swiper(swiperContainer, {
-    loop: false,
-    pagination: {
-      el: paginationDiv,
-      clickable: true,
-    },
-    navigation: {
-      nextEl: nextNavButton,
-      prevEl: prevNavButton,
-    },
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-  });
+ 
 
   // Handle video play/pause and mute/unmute
   block.querySelectorAll('video').forEach((video) => {
