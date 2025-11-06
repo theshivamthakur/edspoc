@@ -3,10 +3,10 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 
 export default function decorate(block) {
+  if (window.location !== window.parent.location && (window.location.href.includes('universal-editor') || document.referrer.includes('universal-editor'))) return;
+
   block.classList.add('carousel-position-relative');
-  if (window.parent !== window && window.parent.document.querySelector('helix-sidekick, helix-editor, .universal-editor')) {
-    return;
-  }
+
   const swiperWrapper = document.createElement('div');
   swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
 
