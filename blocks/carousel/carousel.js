@@ -234,80 +234,80 @@ export default function decorate(block) {
 
   // Initialize Swiper
   // eslint-disable-next-line import/no-unresolved, import/extensions
-  const swiper = new Swiper(swiperContainer, {
-    loop: false,
-    pagination: {
-      el: paginationDiv,
-      clickable: true,
-    },
-    navigation: {
-      nextEl: nextNavButton,
-      prevEl: prevNavButton,
-    },
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-  });
+  // const swiper = new Swiper(swiperContainer, {
+  //   loop: false,
+  //   pagination: {
+  //     el: paginationDiv,
+  //     clickable: true,
+  //   },
+  //   navigation: {
+  //     nextEl: nextNavButton,
+  //     prevEl: prevNavButton,
+  //   },
+  //   autoplay: {
+  //     delay: 5000,
+  //     disableOnInteraction: false,
+  //   },
+  // });
 
-  // Handle video play/pause and mute/unmute
-  block.querySelectorAll('video').forEach((video) => {
-    const playButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-play');
-    const pauseButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-pause');
-    const muteButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-mute');
-    const unmuteButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-unmute');
-    const noAudioButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-no-audio-icon');
+  // // Handle video play/pause and mute/unmute
+  // block.querySelectorAll('video').forEach((video) => {
+  //   const playButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-play');
+  //   const pauseButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-pause');
+  //   const muteButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-mute');
+  //   const unmuteButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-icon-unmute');
+  //   const noAudioButton = video.closest('.carousel-video-wrapper').querySelector('.carousel-no-audio-icon');
 
-    if (video.hasAttribute('autoplay')) {
-      video.play();
-      playButton.classList.add('carousel-d-none');
-      pauseButton.classList.remove('carousel-d-none');
-    } else {
-      playButton.classList.remove('carousel-d-none');
-      pauseButton.classList.add('carousel-d-none');
-    }
+  //   if (video.hasAttribute('autoplay')) {
+  //     video.play();
+  //     playButton.classList.add('carousel-d-none');
+  //     pauseButton.classList.remove('carousel-d-none');
+  //   } else {
+  //     playButton.classList.remove('carousel-d-none');
+  //     pauseButton.classList.add('carousel-d-none');
+  //   }
 
-    if (video.muted) {
-      muteButton.classList.add('carousel-d-none');
-      unmuteButton.classList.add('carousel-d-none');
-      noAudioButton.classList.remove('carousel-d-none');
-    } else {
-      muteButton.classList.remove('carousel-d-none');
-      unmuteButton.classList.add('carousel-d-none');
-      noAudioButton.classList.add('carousel-d-none');
-    }
+  //   if (video.muted) {
+  //     muteButton.classList.add('carousel-d-none');
+  //     unmuteButton.classList.add('carousel-d-none');
+  //     noAudioButton.classList.remove('carousel-d-none');
+  //   } else {
+  //     muteButton.classList.remove('carousel-d-none');
+  //     unmuteButton.classList.add('carousel-d-none');
+  //     noAudioButton.classList.add('carousel-d-none');
+  //   }
 
-    playButton.addEventListener('click', () => {
-      video.play();
-      playButton.classList.add('carousel-d-none');
-      pauseButton.classList.remove('carousel-d-none');
-    });
+  //   playButton.addEventListener('click', () => {
+  //     video.play();
+  //     playButton.classList.add('carousel-d-none');
+  //     pauseButton.classList.remove('carousel-d-none');
+  //   });
 
-    pauseButton.addEventListener('click', () => {
-      video.pause();
-      playButton.classList.remove('carousel-d-none');
-      pauseButton.classList.add('carousel-d-none');
-    });
+  //   pauseButton.addEventListener('click', () => {
+  //     video.pause();
+  //     playButton.classList.remove('carousel-d-none');
+  //     pauseButton.classList.add('carousel-d-none');
+  //   });
 
-    muteButton.addEventListener('click', () => {
-      video.muted = true;
-      muteButton.classList.add('carousel-d-none');
-      unmuteButton.classList.add('carousel-d-none');
-      noAudioButton.classList.remove('carousel-d-none');
-    });
+  //   muteButton.addEventListener('click', () => {
+  //     video.muted = true;
+  //     muteButton.classList.add('carousel-d-none');
+  //     unmuteButton.classList.add('carousel-d-none');
+  //     noAudioButton.classList.remove('carousel-d-none');
+  //   });
 
-    unmuteButton.addEventListener('click', () => {
-      video.muted = false;
-      muteButton.classList.remove('carousel-d-none');
-      unmuteButton.classList.add('carousel-d-none');
-      noAudioButton.classList.add('carousel-d-none');
-    });
+  //   unmuteButton.addEventListener('click', () => {
+  //     video.muted = false;
+  //     muteButton.classList.remove('carousel-d-none');
+  //     unmuteButton.classList.add('carousel-d-none');
+  //     noAudioButton.classList.add('carousel-d-none');
+  //   });
 
-    noAudioButton.addEventListener('click', () => {
-      video.muted = false;
-      muteButton.classList.remove('carousel-d-none');
-      unmuteButton.classList.add('carousel-d-none');
-      noAudioButton.classList.add('carousel-d-none');
-    });
-  });
+  //   noAudioButton.addEventListener('click', () => {
+  //     video.muted = false;
+  //     muteButton.classList.remove('carousel-d-none');
+  //     unmuteButton.classList.add('carousel-d-none');
+  //     noAudioButton.classList.add('carousel-d-none');
+  //   });
+  // });
 }
