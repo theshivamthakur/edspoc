@@ -4,10 +4,17 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
 
+   const isAuthorMode = document.body.classList.contains('adobe-ue-edit') || 
+                       window.location.search.includes('wcmmode=edit') ||
+                       document.querySelector('meta[name="urn:adobe:aue:system:aemconnection"]');
+  
+  if (isAuthorMode) {
+    // In author mode, add minimal styling but keep original structure
+    block.classList.add('carousel-authoring-mode');
+    return;
+  }
+
   block.classList.add('carousel-position-relative');
-    if (window.location.href.includes('/aem/universal-editor/') || document.referrer.includes('/aem/universal-editor/')) return;
-
-
   const swiperWrapper = document.createElement('div');
   swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
 
