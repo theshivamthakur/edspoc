@@ -161,7 +161,7 @@
     ]
   },
   {
-    "id": "carousel-item",
+    "id": "carousel",
     "description": "",
     "fields": [
       {
@@ -171,8 +171,46 @@
         "valueType": "string"
       },
       {
-        "component": "richtext",
-        "label": "Call to Action",
+        "component": "text",
+        "hide": true,
+        "label": "Video Title",
+        "name": "videoTitle",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "hide": true,
+        "label": "Video Aria Label",
+        "name": "videoAriaLabel",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "default": true,
+        "hide": true,
+        "label": "Autoplay Video",
+        "name": "isAutoplay",
+        "valueType": "boolean"
+      },
+      {
+        "component": "boolean",
+        "default": false,
+        "hide": true,
+        "label": "Loop Video",
+        "name": "isLoop",
+        "valueType": "boolean"
+      },
+      {
+        "component": "boolean",
+        "default": true,
+        "hide": true,
+        "label": "Mute Video",
+        "name": "isMuted",
+        "valueType": "boolean"
+      },
+      {
+        "component": "aem-content",
+        "label": "CTA",
         "name": "cta",
         "valueType": "string"
       }
