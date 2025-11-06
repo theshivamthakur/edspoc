@@ -1,11 +1,12 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+
 
 export default function decorate(block) {
   block.classList.add('carousel-position-relative');
-
+ if (document.querySelector('body.aem-AuthorLayer-Edit') || window.location.href.includes('aemeditor.html')) {
+    return;
+  }
   const swiperWrapper = document.createElement('div');
   swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
 
@@ -234,21 +235,21 @@ export default function decorate(block) {
   block.textContent = '';
   block.append(swiperContainer);
 
-  const swiper = new Swiper(swiperContainer, {
-    loop: false,
-    pagination: {
-      el: paginationDiv,
-      clickable: true,
-    },
-    navigation: {
-      nextEl: nextNavButton,
-      prevEl: prevNavButton,
-    },
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-  });
+  // const swiper = new Swiper(swiperContainer, {
+  //   loop: false,
+  //   pagination: {
+  //     el: paginationDiv,
+  //     clickable: true,
+  //   },
+  //   navigation: {
+  //     nextEl: nextNavButton,
+  //     prevEl: prevNavButton,
+  //   },
+  //   autoplay: {
+  //     delay: 5000,
+  //     disableOnInteraction: false,
+  //   },
+  // });
 
   // Handle video play/pause and mute/unmute
   block.querySelectorAll('video').forEach((video) => {
