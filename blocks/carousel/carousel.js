@@ -1,19 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-
 export default function decorate(block) {
-
-   const isAuthorMode = document.body.classList.contains('adobe-ue-edit') || 
-                       window.location.search.includes('wcmmode=edit') ||
-                       document.querySelector('meta[name="urn:adobe:aue:system:aemconnection"]');
-  
-  if (isAuthorMode) {
-    // In author mode, add minimal styling but keep original structure
-    block.classList.add('carousel-authoring-mode');
-    return;
-  }
-
   block.classList.add('carousel-position-relative');
   const swiperWrapper = document.createElement('div');
   swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
@@ -47,6 +35,10 @@ export default function decorate(block) {
         videoWrapper.classList.add('carousel-video-wrapper');
         const video = mediaDiv.querySelector('video');
         video.classList.add('carousel-w-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-video');
+        
+        // CRITICAL: Move instrumentation from original mediaDiv to video element
+        moveInstrumentation(mediaDiv, video);
+        
         videoWrapper.append(video);
 
         // Add play/pause buttons
@@ -94,6 +86,10 @@ export default function decorate(block) {
         const img = mediaDiv.querySelector('img');
         img.classList.add('carousel-w-100', 'carousel-h-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-image');
         const optimizedPic = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+        
+        // CRITICAL: Move instrumentation from original mediaDiv to the picture element
+        moveInstrumentation(mediaDiv, optimizedPic);
+        
         wrapperDiv.append(optimizedPic);
       }
     }
@@ -114,6 +110,10 @@ export default function decorate(block) {
         if (span) {
           span.classList.add('carousel-cmp-button__text', 'carousel-primary-btn', 'carousel-w-75', 'carousel-p-5', 'carousel-rounded-pill', 'carousel-d-inline-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-famlf-cta-btn');
         }
+        
+        // CRITICAL: Move instrumentation from original ctaDiv to anchor element
+        moveInstrumentation(ctaDiv, anchor);
+        
         textCenterDiv.append(anchor);
       }
 
@@ -178,6 +178,11 @@ export default function decorate(block) {
     section.append(wrapperDiv);
     bannerDiv.append(section);
     slide.append(bannerDiv);
+    
+    // CRITICAL: Move instrumentation from the original row to the new slide container
+    // This is the MOST IMPORTANT call - it preserves the editing capability for the entire slide
+    moveInstrumentation(row, slide);
+    
     swiperWrapper.append(slide);
   });
 
@@ -242,22 +247,6 @@ export default function decorate(block) {
 
   block.textContent = '';
   block.append(swiperContainer);
-
-  // const swiper = new Swiper(swiperContainer, {
-  //   loop: false,
-  //   pagination: {
-  //     el: paginationDiv,
-  //     clickable: true,
-  //   },
-  //   navigation: {
-  //     nextEl: nextNavButton,
-  //     prevEl: prevNavButton,
-  //   },
-  //   autoplay: {
-  //     delay: 5000,
-  //     disableOnInteraction: false,
-  //   },
-  // });
 
   // Handle video play/pause and mute/unmute
   block.querySelectorAll('video').forEach((video) => {
