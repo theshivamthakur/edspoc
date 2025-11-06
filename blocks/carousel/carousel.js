@@ -232,7 +232,7 @@ export default function decorate(block) {
   paginationDiv.innerHTML = '<span class="carousel-swiper-pagination-bullet"></span><span class="carousel-swiper-pagination-bullet carousel-swiper-pagination-bullet-active"></span>';
   swiperContainer.append(paginationDiv);
 
-  block.textContent = '';
+  // block.textContent = '';
   block.append(swiperContainer);
 
   // const swiper = new Swiper(swiperContainer, {
