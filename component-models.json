@@ -162,19 +162,11 @@
   },
   {
     "id": "carousel-item",
-    "description": "",
     "fields": [
       {
         "component": "reference",
-        "label": "Image",
-        "multi": false,
-        "name": "image",
-        "valueType": "string"
-      },
-      {
-        "component": "aem-content",
-        "label": "Video",
-        "name": "video",
+        "label": "Media (Image or Video)",
+        "name": "media",
         "valueType": "string"
       },
       {
