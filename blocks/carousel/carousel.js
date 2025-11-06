@@ -4,7 +4,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   block.classList.add('carousel-position-relative');
- if (document.querySelector('body.aem-AuthorLayer-Edit') || window.location.href.includes('aemeditor.html')) {
+  if (window.parent !== window && window.parent.document.querySelector('helix-sidekick, helix-editor, .universal-editor')) {
     return;
   }
   const swiperWrapper = document.createElement('div');
@@ -232,7 +232,7 @@ export default function decorate(block) {
   paginationDiv.innerHTML = '<span class="carousel-swiper-pagination-bullet"></span><span class="carousel-swiper-pagination-bullet carousel-swiper-pagination-bullet-active"></span>';
   swiperContainer.append(paginationDiv);
 
-  // block.textContent = '';
+  block.textContent = '';
   block.append(swiperContainer);
 
   // const swiper = new Swiper(swiperContainer, {
