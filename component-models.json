@@ -166,12 +166,19 @@
     "fields": [
       {
         "component": "reference",
-        "label": "Media (Image or Video)",
-        "name": "media",
+        "label": "Image",
+        "multi": false,
+        "name": "image",
         "valueType": "string"
       },
       {
         "component": "aem-content",
+        "label": "Video",
+        "name": "video",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
         "label": "CTA",
         "name": "cta",
         "valueType": "string"
