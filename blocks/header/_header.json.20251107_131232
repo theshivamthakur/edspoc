@@ -31,30 +31,45 @@
       }
     },
     {
-      "title": "Footer List Item",
-      "id": "footerListItem",
+      "title": "Footer Link List",
+      "id": "footerLinkList",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "footerListItem",
-              "name": "footerListItem"
+              "model": "footerLinkList",
+              "name": "footerLinkList"
             }
           }
         }
       }
     },
     {
-      "title": "Social Media Item",
-      "id": "socialMediaItem",
+      "title": "Social Media Link",
+      "id": "socialMediaLink",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "socialMediaItem",
-              "name": "socialMediaItem"
+              "model": "socialMediaLink",
+              "name": "socialMediaLink"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Footer Primary Link",
+      "id": "footerPrimaryLink",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "model": "footerPrimaryLink",
+              "name": "footerPrimaryLink"
             }
           }
         }
@@ -69,14 +84,13 @@
         {
           "component": "reference",
           "label": "Icon",
-          "multi": false,
           "name": "icon",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Label",
+          "name": "label",
           "valueType": "string"
         },
         {
@@ -84,17 +98,23 @@
           "label": "Link",
           "name": "link",
           "valueType": "string"
+        },
+        {
+          "component": "boolean",
+          "label": "Logout Item",
+          "name": "logout",
+          "valueType": "boolean"
         }
       ]
     },
     {
-      "id": "footerListItem",
+      "id": "footerLinkList",
       "description": "",
       "fields": [
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Label",
+          "name": "label",
           "valueType": "string"
         },
         {
@@ -102,18 +122,47 @@
           "label": "Link",
           "name": "link",
           "valueType": "string"
+        },
+        {
+          "component": "boolean",
+          "label": "Open in new tab",
+          "name": "openInNewTab",
+          "valueType": "boolean"
         }
       ]
     },
     {
-      "id": "socialMediaItem",
+      "id": "socialMediaLink",
       "description": "",
       "fields": [
         {
           "component": "reference",
           "label": "Icon",
-          "multi": false,
           "name": "icon",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Link",
+          "name": "link",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Platform Name",
+          "name": "platformName",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "footerPrimaryLink",
+      "description": "",
+      "fields": [
+        {
+          "component": "text",
+          "label": "Label",
+          "name": "label",
           "valueType": "string"
         },
         {
@@ -130,8 +179,9 @@
       "id": "header",
       "components": [
         "menuItem",
-        "footerListItem",
-        "socialMediaItem"
+        "footerLinkList",
+        "socialMediaLink",
+        "footerPrimaryLink"
       ]
     }
   ]

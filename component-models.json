@@ -213,13 +213,14 @@
       {
         "component": "reference",
         "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Label",
-        "name": "label",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       },
       {
@@ -227,23 +228,17 @@
         "label": "Link",
         "name": "link",
         "valueType": "string"
-      },
-      {
-        "component": "boolean",
-        "label": "Logout Item",
-        "name": "logout",
-        "valueType": "boolean"
       }
     ]
   },
   {
-    "id": "footerLinkList",
+    "id": "footerListItem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Label",
-        "name": "label",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       },
       {
@@ -251,47 +246,18 @@
         "label": "Link",
         "name": "link",
         "valueType": "string"
-      },
-      {
-        "component": "boolean",
-        "label": "Open in new tab",
-        "name": "openInNewTab",
-        "valueType": "boolean"
       }
     ]
   },
   {
-    "id": "socialMediaLink",
+    "id": "socialMediaItem",
     "description": "",
     "fields": [
       {
         "component": "reference",
         "label": "Icon",
+        "multi": false,
         "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Platform Name",
-        "name": "platformName",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerPrimaryLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "text",
-        "label": "Label",
-        "name": "label",
         "valueType": "string"
       },
       {
