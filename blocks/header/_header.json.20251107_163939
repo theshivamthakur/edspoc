@@ -61,15 +61,15 @@
       }
     },
     {
-      "title": "Footer Link Item",
-      "id": "footerLinkItem",
+      "title": "Footer Brand Link",
+      "id": "footerBrandLink",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "footerLinkItem",
-              "name": "footerLinkItem"
+              "model": "footerBrandLink",
+              "name": "footerBrandLink"
             }
           }
         }
@@ -108,14 +108,14 @@
       "fields": [
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Link Text",
+          "name": "linkText",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Link",
-          "name": "link",
+          "label": "Link URL",
+          "name": "linkUrl",
           "valueType": "string"
         }
       ]
@@ -124,6 +124,12 @@
       "id": "socialMediaItem",
       "description": "",
       "fields": [
+        {
+          "component": "text",
+          "label": "Platform Name",
+          "name": "platformName",
+          "valueType": "string"
+        },
         {
           "component": "reference",
           "label": "Icon",
@@ -140,19 +146,19 @@
       ]
     },
     {
-      "id": "footerLinkItem",
+      "id": "footerBrandLink",
       "description": "",
       "fields": [
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Link Text",
+          "name": "linkText",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Link",
-          "name": "link",
+          "label": "Link URL",
+          "name": "linkUrl",
           "valueType": "string"
         }
       ]
@@ -165,7 +171,7 @@
         "menuItem",
         "footerListItem",
         "socialMediaItem",
-        "footerLinkItem"
+        "footerBrandLink"
       ]
     }
   ]
