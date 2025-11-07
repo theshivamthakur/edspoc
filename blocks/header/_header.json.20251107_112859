@@ -31,45 +31,30 @@
       }
     },
     {
-      "title": "Footer List Item",
-      "id": "footerListItem",
+      "title": "Footer Link List",
+      "id": "footerLinkList",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "footerListItem",
-              "name": "footerListItem"
+              "model": "footerLinkList",
+              "name": "footerLinkList"
             }
           }
         }
       }
     },
     {
-      "title": "Social Media Item",
-      "id": "socialMediaItem",
+      "title": "Social Media Link",
+      "id": "socialMediaLink",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "socialMediaItem",
-              "name": "socialMediaItem"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Footer Link Item",
-      "id": "footerLinkItem",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "model": "footerLinkItem",
-              "name": "footerLinkItem"
+              "model": "socialMediaLink",
+              "name": "socialMediaLink"
             }
           }
         }
@@ -84,6 +69,7 @@
         {
           "component": "reference",
           "label": "Icon",
+          "multi": false,
           "name": "icon",
           "valueType": "string"
         },
@@ -101,45 +87,46 @@
         },
         {
           "component": "boolean",
-          "defaultValue": true,
-          "label": "Display",
-          "name": "display",
+          "label": "Logout Item",
+          "name": "logout",
+          "value": false,
           "valueType": "boolean"
         }
       ]
     },
     {
-      "id": "footerListItem",
+      "id": "footerLinkList",
       "description": "",
       "fields": [
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Link Text",
+          "name": "linkText",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Link",
-          "name": "link",
+          "label": "Link URL",
+          "name": "linkUrl",
           "valueType": "string"
         },
         {
           "component": "boolean",
-          "defaultValue": false,
-          "label": "Open in new tab",
-          "name": "openInNewTab",
+          "label": "Open in New Tab",
+          "name": "newTab",
+          "value": false,
           "valueType": "boolean"
         }
       ]
     },
     {
-      "id": "socialMediaItem",
+      "id": "socialMediaLink",
       "description": "",
       "fields": [
         {
           "component": "reference",
           "label": "Icon",
+          "multi": false,
           "name": "icon",
           "valueType": "string"
         },
@@ -156,31 +143,6 @@
           "valueType": "string"
         }
       ]
-    },
-    {
-      "id": "footerLinkItem",
-      "description": "",
-      "fields": [
-        {
-          "component": "text",
-          "label": "Text",
-          "name": "text",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Link",
-          "name": "link",
-          "valueType": "string"
-        },
-        {
-          "component": "boolean",
-          "defaultValue": false,
-          "label": "Open in new tab",
-          "name": "openInNewTab",
-          "valueType": "boolean"
-        }
-      ]
     }
   ],
   "filters": [
@@ -188,9 +150,8 @@
       "id": "header",
       "components": [
         "menuItem",
-        "footerListItem",
-        "socialMediaItem",
-        "footerLinkItem"
+        "footerLinkList",
+        "socialMediaLink"
       ]
     }
   ]

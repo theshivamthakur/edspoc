@@ -213,7 +213,6 @@
       {
         "component": "reference",
         "label": "Icon",
-        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
@@ -231,46 +230,45 @@
       },
       {
         "component": "boolean",
-        "label": "Logout Item",
-        "name": "logout",
-        "value": false,
+        "defaultValue": true,
+        "label": "Display",
+        "name": "display",
         "valueType": "boolean"
       }
     ]
   },
   {
-    "id": "footerLinkList",
+    "id": "footerListItem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Link Text",
-        "name": "linkText",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link URL",
-        "name": "linkUrl",
+        "label": "Link",
+        "name": "link",
         "valueType": "string"
       },
       {
         "component": "boolean",
-        "label": "Open in New Tab",
-        "name": "newTab",
-        "value": false,
+        "defaultValue": false,
+        "label": "Open in new tab",
+        "name": "openInNewTab",
         "valueType": "boolean"
       }
     ]
   },
   {
-    "id": "socialMediaLink",
+    "id": "socialMediaItem",
     "description": "",
     "fields": [
       {
         "component": "reference",
         "label": "Icon",
-        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
@@ -285,6 +283,31 @@
         "label": "Platform Name",
         "name": "platformName",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "footerLinkItem",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "defaultValue": false,
+        "label": "Open in new tab",
+        "name": "openInNewTab",
+        "valueType": "boolean"
       }
     ]
   },

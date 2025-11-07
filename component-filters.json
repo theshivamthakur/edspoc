@@ -52,8 +52,9 @@
     "id": "header",
     "components": [
       "menuItem",
-      "footerLinkList",
-      "socialMediaLink"
+      "footerListItem",
+      "socialMediaItem",
+      "footerLinkItem"
     ]
   }
 ]
