@@ -79,7 +79,6 @@
   "models": [
     {
       "id": "menuItem",
-      "description": "",
       "fields": [
         {
           "component": "reference",
