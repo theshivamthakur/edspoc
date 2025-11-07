@@ -51,10 +51,10 @@
   {
     "id": "header",
     "components": [
-      "menuItem",
-      "footerListItem",
-      "socialMediaItem",
-      "footerLinkItem"
+      "menuitem",
+      "footerlistitem",
+      "socialmediaitem",
+      "footerlinkitem"
     ]
   }
 ]

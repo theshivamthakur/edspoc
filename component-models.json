@@ -207,19 +207,20 @@
     ]
   },
   {
-    "id": "menuItem",
+    "id": "menuitem",
     "description": "",
     "fields": [
       {
         "component": "reference",
         "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Text",
-        "name": "text",
+        "label": "Label",
+        "name": "label",
         "valueType": "string"
       },
       {
@@ -230,45 +231,44 @@
       },
       {
         "component": "boolean",
-        "defaultValue": true,
-        "label": "Display",
-        "name": "display",
-        "valueType": "boolean"
+        "label": "Is Logout Item",
+        "name": "isLogout",
+        "value": false
       }
     ]
   },
   {
-    "id": "footerListItem",
+    "id": "footerlistitem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Text",
-        "name": "text",
+        "label": "Link Text",
+        "name": "linkText",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link",
-        "name": "link",
+        "label": "Link URL",
+        "name": "linkUrl",
         "valueType": "string"
       },
       {
         "component": "boolean",
-        "defaultValue": false,
-        "label": "Open in new tab",
+        "label": "Open in New Tab",
         "name": "openInNewTab",
-        "valueType": "boolean"
+        "value": false
       }
     ]
   },
   {
-    "id": "socialMediaItem",
+    "id": "socialmediaitem",
     "description": "",
     "fields": [
       {
         "component": "reference",
         "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
@@ -287,27 +287,26 @@
     ]
   },
   {
-    "id": "footerLinkItem",
+    "id": "footerlinkitem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Text",
-        "name": "text",
+        "label": "Link Text",
+        "name": "linkText",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link",
-        "name": "link",
+        "label": "Link URL",
+        "name": "linkUrl",
         "valueType": "string"
       },
       {
         "component": "boolean",
-        "defaultValue": false,
-        "label": "Open in new tab",
+        "label": "Open in New Tab",
         "name": "openInNewTab",
-        "valueType": "boolean"
+        "value": false
       }
     ]
   },
