@@ -189,29 +189,29 @@
         },
         {
           "title": "Menu Item",
-          "id": "menuitem",
+          "id": "menuItem",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "menuitem",
-                  "name": "menuitem"
+                  "model": "menuItem",
+                  "name": "menuItem"
                 }
               }
             }
           }
         },
         {
-          "title": "Footer List Item",
-          "id": "footerlistitem",
+          "title": "Footer List",
+          "id": "footerList",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "footerlistitem",
-                  "name": "footerlistitem"
+                  "model": "footerList",
+                  "name": "footerList"
                 }
               }
             }
@@ -219,29 +219,14 @@
         },
         {
           "title": "Social Media Item",
-          "id": "socialmediaitem",
+          "id": "socialMediaItem",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "socialmediaitem",
-                  "name": "socialmediaitem"
-                }
-              }
-            }
-          }
-        },
-        {
-          "title": "Footer Link Item",
-          "id": "footerlinkitem",
-          "plugins": {
-            "xwalk": {
-              "page": {
-                "resourceType": "core/franklin/components/block/v1/block/item",
-                "template": {
-                  "model": "footerlinkitem",
-                  "name": "footerlinkitem"
+                  "model": "socialMediaItem",
+                  "name": "socialMediaItem"
                 }
               }
             }

@@ -51,10 +51,9 @@
   {
     "id": "header",
     "components": [
-      "menuitem",
-      "footerlistitem",
-      "socialmediaitem",
-      "footerlinkitem"
+      "menuItem",
+      "footerList",
+      "socialMediaItem"
     ]
   }
 ]
