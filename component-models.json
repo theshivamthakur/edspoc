@@ -237,14 +237,14 @@
     "fields": [
       {
         "component": "text",
-        "label": "Text",
-        "name": "text",
+        "label": "Link Text",
+        "name": "linkText",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link",
-        "name": "link",
+        "label": "Link URL",
+        "name": "linkUrl",
         "valueType": "string"
       }
     ]
@@ -253,6 +253,12 @@
     "id": "socialMediaItem",
     "description": "",
     "fields": [
+      {
+        "component": "text",
+        "label": "Platform Name",
+        "name": "platformName",
+        "valueType": "string"
+      },
       {
         "component": "reference",
         "label": "Icon",
@@ -264,6 +270,24 @@
         "component": "text",
         "label": "Link",
         "name": "link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "footerBrandLink",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Link Text",
+        "name": "linkText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link URL",
+        "name": "linkUrl",
         "valueType": "string"
       }
     ]

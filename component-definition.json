@@ -233,6 +233,21 @@
           }
         },
         {
+          "title": "Footer Brand Link",
+          "id": "footerBrandLink",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "model": "footerBrandLink",
+                  "name": "footerBrandLink"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Hero",
           "id": "hero",
           "plugins": {

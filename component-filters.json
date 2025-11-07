@@ -53,7 +53,8 @@
     "components": [
       "menuItem",
       "footerListItem",
-      "socialMediaItem"
+      "socialMediaItem",
+      "footerBrandLink"
     ]
   }
 ]
