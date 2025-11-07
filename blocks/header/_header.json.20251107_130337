@@ -1,0 +1,332 @@
+{
+  "definitions": [
+    {
+      "title": "Header",
+      "id": "header",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "filter": "header",
+              "model": "header"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Menu Item",
+      "id": "menuItem",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "model": "menuItem",
+              "name": "menuItem"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Footer List Item",
+      "id": "footerListItem",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "model": "footerListItem",
+              "name": "footerListItem"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Social Media Item",
+      "id": "socialMediaItem",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "model": "socialMediaItem",
+              "name": "socialMediaItem"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Footer Link Item",
+      "id": "footerLinkItem",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "model": "footerLinkItem",
+              "name": "footerLinkItem"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "header",
+      "description": "",
+      "fields": [
+        {
+          "component": "text",
+          "label": "App Name",
+          "multi": false,
+          "name": "appName",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "Header Left Image",
+          "multi": false,
+          "name": "headerLeftImage",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "Header Logo Image",
+          "multi": false,
+          "name": "headerLogoImage",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Header Logo Alt Text",
+          "multi": false,
+          "name": "headerLogoAlt",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Login Button Text",
+          "multi": false,
+          "name": "loginButtonText",
+          "valueType": "string"
+        },
+        {
+          "component": "block",
+          "label": "Menu Items",
+          "modelId": "menuItem",
+          "multi": true,
+          "name": "menuItems",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "reference",
+          "label": "ITC Logo",
+          "multi": false,
+          "name": "itcLogo",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "ITC Logo Alt Text",
+          "multi": false,
+          "name": "itcLogoAlt",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "FSSI Logo",
+          "multi": false,
+          "name": "fssiLogo",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "FSSI Logo Alt Text",
+          "multi": false,
+          "name": "fssiLogoAlt",
+          "valueType": "string"
+        },
+        {
+          "component": "block",
+          "label": "Footer List 1",
+          "modelId": "footerListItem",
+          "multi": true,
+          "name": "footerList1",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "block",
+          "label": "Footer List 2",
+          "modelId": "footerListItem",
+          "multi": true,
+          "name": "footerList2",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "block",
+          "label": "Footer List 3",
+          "modelId": "footerListItem",
+          "multi": true,
+          "name": "footerList3",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "block",
+          "label": "Footer List 4",
+          "modelId": "footerListItem",
+          "multi": true,
+          "name": "footerList4",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "text",
+          "label": "Social Media Title",
+          "multi": false,
+          "name": "socialMediaTitle",
+          "valueType": "string"
+        },
+        {
+          "component": "block",
+          "label": "Social Media Items",
+          "modelId": "socialMediaItem",
+          "multi": true,
+          "name": "socialMediaItems",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "block",
+          "label": "Footer Links",
+          "modelId": "footerLinkItem",
+          "multi": true,
+          "name": "footerLinks",
+          "resourceType": "core/franklin/components/block/v1/block/item"
+        },
+        {
+          "component": "text",
+          "label": "Copyright Text",
+          "multi": false,
+          "name": "copyrightText",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "menuItem",
+      "description": "",
+      "fields": [
+        {
+          "component": "reference",
+          "label": "Icon",
+          "multi": false,
+          "name": "icon",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Icon Alt Text",
+          "multi": false,
+          "name": "iconAlt",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Text",
+          "multi": false,
+          "name": "text",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Link",
+          "multi": false,
+          "name": "link",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "footerListItem",
+      "description": "",
+      "fields": [
+        {
+          "component": "text",
+          "label": "Text",
+          "multi": false,
+          "name": "text",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Link",
+          "multi": false,
+          "name": "link",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "socialMediaItem",
+      "description": "",
+      "fields": [
+        {
+          "component": "reference",
+          "label": "Icon",
+          "multi": false,
+          "name": "icon",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Icon Alt Text",
+          "multi": false,
+          "name": "iconAlt",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Link",
+          "multi": false,
+          "name": "link",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "footerLinkItem",
+      "description": "",
+      "fields": [
+        {
+          "component": "text",
+          "label": "Text",
+          "multi": false,
+          "name": "text",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Link",
+          "multi": false,
+          "name": "link",
+          "valueType": "string"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "header",
+      "components": [
+        "menuItem",
+        "footerListItem",
+        "socialMediaItem",
+        "footerLinkItem"
+      ]
+    }
+  ]
+}
