@@ -31,15 +31,15 @@
       }
     },
     {
-      "title": "Footer List Item",
-      "id": "footerListItem",
+      "title": "Footer List",
+      "id": "footerList",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "footerListItem",
-              "name": "footerListItem"
+              "model": "footerList",
+              "name": "footerList"
             }
           }
         }
@@ -55,21 +55,6 @@
             "template": {
               "model": "socialMediaItem",
               "name": "socialMediaItem"
-            }
-          }
-        }
-      }
-    },
-    {
-      "title": "Footer Link Item",
-      "id": "footerLinkItem",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block/item",
-            "template": {
-              "model": "footerLinkItem",
-              "name": "footerLinkItem"
             }
           }
         }
@@ -103,19 +88,19 @@
       ]
     },
     {
-      "id": "footerListItem",
+      "id": "footerList",
       "description": "",
       "fields": [
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Link Text",
+          "name": "linkText",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Link",
-          "name": "link",
+          "label": "Link URL",
+          "name": "linkUrl",
           "valueType": "string"
         }
       ]
@@ -138,24 +123,6 @@
           "valueType": "string"
         }
       ]
-    },
-    {
-      "id": "footerLinkItem",
-      "description": "",
-      "fields": [
-        {
-          "component": "text",
-          "label": "Text",
-          "name": "text",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Link",
-          "name": "link",
-          "valueType": "string"
-        }
-      ]
     }
   ],
   "filters": [
@@ -163,9 +130,8 @@
       "id": "header",
       "components": [
         "menuItem",
-        "footerListItem",
-        "socialMediaItem",
-        "footerLinkItem"
+        "footerList",
+        "socialMediaItem"
       ]
     }
   ]

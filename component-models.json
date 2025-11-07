@@ -232,19 +232,19 @@
     ]
   },
   {
-    "id": "footerList",
+    "id": "footerListItem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Link Text",
-        "name": "linkText",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Link URL",
-        "name": "linkUrl",
+        "label": "Link",
+        "name": "link",
         "valueType": "string"
       }
     ]
@@ -258,6 +258,24 @@
         "label": "Icon",
         "multi": false,
         "name": "icon",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "footerLinkItem",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       },
       {
