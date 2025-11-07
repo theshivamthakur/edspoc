@@ -207,26 +207,34 @@
     ]
   },
   {
-    "id": "menuItem",
+    "id": "header",
     "description": "",
     "fields": [
       {
-        "component": "text",
-        "label": "Link Text",
-        "name": "linkText",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Link URL",
-        "name": "linkUrl",
-        "valueType": "string"
-      },
-      {
         "component": "reference",
         "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Logout Item",
+        "name": "logout",
+        "value": false,
+        "valueType": "boolean"
       }
     ]
   },
@@ -241,33 +249,35 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
+        "component": "text",
         "label": "Link URL",
         "name": "linkUrl",
         "valueType": "string"
       },
       {
         "component": "boolean",
-        "label": "Open in new tab",
-        "name": "openInNewTab",
+        "label": "Open in New Tab",
+        "name": "newTab",
+        "value": false,
         "valueType": "boolean"
       }
     ]
   },
   {
-    "id": "socialMediaItem",
+    "id": "socialMediaLink",
     "description": "",
     "fields": [
       {
         "component": "reference",
         "label": "Icon",
+        "multi": false,
         "name": "icon",
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Link URL",
-        "name": "linkUrl",
+        "component": "text",
+        "label": "Link",
+        "name": "link",
         "valueType": "string"
       },
       {

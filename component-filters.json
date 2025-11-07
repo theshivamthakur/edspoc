@@ -53,7 +53,7 @@
     "components": [
       "menuItem",
       "footerLinkList",
-      "socialMediaItem"
+      "socialMediaLink"
     ]
   }
 ]
