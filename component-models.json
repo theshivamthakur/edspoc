@@ -210,6 +210,115 @@
     "id": "menuItem",
     "fields": [
       {
+        "component": "text",
+        "label": "App Name",
+        "multi": false,
+        "name": "appName",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Hamburger Icon",
+        "multi": false,
+        "name": "hamburgerIcon",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Logo Image",
+        "multi": false,
+        "name": "logoImage",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Logo Alt Text",
+        "multi": false,
+        "name": "logoAltText",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Login Button Text",
+        "multi": false,
+        "name": "loginButtonText",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "ITC Logo",
+        "multi": false,
+        "name": "itcLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "FSSI Logo",
+        "multi": false,
+        "name": "fssiLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Social Media Title",
+        "multi": false,
+        "name": "socialMediaTitle",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Copyright Text",
+        "multi": false,
+        "name": "copyrightText",
+        "valueType": "string"
+      },
+      {
+        "component": "multifield",
+        "item": {
+          "model": "menuItem"
+        },
+        "label": "Menu Items",
+        "multi": true,
+        "name": "menuItems",
+        "valueType": "string"
+      },
+      {
+        "component": "multifield",
+        "item": {
+          "model": "footerListItem"
+        },
+        "label": "Footer Lists",
+        "multi": true,
+        "name": "footerLists",
+        "valueType": "string"
+      },
+      {
+        "component": "multifield",
+        "item": {
+          "model": "socialMediaItem"
+        },
+        "label": "Social Media Items",
+        "multi": true,
+        "name": "socialMediaItems",
+        "valueType": "string"
+      },
+      {
+        "component": "multifield",
+        "item": {
+          "model": "footerLinkItem"
+        },
+        "label": "Footer Links",
+        "multi": true,
+        "name": "footerLinks",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "menuItem",
+    "description": "",
+    "fields": [
+      {
         "component": "reference",
         "label": "Icon",
         "multi": false,
@@ -219,12 +328,14 @@
       {
         "component": "text",
         "label": "Text",
+        "multi": false,
         "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
         "label": "Link",
+        "multi": false,
         "name": "link",
         "valueType": "string"
       }
@@ -237,12 +348,14 @@
       {
         "component": "text",
         "label": "Text",
+        "multi": false,
         "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
         "label": "Link",
+        "multi": false,
         "name": "link",
         "valueType": "string"
       }
@@ -262,6 +375,7 @@
       {
         "component": "text",
         "label": "Link",
+        "multi": false,
         "name": "link",
         "valueType": "string"
       }
@@ -274,12 +388,14 @@
       {
         "component": "text",
         "label": "Text",
+        "multi": false,
         "name": "text",
         "valueType": "string"
       },
       {
         "component": "text",
         "label": "Link",
+        "multi": false,
         "name": "link",
         "valueType": "string"
       }
