@@ -219,78 +219,72 @@
       {
         "component": "reference",
         "label": "Logo Image",
-        "name": "logo",
+        "name": "logoImage",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Logo Alt Text",
+        "name": "logoAlt",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Login Button Text",
-        "name": "loginButtonText",
+        "label": "Login Image",
+        "name": "loginImage",
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Login Button Link",
-        "name": "loginButtonLink",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Brand Logo",
-        "name": "brandLogo",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Secondary Logo",
-        "name": "secondaryLogo",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "Copyright Text",
-        "name": "copyrightText",
+        "component": "text",
+        "label": "Login Alt Text",
+        "name": "loginAlt",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "menuItem",
+    "id": "navigationLink",
     "description": "",
     "fields": [
       {
+        "component": "text",
+        "label": "Label",
+        "name": "label",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      },
+      {
         "component": "reference",
-        "label": "Menu Icon",
+        "label": "Icon",
         "name": "icon",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Menu Label",
-        "name": "label",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Menu Link",
-        "name": "link",
+        "label": "Icon Alt",
+        "name": "iconAlt",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerListItem",
+    "id": "footerLink",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Footer Link Label",
+        "label": "Label",
         "name": "label",
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Footer Link",
+        "component": "text",
+        "label": "Link",
         "name": "link",
         "valueType": "string"
       }
@@ -301,15 +295,21 @@
     "description": "",
     "fields": [
       {
-        "component": "reference",
-        "label": "Social Icon",
-        "name": "icon",
+        "component": "text",
+        "label": "Platform",
+        "name": "platform",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Link",
+        "name": "link",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Social Link",
-        "name": "link",
+        "label": "Icon",
+        "name": "icon",
         "valueType": "string"
       }
     ]

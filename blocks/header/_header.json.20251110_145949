@@ -17,37 +17,37 @@
       }
     },
     {
-      "title": "Navigation Link",
-      "id": "navigationLink",
+      "title": "Menu-Item",
+      "id": "menuItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "navigationLink",
-              "name": "navigationLink"
+              "model": "menuItem",
+              "name": "menuItem"
             }
           }
         }
       }
     },
     {
-      "title": "Footer Link",
-      "id": "footerLink",
+      "title": "Footer-List-Item",
+      "id": "footerListItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "footerLink",
-              "name": "footerLink"
+              "model": "footerListItem",
+              "name": "footerListItem"
             }
           }
         }
       }
     },
     {
-      "title": "Social Link",
+      "title": "Social-Link",
       "id": "socialLink",
       "plugins": {
         "xwalk": {
@@ -76,72 +76,78 @@
         {
           "component": "reference",
           "label": "Logo Image",
-          "name": "logoImage",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Logo Alt Text",
-          "name": "logoAlt",
+          "name": "logo",
           "valueType": "string"
         },
         {
           "component": "reference",
-          "label": "Login Image",
-          "name": "loginImage",
+          "label": "Login Button Text",
+          "name": "loginButtonText",
           "valueType": "string"
         },
         {
-          "component": "text",
-          "label": "Login Alt Text",
-          "name": "loginAlt",
+          "component": "reference",
+          "label": "Login Button Link",
+          "name": "loginButtonLink",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "Brand Logo",
+          "name": "brandLogo",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "Secondary Logo",
+          "name": "secondaryLogo",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "label": "Copyright Text",
+          "name": "copyrightText",
           "valueType": "string"
         }
       ]
     },
     {
-      "id": "navigationLink",
+      "id": "menuItem",
       "description": "",
       "fields": [
         {
-          "component": "text",
-          "label": "Label",
-          "name": "label",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Link",
-          "name": "link",
-          "valueType": "string"
-        },
-        {
           "component": "reference",
-          "label": "Icon",
+          "label": "Menu Icon",
           "name": "icon",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Icon Alt",
-          "name": "iconAlt",
+          "label": "Menu Label",
+          "name": "label",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "Menu Link",
+          "name": "link",
           "valueType": "string"
         }
       ]
     },
     {
-      "id": "footerLink",
+      "id": "footerListItem",
       "description": "",
       "fields": [
         {
           "component": "text",
-          "label": "Label",
+          "label": "Footer Link Label",
           "name": "label",
           "valueType": "string"
         },
         {
-          "component": "text",
-          "label": "Link",
+          "component": "reference",
+          "label": "Footer Link",
           "name": "link",
           "valueType": "string"
         }
@@ -152,21 +158,15 @@
       "description": "",
       "fields": [
         {
-          "component": "text",
-          "label": "Platform",
-          "name": "platform",
-          "valueType": "string"
-        },
-        {
-          "component": "text",
-          "label": "Link",
-          "name": "link",
+          "component": "reference",
+          "label": "Social Icon",
+          "name": "icon",
           "valueType": "string"
         },
         {
           "component": "reference",
-          "label": "Icon",
-          "name": "icon",
+          "label": "Social Link",
+          "name": "link",
           "valueType": "string"
         }
       ]
@@ -176,8 +176,8 @@
     {
       "id": "header",
       "components": [
-        "navigationLink",
-        "footerLink",
+        "menuItem",
+        "footerListItem",
         "socialLink"
       ]
     }

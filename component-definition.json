@@ -189,37 +189,37 @@
           }
         },
         {
-          "title": "Menu-Item",
-          "id": "menuItem",
+          "title": "Navigation Link",
+          "id": "navigationLink",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "menuItem",
-                  "name": "menuItem"
+                  "model": "navigationLink",
+                  "name": "navigationLink"
                 }
               }
             }
           }
         },
         {
-          "title": "Footer-List-Item",
-          "id": "footerListItem",
+          "title": "Footer Link",
+          "id": "footerLink",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "footerListItem",
-                  "name": "footerListItem"
+                  "model": "footerLink",
+                  "name": "footerLink"
                 }
               }
             }
           }
         },
         {
-          "title": "Social-Link",
+          "title": "Social Link",
           "id": "socialLink",
           "plugins": {
             "xwalk": {
