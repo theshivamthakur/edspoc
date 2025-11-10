@@ -207,77 +207,6 @@
     ]
   },
   {
-    "id": "menuItem",
-    "fields": [
-      {
-        "component": "text",
-        "label": "href",
-        "multi": false,
-        "name": "href",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "src",
-        "multi": false,
-        "name": "src",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "alt",
-        "multi": false,
-        "name": "alt",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "text",
-        "multi": false,
-        "name": "text",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "data-link",
-        "multi": false,
-        "name": "data-link",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "menuItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Icon",
-        "multi": false,
-        "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Href",
-        "name": "href",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Alt",
-        "name": "alt",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "Text",
-        "name": "text",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
     "id": "header",
     "description": "",
     "fields": [
@@ -289,8 +218,8 @@
       },
       {
         "component": "reference",
-        "label": "Brand Image",
-        "name": "brandImage",
+        "label": "Header Image",
+        "name": "headerImage",
         "valueType": "string"
       },
       {
@@ -306,22 +235,175 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Login Button Link",
-        "name": "loginButtonLink",
+        "component": "text",
+        "label": "Login Button Text",
+        "name": "loginBtnText",
         "valueType": "string"
       },
       {
-        "component": "text",
-        "label": "Login Button Text",
-        "name": "loginButtonText",
+        "component": "reference",
+        "label": "Login Button Link",
+        "name": "loginBtnLink",
         "valueType": "string"
       },
       {
         "component": "container",
-        "itemType": "menuItem",
-        "label": "Menu Items",
-        "name": "menuItems",
+        "fields": [
+          {
+            "component": "reference",
+            "label": "Sidebar Menu Item Reference",
+            "name": "sidebarMenuItem",
+            "valueType": "string"
+          }
+        ],
+        "label": "Sidebar Menu Items",
+        "name": "sidebarMenuItems"
+      },
+      {
+        "component": "container",
+        "fields": [
+          {
+            "component": "reference",
+            "label": "Footer Link Reference",
+            "name": "footerLink",
+            "valueType": "string"
+          }
+        ],
+        "label": "Footer Links",
+        "name": "footerLinks"
+      },
+      {
+        "component": "container",
+        "fields": [
+          {
+            "component": "reference",
+            "label": "Footer Social Link Reference",
+            "name": "footerSocialLink",
+            "valueType": "string"
+          }
+        ],
+        "label": "Footer Social Links",
+        "name": "footerSocialLinks"
+      },
+      {
+        "component": "reference",
+        "label": "Footer Left Logo",
+        "name": "footerLeftLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Footer Secondary Logo",
+        "name": "footerSecondaryLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Footer Copyright",
+        "name": "footerCopyright",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "sidebarMenuItem",
+    "description": "",
+    "fields": [
+      {
+        "component": "reference",
+        "label": "Menu Icon",
+        "name": "icon",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Menu Label",
+        "name": "label",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Menu Link",
+        "name": "link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "footerLink",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "Footer Link Text",
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Footer Link URL",
+        "name": "link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "footerSocialLink",
+    "description": "",
+    "fields": [
+      {
+        "component": "reference",
+        "label": "Social Icon",
+        "name": "icon",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Social Link",
+        "name": "link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "headerFooter",
+    "description": "",
+    "fields": [
+      {
+        "component": "text",
+        "label": "App Name",
+        "name": "appName",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Main Logo",
+        "name": "mainLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Side Logo",
+        "name": "sideLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Login Button Label",
+        "name": "loginLabel",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Login URL",
+        "name": "loginUrl",
+        "valueType": "string"
+      },
+      {
+        "component": "container",
+        "itemType": "navigationItem",
+        "label": "Navigation Items",
+        "name": "navigation",
         "valueType": "array"
       },
       {
@@ -339,15 +421,27 @@
         "valueType": "array"
       },
       {
+        "component": "reference",
+        "label": "Footer Primary Logo",
+        "name": "footerPrimaryLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Footer Secondary Logo",
+        "name": "footerSecondaryLogo",
+        "valueType": "string"
+      },
+      {
         "component": "text",
-        "label": "Copyright",
+        "label": "Copyright Text",
         "name": "copyright",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "menuItem",
+    "id": "navigationItem",
     "description": "",
     "fields": [
       {
@@ -357,15 +451,15 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Link",
-        "name": "link",
+        "component": "text",
+        "label": "Label",
+        "name": "label",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Text",
-        "name": "text",
+        "label": "URL",
+        "name": "url",
         "valueType": "string"
       }
     ]
@@ -375,15 +469,15 @@
     "description": "",
     "fields": [
       {
-        "component": "reference",
-        "label": "Link",
-        "name": "link",
+        "component": "text",
+        "label": "Label",
+        "name": "label",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Text",
-        "name": "text",
+        "label": "URL",
+        "name": "url",
         "valueType": "string"
       }
     ]
@@ -394,132 +488,15 @@
     "fields": [
       {
         "component": "reference",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
         "label": "Icon",
         "name": "icon",
         "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "menuItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "text",
-        "label": "App Name",
-        "name": "appName",
-        "value": "boing"
       },
       {
-        "component": "reference",
-        "label": "Header Logo",
-        "multi": false,
-        "name": "headerLogo",
+        "component": "text",
+        "label": "URL",
+        "name": "url",
         "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Login Link",
-        "name": "loginLink",
-        "value": "/login.html"
-      },
-      {
-        "component": "text",
-        "label": "Login Text",
-        "name": "loginText",
-        "value": "Login"
-      },
-      {
-        "component": "richtext",
-        "label": "Copyright Text",
-        "name": "copyrightText",
-        "value": "© 2025 Bingo! All Rights Reserved."
-      }
-    ]
-  },
-  {
-    "id": "menuItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Menu Icon",
-        "multi": false,
-        "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Menu Label",
-        "name": "label"
-      },
-      {
-        "component": "text",
-        "label": "Menu Link",
-        "name": "link"
-      }
-    ]
-  },
-  {
-    "id": "footerLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "text",
-        "label": "Footer Link Label",
-        "name": "label"
-      },
-      {
-        "component": "text",
-        "label": "Footer Link URL",
-        "name": "link"
-      }
-    ]
-  },
-  {
-    "id": "socialLink",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Social Icon",
-        "multi": false,
-        "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Social Link",
-        "name": "link"
-      },
-      {
-        "component": "text",
-        "label": "CTA Label",
-        "name": "ctaLabel"
-      }
-    ]
-  },
-  {
-    "id": "footerLogo",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Footer Logo Image",
-        "multi": false,
-        "name": "image",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Footer Logo Link",
-        "name": "link"
       }
     ]
   },

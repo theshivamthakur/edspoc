@@ -49,32 +49,19 @@
     ]
   },
   {
-    "id": "header-menu-list",
-    "components": [
-      "menuItem"
-    ]
-  },
-  {
-    "id": "headerSidebarMenu",
-    "components": [
-      "menuItem"
-    ]
-  },
-  {
     "id": "header",
     "components": [
-      "menuItem",
+      "sidebarMenuItem",
       "footerLink",
-      "socialLink"
+      "footerSocialLink"
     ]
   },
   {
-    "id": "header-footer",
+    "id": "headerFooter",
     "components": [
-      "menuItem",
+      "navigationItem",
       "footerLink",
-      "socialLink",
-      "footerLogo"
+      "socialLink"
     ]
   }
 ]
