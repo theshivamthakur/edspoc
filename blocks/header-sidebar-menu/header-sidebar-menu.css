@@ -407,6 +407,11 @@
   justify-content: space-between;
   row-gap: 1.5rem; /* Equivalent to 24px assuming 16px base */
 }
+.header-footer-brand__right {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem; /* Equivalent to 16px assuming 16px base */
+}
 .header-pb-5 {
   padding-bottom: 1rem; /* Equivalent to 16px assuming 16px base */
 }
@@ -447,6 +452,13 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.2s linear, -webkit-transform 0.2s linear;
+}
+.header-footer-brand__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Equivalent to 8px assuming 16px base */
+  padding-top: 1rem; /* Equivalent to 16px assuming 16px base */
+  padding-bottom: 1rem; /* Equivalent to 16px assuming 16px base */
 }
 .header-py-5 {
   padding-top: 1rem; /* Equivalent to 16px assuming 16px base */
