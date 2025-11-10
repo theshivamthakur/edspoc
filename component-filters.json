@@ -51,9 +51,9 @@
   {
     "id": "header",
     "components": [
-      "navigationLink",
-      "footerLink",
-      "socialLink"
+      "headerMenuItem",
+      "footerNavItem",
+      "footerSocialItem"
     ]
   }
 ]

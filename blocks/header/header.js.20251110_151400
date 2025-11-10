@@ -1,0 +1,498 @@
+import { createOptimizedPicture } from '../../scripts/aem.js';
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
+export default function decorate(block) {
+  // Remove all children
+  block.textContent = '';
+
+  // Outer section
+  const section = document.createElement('section');
+  section.className = 'header-position-relative header-mb-15';
+
+  // App name span
+  const appNameSpan = document.createElement('span');
+  appNameSpan.className = 'header-d-none header-app-name';
+  const origAppName = block.querySelector('[data-app-name]');
+  if (origAppName) {
+    appNameSpan.dataset.appName = origAppName.dataset.appName;
+    appNameSpan.textContent = origAppName.textContent;
+    moveInstrumentation(origAppName, appNameSpan);
+  }
+  section.append(appNameSpan);
+
+  // Header
+  const origHeader = block.querySelector('header');
+  const header = document.createElement('header');
+  header.className = 'header-boing-container header-d-flex header-justify-content-between header-align-items-center header-h-15 header-px-5 header-py-2 header-fixed-top header-w-100 header-bg-white';
+  if (origHeader) moveInstrumentation(origHeader, header);
+
+  // Header left div (image/svg)
+  const origLeftDiv = origHeader ? origHeader.children[0] : null;
+  const leftDiv = document.createElement('div');
+  leftDiv.className = 'header-d-flex header-w-25';
+  if (origLeftDiv) {
+    // Try to find an image or svg content
+    const origSvgOrImg = origLeftDiv.querySelector('img, svg');
+    if (origSvgOrImg && origSvgOrImg.tagName.toLowerCase() === 'img') {
+      const img = document.createElement('img');
+      img.src = origSvgOrImg.src;
+      img.alt = origSvgOrImg.alt || '';
+      moveInstrumentation(origSvgOrImg, img);
+      leftDiv.append(img);
+    } else if (origSvgOrImg && origSvgOrImg.tagName.toLowerCase() === 'svg') {
+      const svg = origSvgOrImg.cloneNode(true);
+      moveInstrumentation(origSvgOrImg, svg);
+      leftDiv.append(svg);
+    } else {
+      // fallback: text node (likely svg+xml string)
+      if (origLeftDiv.textContent.trim()) {
+        leftDiv.textContent = origLeftDiv.textContent.trim();
+      }
+    }
+    moveInstrumentation(origLeftDiv, leftDiv);
+  }
+  header.append(leftDiv);
+
+  // Header center div (logo)
+  const origMiddleDiv = origHeader ? origHeader.children[1] : null;
+  const middleDiv = document.createElement('div');
+  middleDiv.className = 'header-d-flex  header-justify-content-center header-w-25';
+  if (origMiddleDiv) {
+    const origLogoLink = origMiddleDiv.querySelector('a');
+    if (origLogoLink) {
+      const logoLink = document.createElement('a');
+      logoLink.href = origLogoLink.href;
+      logoLink.className = 'header-analytics_cta_click';
+      [...origLogoLink.attributes].forEach(attr => {
+        if (attr.name.startsWith('data-')) logoLink.setAttribute(attr.name, attr.value);
+        if (attr.name === 'a-label') logoLink.setAttribute('a-label', attr.value);
+      });
+      // Logo div
+      const logoDiv = document.createElement('div');
+      logoDiv.className = 'header__logo header-d-flex header-align-items-center';
+      const origLogoImg = origLogoLink.querySelector('img');
+      if (origLogoImg) {
+        const img = document.createElement('img');
+        img.src = origLogoImg.src;
+        img.alt = origLogoImg.alt;
+        img.className = 'header__logo-img';
+        moveInstrumentation(origLogoImg, img);
+        logoDiv.append(img);
+      }
+      logoLink.append(logoDiv);
+      moveInstrumentation(origLogoLink, logoLink);
+      middleDiv.append(logoLink);
+    }
+    moveInstrumentation(origMiddleDiv, middleDiv);
+  }
+  header.append(middleDiv);
+
+  // Header right div (login)
+  const origRightDiv = origHeader ? origHeader.children[2] : null;
+  const rightDiv = document.createElement('div');
+  rightDiv.className = 'header-d-flex header-w-25 header-justify-content-end';
+  if (origRightDiv) {
+    const origLoginLink = origRightDiv.querySelector('a');
+    if (origLoginLink) {
+      const loginLink = document.createElement('a');
+      loginLink.href = origLoginLink.href;
+      loginLink.className = 'header__login-btn-wrapper header-analytics_cta_click';
+      if (origLoginLink.style.display) loginLink.style.display = origLoginLink.style.display;
+      // login button
+      const origLoginBtn = origLoginLink.querySelector('button');
+      if (origLoginBtn) {
+        const btn = document.createElement('button');
+        btn.className = 'header__login-btn header-btn header-text-boing-primary header-bg-transparent header-fw-semibold header-rounded-4 header-btn-sm header-py-3 header-px-4';
+        btn.textContent = origLoginBtn.textContent;
+        moveInstrumentation(origLoginBtn, btn);
+        loginLink.append(btn);
+      }
+      moveInstrumentation(origLoginLink, loginLink);
+      rightDiv.append(loginLink);
+    }
+    moveInstrumentation(origRightDiv, rightDiv);
+  }
+  header.append(rightDiv);
+  section.append(header);
+
+  // Header submenu container
+  const origSubmenu = block.querySelector('.header-submenu-container');
+  const submenuDiv = document.createElement('div');
+  submenuDiv.className = 'header-submenu-container header-position-fixed header-top-0 header-start-0 header-end-0 header-m-auto header-overflow-hidden';
+  if (origSubmenu) moveInstrumentation(origSubmenu, submenuDiv);
+
+  // Sidebar (aside)
+  const origAside = origSubmenu ? origSubmenu.querySelector('aside') : null;
+  const aside = document.createElement('aside');
+  aside.className = 'header-sidebar header-start-0 header-bg-white header-position-absolute';
+  if (origAside) moveInstrumentation(origAside, aside);
+
+  // Sidebar menu (ul)
+  const origSidebarMenu = origAside ? origAside.querySelector('ul.header-sidebar__menu') : null;
+  const sidebarMenu = document.createElement('ul');
+  sidebarMenu.className = 'header-sidebar__menu header-list-unstyled header-px-4';
+  if (origSidebarMenu) {
+    [...origSidebarMenu.children].forEach((liOrig) => {
+      const li = document.createElement('li');
+      li.className = liOrig.className;
+      if (liOrig.style.display) li.style.display = liOrig.style.display;
+      // menu link
+      const origMenuLink = liOrig.querySelector('a');
+      if (origMenuLink) {
+        const menuLink = document.createElement('a');
+        menuLink.href = origMenuLink.href;
+        menuLink.className = origMenuLink.className;
+        [...origMenuLink.attributes].forEach(attr => {
+          if (attr.name.startsWith('data-')) menuLink.setAttribute(attr.name, attr.value);
+        });
+        // icon
+        const origMenuIcon = origMenuLink.querySelector('img');
+        if (origMenuIcon) {
+          const img = document.createElement('img');
+          img.src = origMenuIcon.src;
+          img.alt = origMenuIcon.alt;
+          img.className = origMenuIcon.className;
+          img.loading = 'lazy';
+          moveInstrumentation(origMenuIcon, img);
+          menuLink.append(img);
+        }
+        // label
+        const label = origMenuLink.childNodes[origMenuLink.childNodes.length-1];
+        if (label && label.nodeType === Node.TEXT_NODE) {
+          menuLink.append(document.createTextNode(label.textContent.trim()));
+        } else {
+          menuLink.append(origMenuLink.textContent.trim());
+        }
+        moveInstrumentation(origMenuLink, menuLink);
+        li.append(menuLink);
+      }
+      moveInstrumentation(liOrig, li);
+      sidebarMenu.append(li);
+    });
+    moveInstrumentation(origSidebarMenu, sidebarMenu);
+  }
+  aside.append(sidebarMenu);
+
+  // Sidebar curve
+  const origCurve = origAside ? origAside.querySelector('.header-sidebar__curve') : null;
+  if (origCurve) {
+    const curveDiv = document.createElement('div');
+    curveDiv.className = 'header-sidebar__curve';
+    moveInstrumentation(origCurve, curveDiv);
+    aside.append(curveDiv);
+  }
+
+  // Sidebar footer brand
+  const origFooterBrand = origAside ? origAside.querySelector('.header-footer-brand') : null;
+  if (origFooterBrand) {
+    const footerBrand = document.createElement('div');
+    footerBrand.className = 'header-footer-brand header-w-100 header-bg-boing-neutral-gray-600';
+    // primary section
+    const origPrimary = origFooterBrand.querySelector('.header-footer-brand__primary');
+    if (origPrimary) {
+      const primary = document.createElement('section');
+      primary.className = 'header-footer-brand__primary';
+      primary.style.backgroundColor = origPrimary.style.backgroundColor;
+      const origPrimaryContainer = origPrimary.querySelector('.header-container');
+      if (origPrimaryContainer) {
+        const primaryContainer = document.createElement('div');
+        primaryContainer.className = 'header-container';
+        // primary content
+        const origPrimaryContent = origPrimaryContainer.querySelector('.header-footer-brand__primary--content');
+        if (origPrimaryContent) {
+          const primaryContent = document.createElement('div');
+          primaryContent.className = 'header-footer-brand__primary--content header-d-flex header-flex-column header-flex-md-row header-justify-content-md-between header-align-items-center';
+          // primary left
+          const origPrimaryLeft = origPrimaryContent.querySelector('.header-footer-brand__left');
+          if (origPrimaryLeft) {
+            const primaryLeft = document.createElement('section');
+            primaryLeft.className = 'header-footer-brand__left header-d-flex header-gap-16 header-px-10 header-align-items-center header-justify-content-center';
+            // ITC logo
+            const origITCLink = origPrimaryLeft.querySelector('a.header-footer-brand__logo');
+            if (origITCLink) {
+              const itcLink = document.createElement('a');
+              itcLink.href = origITCLink.href;
+              itcLink.target = origITCLink.target;
+              itcLink.className = 'header-footer-brand__logo header-d-inline-block header-analytics_cta_click';
+              [...origITCLink.attributes].forEach(attr => {
+                if (attr.name.startsWith('data-') || attr.name === 'aria-label') itcLink.setAttribute(attr.name, attr.value);
+              });
+              const origITCImg = origITCLink.querySelector('img');
+              if (origITCImg) {
+                const itcImg = document.createElement('img');
+                itcImg.src = origITCImg.src;
+                itcImg.alt = origITCImg.alt;
+                itcImg.className = 'header-object-fit-contain header-w-100 header-h-100';
+                itcImg.loading = 'lazy';
+                moveInstrumentation(origITCImg, itcImg);
+                itcLink.append(itcImg);
+              }
+              moveInstrumentation(origITCLink, itcLink);
+              primaryLeft.append(itcLink);
+            }
+            // FSSI logo
+            const origFSSI = origPrimaryLeft.querySelector('.header-footer-brand__secondary--logo');
+            if (origFSSI) {
+              const fssiDiv = document.createElement('div');
+              fssiDiv.className = 'header-footer-brand__secondary--logo header-d-inline-block';
+              const origFSSIImg = origFSSI.querySelector('img');
+              if (origFSSIImg) {
+                const fssiImg = document.createElement('img');
+                fssiImg.className = 'header-object-fit-contain header-w-100';
+                fssiImg.src = origFSSIImg.src;
+                fssiImg.alt = origFSSIImg.alt;
+                fssiImg.loading = 'lazy';
+                moveInstrumentation(origFSSIImg, fssiImg);
+                fssiDiv.append(fssiImg);
+              }
+              moveInstrumentation(origFSSI, fssiDiv);
+              primaryLeft.append(fssiDiv);
+            }
+            moveInstrumentation(origPrimaryLeft, primaryLeft);
+            primaryContent.append(primaryLeft);
+          }
+          // primary right (footer nav)
+          const origPrimaryRight = origPrimaryContent.querySelector('.header-footer-brand__right');
+          if (origPrimaryRight) {
+            const primaryRight = document.createElement('section');
+            primaryRight.className = 'header-footer-brand__right';
+            const origNav = origPrimaryRight.querySelector('nav');
+            if (origNav) {
+              const nav = document.createElement('nav');
+              nav.className = 'header-footer-brand__navbar header-d-grid header-d-md-flex';
+              nav.setAttribute('aria-label', 'footer navbar');
+              const origNavLeft = origNav.querySelector('.header-footer-brand__navbar--left');
+              if (origNavLeft) {
+                const navLeft = document.createElement('div');
+                navLeft.className = 'header-footer-brand__navbar--left header-d-flex header-flex-column header-flex-md-row ';
+                // two footer lists
+                [...origNavLeft.querySelectorAll('.header-footerList')].forEach((footerListOrig) => {
+                  const footerList = document.createElement('div');
+                  footerList.className = 'header-footerList';
+                  const origUL = footerListOrig.querySelector('ul');
+                  if (origUL) {
+                    const ul = document.createElement('ul');
+                    ul.className = origUL.className;
+                    [...origUL.children].forEach((liOrig) => {
+                      const li = document.createElement('li');
+                      li.className = liOrig.className;
+                      const origFooterLink = liOrig.querySelector('a');
+                      if (origFooterLink) {
+                        const footerLink = document.createElement('a');
+                        footerLink.href = origFooterLink.href;
+                        footerLink.className = origFooterLink.className;
+                        [...origFooterLink.attributes].forEach(attr => {
+                          if (attr.name.startsWith('data-') || attr.name === 'target') footerLink.setAttribute(attr.name, attr.value);
+                        });
+                        footerLink.textContent = origFooterLink.textContent;
+                        moveInstrumentation(origFooterLink, footerLink);
+                        li.append(footerLink);
+                      }
+                      moveInstrumentation(liOrig, li);
+                      ul.append(li);
+                    });
+                    moveInstrumentation(origUL, ul);
+                    footerList.append(ul);
+                  }
+                  moveInstrumentation(footerListOrig, footerList);
+                  navLeft.append(footerList);
+                });
+                moveInstrumentation(origNavLeft, navLeft);
+                nav.append(navLeft);
+              }
+              const origNavRight = origNav.querySelector('.header-footer-brand__navbar--right');
+              if (origNavRight) {
+                const navRight = document.createElement('div');
+                navRight.className = 'header-footer-brand__navbar--right header-d-flex header-flex-column header-flex-md-row';
+                [...origNavRight.querySelectorAll('.header-footerList')].forEach((footerListOrig) => {
+                  const footerList = document.createElement('div');
+                  footerList.className = 'header-footerList';
+                  const origUL = footerListOrig.querySelector('ul');
+                  if (origUL) {
+                    const ul = document.createElement('ul');
+                    ul.className = origUL.className;
+                    [...origUL.children].forEach((liOrig) => {
+                      const li = document.createElement('li');
+                      li.className = liOrig.className;
+                      const origFooterLink = liOrig.querySelector('a');
+                      if (origFooterLink) {
+                        const footerLink = document.createElement('a');
+                        footerLink.href = origFooterLink.href;
+                        footerLink.className = origFooterLink.className;
+                        [...origFooterLink.attributes].forEach(attr => {
+                          if (attr.name.startsWith('data-') || attr.name === 'target') footerLink.setAttribute(attr.name, attr.value);
+                        });
+                        footerLink.textContent = origFooterLink.textContent;
+                        moveInstrumentation(origFooterLink, footerLink);
+                        li.append(footerLink);
+                      }
+                      moveInstrumentation(liOrig, li);
+                      ul.append(li);
+                    });
+                    moveInstrumentation(origUL, ul);
+                    footerList.append(ul);
+                  }
+                  moveInstrumentation(footerListOrig, footerList);
+                  navRight.append(footerList);
+                });
+                moveInstrumentation(origNavRight, navRight);
+                nav.append(navRight);
+              }
+              moveInstrumentation(origNav, nav);
+              primaryRight.append(nav);
+            }
+            moveInstrumentation(origPrimaryRight, primaryRight);
+            primaryContent.append(primaryRight);
+          }
+          moveInstrumentation(origPrimaryContent, primaryContent);
+          primaryContainer.append(primaryContent);
+        }
+        moveInstrumentation(origPrimaryContainer, primaryContainer);
+        primary.append(primaryContainer);
+      }
+      moveInstrumentation(origPrimary, primary);
+      footerBrand.append(primary);
+    }
+    // secondary section
+    const origSecondary = origFooterBrand.querySelector('.header-footer-brand__secondary');
+    if (origSecondary) {
+      const secondary = document.createElement('section');
+      secondary.className = 'header-footer-brand__secondary';
+      secondary.style.backgroundColor = origSecondary.style.backgroundColor;
+      const origSecondaryContainer = origSecondary.querySelector('.header-container');
+      if (origSecondaryContainer) {
+        const secondaryContainer = document.createElement('div');
+        secondaryContainer.className = 'header-container';
+        const origSecondaryContent = origSecondaryContainer.querySelector('.header-footer-brand__secondary--content');
+        if (origSecondaryContent) {
+          const secondaryContent = document.createElement('div');
+          secondaryContent.className = 'header-footer-brand__secondary--content header-d-flex header-flex-column  header-justify-content-md-between header-align-items-center';
+          // Social section
+          const origSecRight = origSecondaryContent.querySelector('.header-footer-brand__right');
+          if (origSecRight) {
+            const secRight = document.createElement('section');
+            secRight.className = 'header-footer-brand__right header-d-flex header-flex-column header-pb-5';
+            // h3
+            const origH3 = origSecRight.querySelector('h3');
+            if (origH3) {
+              const h3 = document.createElement('h3');
+              h3.className = 'header-social_media--title';
+              h3.textContent = origH3.textContent;
+              moveInstrumentation(origH3, h3);
+              secRight.append(h3);
+            }
+            // social links
+            const origSocialUL = origSecRight.querySelector('ul');
+            if (origSocialUL) {
+              const socialUL = document.createElement('ul');
+              socialUL.className = 'header-footer-brand__right--list header-d-flex header-align-items-center header-justify-content-center header-px-10 header-flex-wrap';
+              [...origSocialUL.children].forEach((liOrig) => {
+                const li = document.createElement('li');
+                li.className = 'header-footer-brand__right--item header-d-flex header-justify-content-center header-align-items-center';
+                const origSocialLink = liOrig.querySelector('a');
+                if (origSocialLink) {
+                  const socialLink = document.createElement('a');
+                  socialLink.href = origSocialLink.href;
+                  socialLink.className = origSocialLink.className;
+                  [...origSocialLink.attributes].forEach(attr => {
+                    if (attr.name.startsWith('data-') || attr.name === 'target') socialLink.setAttribute(attr.name, attr.value);
+                  });
+                  const origSocialImg = origSocialLink.querySelector('img');
+                  if (origSocialImg) {
+                    const socialImg = document.createElement('img');
+                    socialImg.src = origSocialImg.src;
+                    socialImg.alt = origSocialImg.alt;
+                    socialImg.className = origSocialImg.className;
+                    socialImg.setAttribute('aria-label', origSocialImg.getAttribute('aria-label'));
+                    socialImg.loading = 'lazy';
+                    moveInstrumentation(origSocialImg, socialImg);
+                    socialLink.append(socialImg);
+                  }
+                  moveInstrumentation(origSocialLink, socialLink);
+                  li.append(socialLink);
+                }
+                moveInstrumentation(liOrig, li);
+                socialUL.append(li);
+              });
+              moveInstrumentation(origSocialUL, socialUL);
+              secRight.append(socialUL);
+            }
+            moveInstrumentation(origSecRight, secRight);
+            secondaryContent.append(secRight);
+          }
+          // Copyright + ITC Portal
+          const origSecLeft = origSecondaryContent.querySelector('.header-footer-brand__left');
+          if (origSecLeft) {
+            const secLeft = document.createElement('section');
+            secLeft.className = 'header-footer-brand__left header-py-5 header-d-flex header-flex-column header-gap-3';
+            const origLeftUL = origSecLeft.querySelector('ul');
+            if (origLeftUL) {
+              const leftUL = document.createElement('ul');
+              leftUL.className = 'header-footer-brand__left--list header-d-flex header-align-items-center header-justify-content-center header-flex-wrap';
+              [...origLeftUL.children].forEach((liOrig) => {
+                const li = document.createElement('li');
+                li.className = 'header-footer-brand__left--item header-foot_link';
+                const origLeftLink = liOrig.querySelector('a');
+                if (origLeftLink) {
+                  const leftLink = document.createElement('a');
+                  leftLink.href = origLeftLink.href;
+                  leftLink.className = 'header-footer-brand__left--link header-analytics_cta_click';
+                  leftLink.target = origLeftLink.target;
+                  [...origLeftLink.attributes].forEach(attr => {
+                    if (attr.name.startsWith('data-')) leftLink.setAttribute(attr.name, attr.value);
+                  });
+                  leftLink.textContent = origLeftLink.textContent;
+                  moveInstrumentation(origLeftLink, leftLink);
+                  li.append(leftLink);
+                }
+                moveInstrumentation(liOrig, li);
+                leftUL.append(li);
+              });
+              moveInstrumentation(origLeftUL, leftUL);
+              secLeft.append(leftUL);
+            }
+            // copyright
+            const origCopyright = origSecLeft.querySelector('.header-footer-brand__left--copyright');
+            if (origCopyright) {
+              const copyrightDiv = document.createElement('div');
+              copyrightDiv.className = 'header-footer-brand__left--copyright header-text-center ';
+              const origSpan = origCopyright.querySelector('span');
+              if (origSpan) {
+                const span = document.createElement('span');
+                span.className = 'header-footer-brand__left--text header-text-white';
+                span.textContent = origSpan.textContent;
+                moveInstrumentation(origSpan, span);
+                copyrightDiv.append(span);
+              }
+              moveInstrumentation(origCopyright, copyrightDiv);
+              secLeft.append(copyrightDiv);
+            }
+            moveInstrumentation(origSecLeft, secLeft);
+            secondaryContent.append(secLeft);
+          }
+          moveInstrumentation(origSecondaryContent, secondaryContent);
+          secondaryContainer.append(secondaryContent);
+        }
+        moveInstrumentation(origSecondaryContainer, secondaryContainer);
+        secondary.append(secondaryContainer);
+      }
+      moveInstrumentation(origSecondary, secondary);
+      footerBrand.append(secondary);
+    }
+    moveInstrumentation(origFooterBrand, footerBrand);
+    aside.append(footerBrand);
+  }
+  // Overlay
+  const origOverlay = origSubmenu ? origSubmenu.querySelector('.header-overlay') : null;
+  if (origOverlay) {
+    const overlayDiv = document.createElement('div');
+    overlayDiv.className = 'header-overlay header-position-absolute header-top-0 header-start-0 header-w-100 header-h-100 header-bg-black header-opacity-25';
+    moveInstrumentation(origOverlay, overlayDiv);
+    submenuDiv.append(aside, overlayDiv);
+  } else {
+    submenuDiv.append(aside);
+  }
+  section.append(submenuDiv);
+
+  block.append(section);
+}
