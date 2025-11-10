@@ -1,3 +1,449 @@
-{
-  "blockJs": "import { moveInstrumentation } from '../../scripts/scripts.js';\nimport { createOptimizedPicture } from '../../scripts/aem.js';\n\nexport default function decorate(block) {\n  // Clear block content\n  block.textContent = '';\n\n  // App Name\n  const appNameSpan = block.parentElement.querySelector('.header-app-name');\n  if (appNameSpan) {\n    const appName = document.createElement('span');\n    moveInstrumentation(appNameSpan, appName);\n    appName.className = appNameSpan.className;\n    appName.textContent = appNameSpan.textContent;\n    block.append(appName);\n  }\n\n  // Header Container\n  const header = block.parentElement.querySelector('header.header-boing-container');\n  if (header) {\n    const newHeader = document.createElement('header');\n    moveInstrumentation(header, newHeader);\n    newHeader.className = header.className;\n\n    // Left Image/Container (SVG or similar)\n    const leftDiv = header.querySelector('div.header-d-flex.header-w-25');\n    if (leftDiv) {\n      const leftDivNew = document.createElement('div');\n      moveInstrumentation(leftDiv, leftDivNew);\n      leftDivNew.className = leftDiv.className;\n      // If it has img/svg, move it\n      [...leftDiv.childNodes].forEach((n) => {\n        leftDivNew.append(n.cloneNode(true));\n      });\n      newHeader.append(leftDivNew);\n    }\n\n    // Middle Logo\n    const logoDiv = header.querySelector('div.header-justify-content-center');\n    if (logoDiv) {\n      const logoDivNew = document.createElement('div');\n      moveInstrumentation(logoDiv, logoDivNew);\n      logoDivNew.className = logoDiv.className;\n      // Move <a> with logo inside\n      const logoLink = logoDiv.querySelector('a');\n      if (logoLink) {\n        const logoLinkNew = document.createElement('a');\n        moveInstrumentation(logoLink, logoLinkNew);\n        logoLinkNew.className = logoLink.className;\n        logoLinkNew.href = logoLink.href;\n        [...logoLink.attributes].forEach(attr => {\n          if (!['href', 'class'].includes(attr.name)) logoLinkNew.setAttribute(attr.name, attr.value);\n        });\n        const logoImgDiv = logoLink.querySelector('div.header__logo');\n        if (logoImgDiv) {\n          const logoImgDivNew = document.createElement('div');\n          moveInstrumentation(logoImgDiv, logoImgDivNew);\n          logoImgDivNew.className = logoImgDiv.className;\n          const img = logoImgDiv.querySelector('img');\n          if (img) {\n            const optimizedPic = createOptimizedPicture(img.src, img.alt, img.className);\n            moveInstrumentation(img, optimizedPic.querySelector('img'));\n            logoImgDivNew.append(optimizedPic);\n          }\n          logoLinkNew.append(logoImgDivNew);\n        }\n        logoDivNew.append(logoLinkNew);\n      }\n      newHeader.append(logoDivNew);\n    }\n\n    // Right Login Button\n    const loginDiv = header.querySelector('div.header-justify-content-end');\n    if (loginDiv) {\n      const loginDivNew = document.createElement('div');\n      moveInstrumentation(loginDiv, loginDivNew);\n      loginDivNew.className = loginDiv.className;\n      const loginLink = loginDiv.querySelector('a');\n      if (loginLink) {\n        const loginLinkNew = document.createElement('a');\n        moveInstrumentation(loginLink, loginLinkNew);\n        loginLinkNew.className = loginLink.className;\n        loginLinkNew.href = loginLink.href;\n        if (loginLink.hasAttribute('style')) loginLinkNew.setAttribute('style', loginLink.getAttribute('style'));\n        [...loginLink.attributes].forEach(attr => {\n          if (!['href', 'class', 'style'].includes(attr.name)) loginLinkNew.setAttribute(attr.name, attr.value);\n        });\n        const btn = loginLink.querySelector('button');\n        if (btn) {\n          const btnNew = document.createElement('button');\n          moveInstrumentation(btn, btnNew);\n          btnNew.className = btn.className;\n          btnNew.textContent = btn.textContent;\n          loginLinkNew.append(btnNew);\n        }\n        loginDivNew.append(loginLinkNew);\n      }\n      newHeader.append(loginDivNew);\n    }\n\n    block.append(newHeader);\n  }\n\n  // Sidebar/Submenu\n  const submenu = block.parentElement.querySelector('.header-submenu-container');\n  if (submenu) {\n    const submenuNew = document.createElement('div');\n    moveInstrumentation(submenu, submenuNew);\n    submenuNew.className = submenu.className;\n\n    // Sidebar (aside)\n    const aside = submenu.querySelector('aside.header-sidebar');\n    if (aside) {\n      const asideNew = document.createElement('aside');\n      moveInstrumentation(aside, asideNew);\n      asideNew.className = aside.className;\n      // Sidebar menu list\n      const menuUl = aside.querySelector('ul.header-sidebar__menu');\n      if (menuUl) {\n        const menuUlNew = document.createElement('ul');\n        moveInstrumentation(menuUl, menuUlNew);\n        menuUlNew.className = menuUl.className;\n        // Each menu item\n        [...menuUl.children].forEach((li) => {\n          const liNew = document.createElement('li');\n          moveInstrumentation(li, liNew);\n          liNew.className = li.className;\n          if (li.hasAttribute('style')) liNew.setAttribute('style', li.getAttribute('style'));\n          const link = li.querySelector('a');\n          if (link) {\n            const linkNew = document.createElement('a');\n            moveInstrumentation(link, linkNew);\n            linkNew.className = link.className;\n            linkNew.href = link.href;\n            [...link.attributes].forEach(attr => {\n              if (!['href', 'class'].includes(attr.name)) linkNew.setAttribute(attr.name, attr.value);\n            });\n            const icon = link.querySelector('img');\n            if (icon) {\n              const iconNew = document.createElement('img');\n              moveInstrumentation(icon, iconNew);\n              iconNew.className = icon.className;\n              iconNew.src = icon.src;\n              iconNew.alt = icon.alt;\n              if (icon.hasAttribute('loading')) iconNew.setAttribute('loading', icon.getAttribute('loading'));\n              if (icon.hasAttribute('aria-label')) iconNew.setAttribute('aria-label', icon.getAttribute('aria-label'));\n              linkNew.append(iconNew);\n            }\n            // Add text node\n            const label = [...link.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());\n            if (label) {\n              linkNew.append(document.createTextNode(label.textContent.trim()));\n            }\n            liNew.append(linkNew);\n          }\n          menuUlNew.append(liNew);\n        });\n        asideNew.append(menuUlNew);\n      }\n\n      // Sidebar curve\n      const curve = aside.querySelector('.header-sidebar__curve');\n      if (curve) {\n        const curveNew = document.createElement('div');\n        moveInstrumentation(curve, curveNew);\n        curveNew.className = curve.className;\n        asideNew.append(curveNew);\n      }\n\n      // Footer Brand (inside aside)\n      const footerBrand = aside.querySelector('.header-footer-brand');\n      if (footerBrand) {\n        const footerBrandNew = document.createElement('div');\n        moveInstrumentation(footerBrand, footerBrandNew);\n        footerBrandNew.className = footerBrand.className;\n        // Primary section\n        const primary = footerBrand.querySelector('.header-footer-brand__primary');\n        if (primary) {\n          const primaryNew = document.createElement('section');\n          moveInstrumentation(primary, primaryNew);\n          primaryNew.className = primary.className;\n          if (primary.hasAttribute('style')) primaryNew.setAttribute('style', primary.getAttribute('style'));\n          // Container\n          const container = primary.querySelector('.header-container');\n          if (container) {\n            const containerNew = document.createElement('div');\n            moveInstrumentation(container, containerNew);\n            containerNew.className = container.className;\n            // Content\n            const content = container.querySelector('.header-footer-brand__primary--content');\n            if (content) {\n              const contentNew = document.createElement('div');\n              moveInstrumentation(content, contentNew);\n              contentNew.className = content.className;\n              // Left logos\n              const left = content.querySelector('.header-footer-brand__left');\n              if (left) {\n                const leftNew = document.createElement('section');\n                moveInstrumentation(left, leftNew);\n                leftNew.className = left.className;\n                // ITC Logo\n                const itcLogo = left.querySelector('a.header-footer-brand__logo');\n                if (itcLogo) {\n                  const itcLogoNew = document.createElement('a');\n                  moveInstrumentation(itcLogo, itcLogoNew);\n                  itcLogoNew.className = itcLogo.className;\n                  itcLogoNew.href = itcLogo.href;\n                  if (itcLogo.hasAttribute('target')) itcLogoNew.setAttribute('target', itcLogo.getAttribute('target'));\n                  [...itcLogo.attributes].forEach(attr => {\n                    if (!['href', 'class', 'target'].includes(attr.name)) itcLogoNew.setAttribute(attr.name, attr.value);\n                  });\n                  const itcImg = itcLogo.querySelector('img');\n                  if (itcImg) {\n                    const itcImgNew = document.createElement('img');\n                    moveInstrumentation(itcImg, itcImgNew);\n                    itcImgNew.className = itcImg.className;\n                    itcImgNew.src = itcImg.src;\n                    itcImgNew.alt = itcImg.alt;\n                    if (itcImg.hasAttribute('loading')) itcImgNew.setAttribute('loading', itcImg.getAttribute('loading'));\n                    itcLogoNew.append(itcImgNew);\n                  }\n                  leftNew.append(itcLogoNew);\n                }\n                // FSSI Logo\n                const fssiLogo = left.querySelector('.header-footer-brand__secondary--logo');\n                if (fssiLogo) {\n                  const fssiLogoNew = document.createElement('div');\n                  moveInstrumentation(fssiLogo, fssiLogoNew);\n                  fssiLogoNew.className = fssiLogo.className;\n                  const fssiImg = fssiLogo.querySelector('img');\n                  if (fssiImg) {\n                    const fssiImgNew = document.createElement('img');\n                    moveInstrumentation(fssiImg, fssiImgNew);\n                    fssiImgNew.className = fssiImg.className;\n                    fssiImgNew.src = fssiImg.src;\n                    fssiImgNew.alt = fssiImg.alt;\n                    if (fssiImg.hasAttribute('loading')) fssiImgNew.setAttribute('loading', fssiImg.getAttribute('loading'));\n                    fssiLogoNew.append(fssiImgNew);\n                  }\n                  leftNew.append(fssiLogoNew);\n                }\n                contentNew.append(leftNew);\n              }\n              // Right nav/footer links\n              const right = content.querySelector('.header-footer-brand__right');\n              if (right) {\n                const rightNew = document.createElement('section');\n                moveInstrumentation(right, rightNew);\n                rightNew.className = right.className;\n                const nav = right.querySelector('nav');\n                if (nav) {\n                  const navNew = document.createElement('nav');\n                  moveInstrumentation(nav, navNew);\n                  navNew.className = nav.className;\n                  if (nav.hasAttribute('aria-label')) navNew.setAttribute('aria-label', nav.getAttribute('aria-label'));\n                  // Left Footer Lists\n                  const navLeft = nav.querySelector('.header-footer-brand__navbar--left');\n                  if (navLeft) {\n                    const navLeftNew = document.createElement('div');\n                    moveInstrumentation(navLeft, navLeftNew);\n                    navLeftNew.className = navLeft.className;\n                    const lists = navLeft.querySelectorAll('.header-footerList');\n                    lists.forEach(list => {\n                      const listNew = document.createElement('div');\n                      moveInstrumentation(list, listNew);\n                      listNew.className = list.className;\n                      const ul = list.querySelector('ul');\n                      if (ul) {\n                        const ulNew = document.createElement('ul');\n                        moveInstrumentation(ul, ulNew);\n                        ulNew.className = ul.className;\n                        [...ul.children].forEach(li => {\n                          const liNew = document.createElement('li');\n                          moveInstrumentation(li, liNew);\n                          liNew.className = li.className;\n                          const a = li.querySelector('a');\n                          if (a) {\n                            const aNew = document.createElement('a');\n                            moveInstrumentation(a, aNew);\n                            aNew.className = a.className;\n                            aNew.href = a.href;\n                            [...a.attributes].forEach(attr => {\n                              if (!['href', 'class'].includes(attr.name)) aNew.setAttribute(attr.name, attr.value);\n                            });\n                            aNew.textContent = a.textContent;\n                            liNew.append(aNew);\n                          }\n                          ulNew.append(liNew);\n                        });\n                        listNew.append(ulNew);\n                      }\n                      navLeftNew.append(listNew);\n                    });\n                    navNew.append(navLeftNew);\n                  }\n                  // Right Footer Lists\n                  const navRight = nav.querySelector('.header-footer-brand__navbar--right');\n                  if (navRight) {\n                    const navRightNew = document.createElement('div');\n                    moveInstrumentation(navRight, navRightNew);\n                    navRightNew.className = navRight.className;\n                    const lists = navRight.querySelectorAll('.header-footerList');\n                    lists.forEach(list => {\n                      const listNew = document.createElement('div');\n                      moveInstrumentation(list, listNew);\n                      listNew.className = list.className;\n                      const ul = list.querySelector('ul');\n                      if (ul) {\n                        const ulNew = document.createElement('ul');\n                        moveInstrumentation(ul, ulNew);\n                        ulNew.className = ul.className;\n                        [...ul.children].forEach(li => {\n                          const liNew = document.createElement('li');\n                          moveInstrumentation(li, liNew);\n                          liNew.className = li.className;\n                          const a = li.querySelector('a');\n                          if (a) {\n                            const aNew = document.createElement('a');\n                            moveInstrumentation(a, aNew);\n                            aNew.className = a.className;\n                            aNew.href = a.href;\n                            [...a.attributes].forEach(attr => {\n                              if (!['href', 'class'].includes(attr.name)) aNew.setAttribute(attr.name, attr.value);\n                            });\n                            aNew.textContent = a.textContent;\n                            liNew.append(aNew);\n                          }\n                          ulNew.append(liNew);\n                        });\n                        listNew.append(ulNew);\n                      }\n                      navRightNew.append(listNew);\n                    });\n                    navNew.append(navRightNew);\n                  }\n                  rightNew.append(navNew);\n                }\n                contentNew.append(rightNew);\n              }\n              containerNew.append(contentNew);\n            }\n            primaryNew.append(containerNew);\n          }\n          footerBrandNew.append(primaryNew);\n        }\n        // Secondary section\n        const secondary = footerBrand.querySelector('.header-footer-brand__secondary');\n        if (secondary) {\n          const secondaryNew = document.createElement('section');\n          moveInstrumentation(secondary, secondaryNew);\n          secondaryNew.className = secondary.className;\n          if (secondary.hasAttribute('style')) secondaryNew.setAttribute('style', secondary.getAttribute('style'));\n          // Container\n          const container = secondary.querySelector('.header-container');\n          if (container) {\n            const containerNew = document.createElement('div');\n            moveInstrumentation(container, containerNew);\n            containerNew.className = container.className;\n            // Content\n            const content = container.querySelector('.header-footer-brand__secondary--content');\n            if (content) {\n              const contentNew = document.createElement('div');\n              moveInstrumentation(content, contentNew);\n              contentNew.className = content.className;\n              // Right Social links\n              const right = content.querySelector('section.header-footer-brand__right');\n              if (right) {\n                const rightNew = document.createElement('section');\n                moveInstrumentation(right, rightNew);\n                rightNew.className = right.className;\n                // Title\n                const h3 = right.querySelector('h3');\n                if (h3) {\n                  const h3New = document.createElement('h3');\n                  moveInstrumentation(h3, h3New);\n                  h3New.className = h3.className;\n                  h3New.textContent = h3.textContent;\n                  rightNew.append(h3New);\n                }\n                // Social links list\n                const ul = right.querySelector('ul');\n                if (ul) {\n                  const ulNew = document.createElement('ul');\n                  moveInstrumentation(ul, ulNew);\n                  ulNew.className = ul.className;\n                  [...ul.children].forEach(li => {\n                    const liNew = document.createElement('li');\n                    moveInstrumentation(li, liNew);\n                    liNew.className = li.className;\n                    const a = li.querySelector('a');\n                    if (a) {\n                      const aNew = document.createElement('a');\n                      moveInstrumentation(a, aNew);\n                      aNew.className = a.className;\n                      aNew.href = a.href;\n                      if (a.hasAttribute('target')) aNew.setAttribute('target', a.getAttribute('target'));\n                      [...a.attributes].forEach(attr => {\n                        if (!['href', 'class', 'target'].includes(attr.name)) aNew.setAttribute(attr.name, attr.value);\n                      });\n                      const img = a.querySelector('img');\n                      if (img) {\n                        const imgNew = document.createElement('img');\n                        moveInstrumentation(img, imgNew);\n                        imgNew.className = img.className;\n                        imgNew.src = img.src;\n                        imgNew.alt = img.alt;\n                        if (img.hasAttribute('loading')) imgNew.setAttribute('loading', img.getAttribute('loading'));\n                        if (img.hasAttribute('aria-label')) imgNew.setAttribute('aria-label', img.getAttribute('aria-label'));\n                        aNew.append(imgNew);\n                      }\n                      liNew.append(aNew);\n                    }\n                    ulNew.append(liNew);\n                  });\n                  rightNew.append(ulNew);\n                }\n                contentNew.append(rightNew);\n              }\n              // Left copyright and portal link\n              const left = content.querySelector('section.header-footer-brand__left');\n              if (left) {\n                const leftNew = document.createElement('section');\n                moveInstrumentation(left, leftNew);\n                leftNew.className = left.className;\n                // Links list\n                const ul = left.querySelector('ul');\n                if (ul) {\n                  const ulNew = document.createElement('ul');\n                  moveInstrumentation(ul, ulNew);\n                  ulNew.className = ul.className;\n                  [...ul.children].forEach(li => {\n                    const liNew = document.createElement('li');\n                    moveInstrumentation(li, liNew);\n                    liNew.className = li.className;\n                    const a = li.querySelector('a');\n                    if (a) {\n                      const aNew = document.createElement('a');\n                      moveInstrumentation(a, aNew);\n                      aNew.className = a.className;\n                      aNew.href = a.href;\n                      if (a.hasAttribute('target')) aNew.setAttribute('target', a.getAttribute('target'));\n                      [...a.attributes].forEach(attr => {\n                        if (!['href', 'class', 'target'].includes(attr.name)) aNew.setAttribute(attr.name, attr.value);\n                      });\n                      aNew.textContent = a.textContent;\n                      liNew.append(aNew);\n                    }\n                    ulNew.append(liNew);\n                  });\n                  leftNew.append(ulNew);\n                }\n                // Copyright\n                const copyright = left.querySelector('.header-footer-brand__left--copyright');\n                if (copyright) {\n                  const copyrightNew = document.createElement('div');\n                  moveInstrumentation(copyright, copyrightNew);\n                  copyrightNew.className = copyright.className;\n                  const span = copyright.querySelector('span');\n                  if (span) {\n                    const spanNew = document.createElement('span');\n                    moveInstrumentation(span, spanNew);\n                    spanNew.className = span.className;\n                    spanNew.textContent = span.textContent;\n                    copyrightNew.append(spanNew);\n                  }\n                  leftNew.append(copyrightNew);\n                }\n                contentNew.append(leftNew);\n              }\n              containerNew.append(contentNew);\n            }\n            secondaryNew.append(containerNew);\n          }\n          footerBrandNew.append(secondaryNew);\n        }\n        asideNew.append(footerBrandNew);\n      }\n      submenuNew.append(asideNew);\n    }\n    // Overlay\n    const overlay = submenu.querySelector('.header-overlay');\n    if (overlay) {\n      const overlayNew = document.createElement('div');\n      moveInstrumentation(overlay, overlayNew);\n      overlayNew.className = overlay.className;\n      submenuNew.append(overlayNew);\n    }\n    block.append(submenuNew);\n  }\n}\n"
+import { moveInstrumentation } from '../../scripts/scripts.js';
+import { createOptimizedPicture } from '../../scripts/aem.js';
+
+export default function decorate(block) {
+  // Save original block children (the section)
+  const section = block.querySelector('section');
+  if (!section) return;
+
+  // Move instrumentation to a new root wrapper
+  const wrapper = document.createElement('div');
+  moveInstrumentation(section, wrapper);
+  wrapper.className = section.className;
+
+  // App Name (hidden span)
+  const appNameSpan = section.querySelector('.header-app-name');
+  if (appNameSpan) {
+    const appNameNew = document.createElement('span');
+    moveInstrumentation(appNameSpan, appNameNew);
+    appNameNew.className = appNameSpan.className;
+    appNameNew.setAttribute('data-app-name', appNameSpan.getAttribute('data-app-name'));
+    appNameNew.textContent = appNameSpan.textContent;
+    wrapper.append(appNameNew);
+  }
+
+  // HEADER BAR
+  const header = section.querySelector('header');
+  if (header) {
+    const headerNew = document.createElement('header');
+    moveInstrumentation(header, headerNew);
+    headerNew.className = header.className;
+
+    // Each of the 3 flex children
+    const headerRows = [...header.children];
+    headerRows.forEach((row, i) => {
+      const divNew = document.createElement('div');
+      moveInstrumentation(row, divNew);
+      divNew.className = row.className;
+
+      // First: just svg+xml text
+      if (i === 0) {
+        divNew.innerHTML = row.innerHTML;
+      }
+      // Second: logo
+      else if (i === 1) {
+        // Contains <a> with <div> with <img>
+        const logoA = row.querySelector('a');
+        if (logoA) {
+          const logoANew = document.createElement('a');
+          moveInstrumentation(logoA, logoANew);
+          logoANew.className = logoA.className;
+          logoANew.href = logoA.href;
+          logoANew.setAttribute('data-ct', logoA.getAttribute('data-ct'));
+          logoANew.setAttribute('a-label', logoA.getAttribute('a-label'));
+
+          const logoDiv = logoA.querySelector('div');
+          if (logoDiv) {
+            const logoDivNew = document.createElement('div');
+            moveInstrumentation(logoDiv, logoDivNew);
+            logoDivNew.className = logoDiv.className;
+
+            const logoImg = logoDiv.querySelector('img');
+            if (logoImg) {
+              const pic = createOptimizedPicture(logoImg.src, logoImg.alt, logoImg.className);
+              moveInstrumentation(logoImg, pic.querySelector('img'));
+              logoDivNew.append(pic);
+            }
+            logoANew.append(logoDivNew);
+          }
+          divNew.append(logoANew);
+        }
+      }
+      // Third: login button
+      else if (i === 2) {
+        // Contains <a> with <button>
+        const loginA = row.querySelector('a');
+        if (loginA) {
+          const loginANew = document.createElement('a');
+          moveInstrumentation(loginA, loginANew);
+          loginANew.className = loginA.className;
+          loginANew.href = loginA.href;
+          loginANew.style.display = loginA.style.display;
+          const btn = loginA.querySelector('button');
+          if (btn) {
+            const btnNew = document.createElement('button');
+            moveInstrumentation(btn, btnNew);
+            btnNew.className = btn.className;
+            btnNew.innerHTML = btn.innerHTML;
+            loginANew.append(btnNew);
+          }
+          divNew.append(loginANew);
+        }
+      }
+      headerNew.append(divNew);
+    });
+    wrapper.append(headerNew);
+  }
+
+  // SUBMENU CONTAINER
+  const submenu = section.querySelector('.header-submenu-container');
+  if (submenu) {
+    const submenuNew = document.createElement('div');
+    moveInstrumentation(submenu, submenuNew);
+    submenuNew.className = submenu.className;
+
+    // SIDEBAR
+    const aside = submenu.querySelector('aside.header-sidebar');
+    if (aside) {
+      const asideNew = document.createElement('aside');
+      moveInstrumentation(aside, asideNew);
+      asideNew.className = aside.className;
+
+      // Sidebar Menu
+      const ul = aside.querySelector('ul.header-sidebar__menu');
+      if (ul) {
+        const ulNew = document.createElement('ul');
+        moveInstrumentation(ul, ulNew);
+        ulNew.className = ul.className;
+
+        [...ul.children].forEach((li) => {
+          const liNew = document.createElement('li');
+          moveInstrumentation(li, liNew);
+          liNew.className = li.className;
+          liNew.style.cssText = li.style.cssText;
+
+          const a = li.querySelector('a');
+          if (a) {
+            const aNew = document.createElement('a');
+            moveInstrumentation(a, aNew);
+            aNew.className = a.className;
+            aNew.href = a.href;
+            if (a.hasAttribute('data-link')) aNew.setAttribute('data-link', a.getAttribute('data-link'));
+            [...a.attributes].forEach(attr => {
+              if (!['href','class','data-link'].includes(attr.name)) {
+                aNew.setAttribute(attr.name, attr.value);
+              }
+            });
+            // Icon
+            const img = a.querySelector('img');
+            if (img) {
+              const pic = createOptimizedPicture(img.src, img.alt, img.className);
+              moveInstrumentation(img, pic.querySelector('img'));
+              aNew.append(pic);
+            }
+            // Text
+            const text = [...a.childNodes].filter(n => n.nodeType === 3 && n.textContent.trim()).map(n => n.textContent.trim()).join(' ');
+            if (text) aNew.append(document.createTextNode(text));
+            liNew.append(aNew);
+          }
+          ulNew.append(liNew);
+        });
+        asideNew.append(ulNew);
+      }
+
+      // Sidebar curve
+      const curve = aside.querySelector('.header-sidebar__curve');
+      if (curve) {
+        const curveNew = document.createElement('div');
+        moveInstrumentation(curve, curveNew);
+        curveNew.className = curve.className;
+        asideNew.append(curveNew);
+      }
+
+      // Footer Brand
+      const footerBrand = aside.querySelector('.header-footer-brand');
+      if (footerBrand) {
+        const footerBrandNew = document.createElement('div');
+        moveInstrumentation(footerBrand, footerBrandNew);
+        footerBrandNew.className = footerBrand.className;
+
+        // Primary section
+        const primary = footerBrand.querySelector('.header-footer-brand__primary');
+        if (primary) {
+          const primaryNew = document.createElement('section');
+          moveInstrumentation(primary, primaryNew);
+          primaryNew.className = primary.className;
+          primaryNew.style.backgroundColor = primary.style.backgroundColor;
+
+          const container = primary.querySelector('.header-container');
+          if (container) {
+            const containerNew = document.createElement('div');
+            moveInstrumentation(container, containerNew);
+            containerNew.className = container.className;
+
+            const content = container.querySelector('.header-footer-brand__primary--content');
+            if (content) {
+              const contentNew = document.createElement('div');
+              moveInstrumentation(content, contentNew);
+              contentNew.className = content.className;
+
+              // Left logos section
+              const left = content.querySelector('.header-footer-brand__left');
+              if (left) {
+                const leftNew = document.createElement('section');
+                moveInstrumentation(left, leftNew);
+                leftNew.className = left.className;
+                // Brand logo
+                const brandA = left.querySelector('a');
+                if (brandA) {
+                  const brandANew = document.createElement('a');
+                  moveInstrumentation(brandA, brandANew);
+                  brandANew.className = brandA.className;
+                  brandANew.href = brandA.href;
+                  brandANew.target = brandA.target;
+                  [...brandA.attributes].forEach(attr => {
+                    if (!['href','class','target'].includes(attr.name)) {
+                      brandANew.setAttribute(attr.name, attr.value);
+                    }
+                  });
+                  const brandImg = brandA.querySelector('img');
+                  if (brandImg) {
+                    const pic = createOptimizedPicture(brandImg.src, brandImg.alt, brandImg.className);
+                    moveInstrumentation(brandImg, pic.querySelector('img'));
+                    brandANew.append(pic);
+                  }
+                  leftNew.append(brandANew);
+                }
+                // Secondary logo
+                const secLogoDiv = left.querySelector('.header-footer-brand__secondary--logo');
+                if (secLogoDiv) {
+                  const secLogoDivNew = document.createElement('div');
+                  moveInstrumentation(secLogoDiv, secLogoDivNew);
+                  secLogoDivNew.className = secLogoDiv.className;
+                  const secImg = secLogoDiv.querySelector('img');
+                  if (secImg) {
+                    const pic = createOptimizedPicture(secImg.src, secImg.alt, secImg.className);
+                    moveInstrumentation(secImg, pic.querySelector('img'));
+                    secLogoDivNew.append(pic);
+                  }
+                  leftNew.append(secLogoDivNew);
+                }
+                contentNew.append(leftNew);
+              }
+
+              // Right nav section
+              const right = content.querySelector('.header-footer-brand__right');
+              if (right) {
+                const rightNew = document.createElement('section');
+                moveInstrumentation(right, rightNew);
+                rightNew.className = right.className;
+                // Nav
+                const nav = right.querySelector('nav');
+                if (nav) {
+                  const navNew = document.createElement('nav');
+                  moveInstrumentation(nav, navNew);
+                  navNew.className = nav.className;
+                  navNew.setAttribute('aria-label', nav.getAttribute('aria-label'));
+                  // left and right divs
+                  [...nav.children].forEach((navCol) => {
+                    const navColNew = document.createElement('div');
+                    moveInstrumentation(navCol, navColNew);
+                    navColNew.className = navCol.className;
+                    // Each footerList
+                    const lists = navCol.querySelectorAll('.header-footerList');
+                    lists.forEach(list => {
+                      const listNew = document.createElement('div');
+                      moveInstrumentation(list, listNew);
+                      listNew.className = list.className;
+                      const ul = list.querySelector('ul');
+                      if (ul) {
+                        const ulNew = document.createElement('ul');
+                        moveInstrumentation(ul, ulNew);
+                        ulNew.className = ul.className;
+                        [...ul.children].forEach(item => {
+                          const liNew = document.createElement('li');
+                          moveInstrumentation(item, liNew);
+                          liNew.className = item.className;
+                          const a = item.querySelector('a');
+                          if (a) {
+                            const aNew = document.createElement('a');
+                            moveInstrumentation(a, aNew);
+                            aNew.className = a.className;
+                            aNew.href = a.href;
+                            if (a.target) aNew.target = a.target;
+                            [...a.attributes].forEach(attr => {
+                              if (!['href','class','target'].includes(attr.name)) {
+                                aNew.setAttribute(attr.name, attr.value);
+                              }
+                            });
+                            aNew.textContent = a.textContent;
+                            liNew.append(aNew);
+                          }
+                          ulNew.append(liNew);
+                        });
+                        listNew.append(ulNew);
+                      }
+                      navColNew.append(listNew);
+                    });
+                    navNew.append(navColNew);
+                  });
+                  rightNew.append(navNew);
+                }
+                contentNew.append(rightNew);
+              }
+
+              containerNew.append(contentNew);
+            }
+            primaryNew.append(containerNew);
+          }
+          footerBrandNew.append(primaryNew);
+        }
+
+        // Secondary section (socials, copyright)
+        const secondary = footerBrand.querySelector('.header-footer-brand__secondary');
+        if (secondary) {
+          const secondaryNew = document.createElement('section');
+          moveInstrumentation(secondary, secondaryNew);
+          secondaryNew.className = secondary.className;
+          secondaryNew.style.backgroundColor = secondary.style.backgroundColor;
+
+          const container = secondary.querySelector('.header-container');
+          if (container) {
+            const containerNew = document.createElement('div');
+            moveInstrumentation(container, containerNew);
+            containerNew.className = container.className;
+
+            const content = container.querySelector('.header-footer-brand__secondary--content');
+            if (content) {
+              const contentNew = document.createElement('div');
+              moveInstrumentation(content, contentNew);
+              contentNew.className = content.className;
+
+              // Socials right
+              const right = content.querySelector('.header-footer-brand__right');
+              if (right) {
+                const rightNew = document.createElement('section');
+                moveInstrumentation(right, rightNew);
+                rightNew.className = right.className;
+                const h3 = right.querySelector('h3');
+                if (h3) {
+                  const h3New = document.createElement('h3');
+                  moveInstrumentation(h3, h3New);
+                  h3New.className = h3.className;
+                  h3New.textContent = h3.textContent;
+                  rightNew.append(h3New);
+                }
+                const ul = right.querySelector('ul');
+                if (ul) {
+                  const ulNew = document.createElement('ul');
+                  moveInstrumentation(ul, ulNew);
+                  ulNew.className = ul.className;
+                  [...ul.children].forEach(li => {
+                    const liNew = document.createElement('li');
+                    moveInstrumentation(li, liNew);
+                    liNew.className = li.className;
+                    const a = li.querySelector('a');
+                    if (a) {
+                      const aNew = document.createElement('a');
+                      moveInstrumentation(a, aNew);
+                      aNew.className = a.className;
+                      aNew.href = a.href;
+                      if (a.target) aNew.target = a.target;
+                      [...a.attributes].forEach(attr => {
+                        if (!['href','class','target'].includes(attr.name)) {
+                          aNew.setAttribute(attr.name, attr.value);
+                        }
+                      });
+                      const img = a.querySelector('img');
+                      if (img) {
+                        const pic = createOptimizedPicture(img.src, img.alt, img.className);
+                        moveInstrumentation(img, pic.querySelector('img'));
+                        aNew.append(pic);
+                      }
+                      liNew.append(aNew);
+                    }
+                    ulNew.append(liNew);
+                  });
+                  rightNew.append(ulNew);
+                }
+                contentNew.append(rightNew);
+              }
+
+              // Copyright left
+              const left = content.querySelector('.header-footer-brand__left');
+              if (left) {
+                const leftNew = document.createElement('section');
+                moveInstrumentation(left, leftNew);
+                leftNew.className = left.className;
+                const ul = left.querySelector('ul');
+                if (ul) {
+                  const ulNew = document.createElement('ul');
+                  moveInstrumentation(ul, ulNew);
+                  ulNew.className = ul.className;
+                  [...ul.children].forEach(li => {
+                    const liNew = document.createElement('li');
+                    moveInstrumentation(li, liNew);
+                    liNew.className = li.className;
+                    const a = li.querySelector('a');
+                    if (a) {
+                      const aNew = document.createElement('a');
+                      moveInstrumentation(a, aNew);
+                      aNew.className = a.className;
+                      aNew.href = a.href;
+                      if (a.target) aNew.target = a.target;
+                      [...a.attributes].forEach(attr => {
+                        if (!['href','class','target'].includes(attr.name)) {
+                          aNew.setAttribute(attr.name, attr.value);
+                        }
+                      });
+                      aNew.textContent = a.textContent;
+                      liNew.append(aNew);
+                    }
+                    ulNew.append(liNew);
+                  });
+                  leftNew.append(ulNew);
+                }
+                // Copyright text
+                const copyright = left.querySelector('.header-footer-brand__left--copyright');
+                if (copyright) {
+                  const copyrightNew = document.createElement('div');
+                  moveInstrumentation(copyright, copyrightNew);
+                  copyrightNew.className = copyright.className;
+                  const span = copyright.querySelector('span');
+                  if (span) {
+                    const spanNew = document.createElement('span');
+                    moveInstrumentation(span, spanNew);
+                    spanNew.className = span.className;
+                    spanNew.textContent = span.textContent;
+                    copyrightNew.append(spanNew);
+                  }
+                  leftNew.append(copyrightNew);
+                }
+                contentNew.append(leftNew);
+              }
+
+              containerNew.append(contentNew);
+            }
+            secondaryNew.append(containerNew);
+          }
+          footerBrandNew.append(secondaryNew);
+        }
+        asideNew.append(footerBrandNew);
+      }
+      submenuNew.append(asideNew);
+    }
+
+    // Overlay div
+    const overlay = submenu.querySelector('.header-overlay');
+    if (overlay) {
+      const overlayNew = document.createElement('div');
+      moveInstrumentation(overlay, overlayNew);
+      overlayNew.className = overlay.className;
+      submenuNew.append(overlayNew);
+    }
+    wrapper.append(submenuNew);
+  }
+
+  block.textContent = '';
+  block.append(wrapper);
 }

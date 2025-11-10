@@ -218,95 +218,44 @@
       },
       {
         "component": "reference",
-        "label": "Header Image",
-        "name": "headerImage",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
         "label": "Logo Image",
-        "name": "logoImage",
+        "name": "logo",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Logo Link",
-        "name": "logoLink",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
         "label": "Login Button Text",
-        "name": "loginBtnText",
+        "name": "loginButtonText",
         "valueType": "string"
       },
       {
         "component": "reference",
         "label": "Login Button Link",
-        "name": "loginBtnLink",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "fields": [
-          {
-            "component": "reference",
-            "label": "Sidebar Menu Item Reference",
-            "name": "sidebarMenuItem",
-            "valueType": "string"
-          }
-        ],
-        "label": "Sidebar Menu Items",
-        "name": "sidebarMenuItems"
-      },
-      {
-        "component": "container",
-        "fields": [
-          {
-            "component": "reference",
-            "label": "Footer Link Reference",
-            "name": "footerLink",
-            "valueType": "string"
-          }
-        ],
-        "label": "Footer Links",
-        "name": "footerLinks"
-      },
-      {
-        "component": "container",
-        "fields": [
-          {
-            "component": "reference",
-            "label": "Footer Social Link Reference",
-            "name": "footerSocialLink",
-            "valueType": "string"
-          }
-        ],
-        "label": "Footer Social Links",
-        "name": "footerSocialLinks"
-      },
-      {
-        "component": "reference",
-        "label": "Footer Left Logo",
-        "name": "footerLeftLogo",
+        "name": "loginButtonLink",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Footer Secondary Logo",
-        "name": "footerSecondaryLogo",
+        "label": "Brand Logo",
+        "name": "brandLogo",
         "valueType": "string"
       },
       {
-        "component": "text",
-        "label": "Footer Copyright",
-        "name": "footerCopyright",
+        "component": "reference",
+        "label": "Secondary Logo",
+        "name": "secondaryLogo",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "Copyright Text",
+        "name": "copyrightText",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "sidebarMenuItem",
+    "id": "menuItem",
     "description": "",
     "fields": [
       {
@@ -330,25 +279,25 @@
     ]
   },
   {
-    "id": "footerLink",
+    "id": "footerListItem",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Footer Link Text",
-        "name": "text",
+        "label": "Footer Link Label",
+        "name": "label",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Footer Link URL",
+        "label": "Footer Link",
         "name": "link",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerSocialLink",
+    "id": "socialLink",
     "description": "",
     "fields": [
       {
@@ -361,141 +310,6 @@
         "component": "reference",
         "label": "Social Link",
         "name": "link",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "headerFooter",
-    "description": "",
-    "fields": [
-      {
-        "component": "text",
-        "label": "App Name",
-        "name": "appName",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Header Logo Image",
-        "name": "headerLogo",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Header Logo Alt Text",
-        "name": "headerLogoAlt",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Login Button Label",
-        "name": "loginButtonLabel",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Login Button Link",
-        "name": "loginButtonLink",
-        "valueType": "string"
-      },
-      {
-        "component": "container",
-        "itemComponent": "sidebarMenuItem",
-        "label": "Sidebar Menu",
-        "name": "sidebarMenu",
-        "valueType": "array"
-      },
-      {
-        "component": "container",
-        "itemComponent": "footerLinkItem",
-        "label": "Footer Links",
-        "name": "footerLinks",
-        "valueType": "array"
-      },
-      {
-        "component": "container",
-        "itemComponent": "socialLinkItem",
-        "label": "Social Links",
-        "name": "socialLinks",
-        "valueType": "array"
-      },
-      {
-        "component": "reference",
-        "label": "Footer Logo 1",
-        "name": "footerLogo1",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Footer Logo 2",
-        "name": "footerLogo2",
-        "valueType": "string"
-      },
-      {
-        "component": "richtext",
-        "label": "Copyright Text",
-        "name": "copyrightText",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "sidebarMenuItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Icon Image",
-        "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Label",
-        "name": "label",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "footerLinkItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Label",
-        "name": "label",
-        "valueType": "string"
-      }
-    ]
-  },
-  {
-    "id": "socialLinkItem",
-    "description": "",
-    "fields": [
-      {
-        "component": "reference",
-        "label": "Social Link",
-        "name": "link",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Social Icon Image",
-        "name": "icon",
         "valueType": "string"
       }
     ]
