@@ -208,6 +208,46 @@
   },
   {
     "id": "menuItem",
+    "fields": [
+      {
+        "component": "text",
+        "label": "href",
+        "multi": false,
+        "name": "href",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "src",
+        "multi": false,
+        "name": "src",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "alt",
+        "multi": false,
+        "name": "alt",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "text",
+        "multi": false,
+        "name": "text",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "data-link",
+        "multi": false,
+        "name": "data-link",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "menuItem",
     "description": "",
     "fields": [
       {
