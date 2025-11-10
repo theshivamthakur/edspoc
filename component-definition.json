@@ -250,45 +250,45 @@
           }
         },
         {
-          "title": "Navigation-Item",
-          "id": "navigationItem",
+          "title": "Sidebar-Menu-Item",
+          "id": "sidebarMenuItem",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "navigationItem",
-                  "name": "navigationItem"
+                  "model": "sidebarMenuItem",
+                  "name": "sidebarMenuItem"
                 }
               }
             }
           }
         },
         {
-          "title": "Footer-Link",
-          "id": "footerLink",
+          "title": "Footer-Link-Item",
+          "id": "footerLinkItem",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "footerLink",
-                  "name": "footerLink"
+                  "model": "footerLinkItem",
+                  "name": "footerLinkItem"
                 }
               }
             }
           }
         },
         {
-          "title": "Social-Link",
-          "id": "socialLink",
+          "title": "Social-Link-Item",
+          "id": "socialLinkItem",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "socialLink",
-                  "name": "socialLink"
+                  "model": "socialLinkItem",
+                  "name": "socialLinkItem"
                 }
               }
             }
