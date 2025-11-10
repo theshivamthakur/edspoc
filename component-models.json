@@ -207,7 +207,7 @@
     ]
   },
   {
-    "id": "menuItem",
+    "id": "header",
     "description": "",
     "fields": [
       {
@@ -228,6 +228,12 @@
         "label": "Link",
         "name": "link",
         "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Is Logout Item",
+        "name": "isLogout",
+        "value": false
       }
     ]
   },
@@ -246,6 +252,12 @@
         "label": "Link",
         "name": "link",
         "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Open in New Tab",
+        "name": "openInNewTab",
+        "value": false
       }
     ]
   },
@@ -265,6 +277,12 @@
         "label": "Link",
         "name": "link",
         "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "Platform Name",
+        "name": "platformName",
+        "valueType": "string"
       }
     ]
   },
@@ -283,6 +301,12 @@
         "label": "Link",
         "name": "link",
         "valueType": "string"
+      },
+      {
+        "component": "boolean",
+        "label": "Open in New Tab",
+        "name": "openInNewTab",
+        "value": false
       }
     ]
   },
