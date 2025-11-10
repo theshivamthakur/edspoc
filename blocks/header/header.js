@@ -1,6 +1,6 @@
-{
-  "blockJs": 
-`import { moveInstrumentation } from '../../scripts/scripts.js';
+
+
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   // Helper to copy all classes from one element to another
@@ -214,6 +214,4 @@ export default function decorate(block) {
 
   // Final append
   block.append(headerWrapper);
-}
-`
 }
