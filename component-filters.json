@@ -17,7 +17,7 @@
       "columns",
       "fragment",
       "test",
-      "headerFooter",
+      "header",
       "carousel"
     ]
   },
@@ -58,6 +58,14 @@
     "id": "headerSidebarMenu",
     "components": [
       "menuItem"
+    ]
+  },
+  {
+    "id": "header",
+    "components": [
+      "sidebarMenuItem",
+      "footerLink",
+      "socialLink"
     ]
   },
   {
