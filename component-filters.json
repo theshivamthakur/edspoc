@@ -59,5 +59,14 @@
     "components": [
       "menuItem"
     ]
+  },
+  {
+    "id": "header-footer",
+    "components": [
+      "menuItem",
+      "footerLink",
+      "socialLink",
+      "footerLogo"
+    ]
   }
 ]
