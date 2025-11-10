@@ -285,70 +285,87 @@
         "component": "text",
         "label": "App Name",
         "name": "appName",
-        "value": "boing",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Brand Image",
+        "name": "brandImage",
         "valueType": "string"
       },
       {
         "component": "reference",
         "label": "Logo Image",
-        "multi": false,
         "name": "logoImage",
         "valueType": "string"
       },
       {
-        "component": "text",
-        "label": "Logo Image Alt Text",
-        "name": "logoImageAlt",
+        "component": "reference",
+        "label": "Logo Link",
+        "name": "logoLink",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Side Logo Image",
-        "multi": false,
-        "name": "sideLogoImage",
+        "label": "Login Button Link",
+        "name": "loginButtonLink",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Side Logo Image Alt Text",
-        "name": "sideLogoImageAlt",
+        "label": "Login Button Text",
+        "name": "loginButtonText",
         "valueType": "string"
       },
       {
+        "component": "container",
+        "itemType": "menuItem",
+        "label": "Menu Items",
+        "name": "menuItems",
+        "valueType": "array"
+      },
+      {
+        "component": "container",
+        "itemType": "footerLink",
+        "label": "Footer Links",
+        "name": "footerLinks",
+        "valueType": "array"
+      },
+      {
+        "component": "container",
+        "itemType": "socialLink",
+        "label": "Social Links",
+        "name": "socialLinks",
+        "valueType": "array"
+      },
+      {
         "component": "text",
-        "label": "Login URL",
-        "name": "loginUrl",
+        "label": "Copyright",
+        "name": "copyright",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "sidebarMenuItem",
+    "id": "menuItem",
     "description": "",
     "fields": [
       {
-        "component": "text",
-        "label": "Menu Item Title",
-        "name": "title",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Menu Item URL",
-        "name": "url",
-        "valueType": "string"
-      },
-      {
         "component": "reference",
-        "label": "Menu Item Icon",
-        "multi": false,
+        "label": "Icon",
         "name": "icon",
         "valueType": "string"
       },
       {
+        "component": "reference",
+        "label": "Link",
+        "name": "link",
+        "valueType": "string"
+      },
+      {
         "component": "text",
-        "label": "Menu Item Icon Alt Text",
-        "name": "iconAlt",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       }
     ]
@@ -358,15 +375,15 @@
     "description": "",
     "fields": [
       {
-        "component": "text",
-        "label": "Footer Link Title",
-        "name": "title",
+        "component": "reference",
+        "label": "Link",
+        "name": "link",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Footer Link URL",
-        "name": "url",
+        "label": "Text",
+        "name": "text",
         "valueType": "string"
       }
     ]
@@ -376,28 +393,15 @@
     "description": "",
     "fields": [
       {
-        "component": "text",
-        "label": "Platform",
-        "name": "platform",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Social Link URL",
-        "name": "url",
+        "component": "reference",
+        "label": "Link",
+        "name": "link",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Social Platform Icon",
-        "multi": false,
+        "label": "Icon",
         "name": "icon",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "label": "Icon Alt Text",
-        "name": "iconAlt",
         "valueType": "string"
       }
     ]

@@ -63,7 +63,7 @@
   {
     "id": "header",
     "components": [
-      "sidebarMenuItem",
+      "menuItem",
       "footerLink",
       "socialLink"
     ]

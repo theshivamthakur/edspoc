@@ -9,30 +9,30 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "filter": "header",
-              "model": "header",
-              "name": "Header"
+              "name": "header",
+              "model":"header"
             }
           }
         }
       }
     },
     {
-      "title": "MenuItem",
-      "id": "menuItem",
+      "title": "Sidebar Menu Item",
+      "id": "sidebarMenuItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "menuItem",
-              "name": "MenuItem"
+              "model": "sidebarMenuItem",
+              "name": "sidebarMenuItem"
             }
           }
         }
       }
     },
     {
-      "title": "FooterLink",
+      "title": "Footer Link",
       "id": "footerLink",
       "plugins": {
         "xwalk": {
@@ -40,14 +40,14 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "model": "footerLink",
-              "name": "FooterLink"
+              "name": "footerLink"
             }
           }
         }
       }
     },
     {
-      "title": "SocialLink",
+      "title": "Social Link",
       "id": "socialLink",
       "plugins": {
         "xwalk": {
@@ -55,7 +55,7 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "model": "socialLink",
-              "name": "SocialLink"
+              "name": "socialLink"
             }
           }
         }
@@ -71,87 +71,70 @@
           "component": "text",
           "label": "App Name",
           "name": "appName",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "label": "Brand Image",
-          "name": "brandImage",
+          "value": "boing",
           "valueType": "string"
         },
         {
           "component": "reference",
           "label": "Logo Image",
+          "multi": false,
           "name": "logoImage",
           "valueType": "string"
         },
         {
-          "component": "reference",
-          "label": "Logo Link",
-          "name": "logoLink",
+          "component": "text",
+          "label": "Logo Image Alt Text",
+          "name": "logoImageAlt",
           "valueType": "string"
         },
         {
           "component": "reference",
-          "label": "Login Button Link",
-          "name": "loginButtonLink",
+          "label": "Side Logo Image",
+          "multi": false,
+          "name": "sideLogoImage",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Login Button Text",
-          "name": "loginButtonText",
+          "label": "Side Logo Image Alt Text",
+          "name": "sideLogoImageAlt",
           "valueType": "string"
         },
         {
-          "component": "container",
-          "itemType": "menuItem",
-          "label": "Menu Items",
-          "name": "menuItems",
-          "valueType": "array"
-        },
-        {
-          "component": "container",
-          "itemType": "footerLink",
-          "label": "Footer Links",
-          "name": "footerLinks",
-          "valueType": "array"
-        },
-        {
-          "component": "container",
-          "itemType": "socialLink",
-          "label": "Social Links",
-          "name": "socialLinks",
-          "valueType": "array"
-        },
-        {
           "component": "text",
-          "label": "Copyright",
-          "name": "copyright",
+          "label": "Login URL",
+          "name": "loginUrl",
           "valueType": "string"
         }
       ]
     },
     {
-      "id": "menuItem",
+      "id": "sidebarMenuItem",
       "description": "",
       "fields": [
         {
-          "component": "reference",
-          "label": "Icon",
-          "name": "icon",
-          "valueType": "string"
-        },
-        {
-          "component": "reference",
-          "label": "Link",
-          "name": "link",
+          "component": "text",
+          "label": "Menu Item Title",
+          "name": "title",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Menu Item URL",
+          "name": "url",
+          "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "label": "Menu Item Icon",
+          "multi": false,
+          "name": "icon",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Menu Item Icon Alt Text",
+          "name": "iconAlt",
           "valueType": "string"
         }
       ]
@@ -161,15 +144,15 @@
       "description": "",
       "fields": [
         {
-          "component": "reference",
-          "label": "Link",
-          "name": "link",
+          "component": "text",
+          "label": "Footer Link Title",
+          "name": "title",
           "valueType": "string"
         },
         {
           "component": "text",
-          "label": "Text",
-          "name": "text",
+          "label": "Footer Link URL",
+          "name": "url",
           "valueType": "string"
         }
       ]
@@ -179,15 +162,28 @@
       "description": "",
       "fields": [
         {
-          "component": "reference",
-          "label": "Link",
-          "name": "link",
+          "component": "text",
+          "label": "Platform",
+          "name": "platform",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Social Link URL",
+          "name": "url",
           "valueType": "string"
         },
         {
           "component": "reference",
-          "label": "Icon",
+          "label": "Social Platform Icon",
+          "multi": false,
           "name": "icon",
+          "valueType": "string"
+        },
+        {
+          "component": "text",
+          "label": "Icon Alt Text",
+          "name": "iconAlt",
           "valueType": "string"
         }
       ]
@@ -197,7 +193,7 @@
     {
       "id": "header",
       "components": [
-        "menuItem",
+        "sidebarMenuItem",
         "footerLink",
         "socialLink"
       ]
