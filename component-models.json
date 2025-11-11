@@ -208,128 +208,108 @@
   },
   {
     "id": "header",
+    "description": "",
     "fields": [
       {
         "component": "text",
-        "name": "appName",
         "label": "App Name",
+        "name": "appName",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "name": "leftImage",
-        "label": "Left Image",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "name": "logoImage",
         "label": "Logo Image",
+        "name": "logoImage",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "logoImageAlt",
-        "label": "Logo Image Alt",
+        "label": "Logo Alt",
+        "name": "logoAlt",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "logoLink",
         "label": "Logo Link",
+        "name": "logoHref",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "loginLink",
         "label": "Login Link",
+        "name": "loginHref",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "loginText",
-        "label": "Login Text",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "name": "footerLogo1",
-        "label": "Footer Logo 1",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "name": "footerLogo2",
-        "label": "Footer Logo 2",
-        "valueType": "string"
-      },
-      {
-        "component": "text",
-        "name": "copyright",
-        "label": "Copyright",
+        "label": "Login Label",
+        "name": "loginLabel",
         "valueType": "string"
       }
     ]
   },
   {
     "id": "headerMenuItem",
+    "description": "",
     "fields": [
       {
         "component": "text",
-        "name": "text",
-        "label": "Text",
+        "label": "Menu Label",
+        "name": "menuLabel",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "href",
-        "label": "Link",
+        "label": "Menu Link",
+        "name": "menuHref",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "name": "icon",
-        "label": "Icon",
+        "label": "Menu Icon",
+        "name": "menuIcon",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerNavItem",
+    "id": "footerListItem",
+    "description": "",
     "fields": [
       {
         "component": "text",
-        "name": "text",
-        "label": "Text",
+        "label": "Footer Label",
+        "name": "footerLabel",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "href",
-        "label": "Link",
+        "label": "Footer Link",
+        "name": "footerHref",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "footerSocialItem",
+    "id": "socialLink",
+    "description": "",
     "fields": [
       {
         "component": "text",
-        "name": "platform",
         "label": "Platform",
+        "name": "platform",
         "valueType": "string"
       },
       {
         "component": "text",
-        "name": "href",
-        "label": "Link",
+        "label": "Social Link",
+        "name": "socialHref",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "name": "icon",
-        "label": "Icon",
+        "label": "Social Icon",
+        "name": "socialIcon",
         "valueType": "string"
       }
     ]
