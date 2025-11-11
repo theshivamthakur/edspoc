@@ -112,7 +112,7 @@ export default function decorate(block) {
     // Handle Image
     const img = imageCell?.querySelector('img');
     if (img) {
-      const optimizedPic = createOptimizedPicture(img.src, img.alt, img.loading, img.fetchPriority);
+      const optimizedPic = createOptimizedPicture(img.src, img.alt);
       moveInstrumentation(img, optimizedPic.querySelector('img'));
       optimizedPic.querySelector('img').classList.add('carousel-w-100', 'carousel-h-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-image');
       sectionWrapper.append(optimizedPic);
