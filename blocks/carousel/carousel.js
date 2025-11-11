@@ -2,7 +2,14 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
+  // --- EXISTING DOM CONSTRUCTION LOGIC ---
+
   const carouselWrapper = document.createElement('div');
+  // NOTE: Swiper initialization typically requires a unique ID on the container
+  // Let's generate a unique ID for the Swiper container
+  const swiperId = `carousel-${Math.random().toString(36).substring(2, 11)}`;
+  carouselWrapper.id = swiperId; 
+  
   carouselWrapper.classList.add('swiper', 'carousel-primary-swiper', 'carousel-primary-swiper-carousel-419d8524f7', 'swiper-initialized', 'swiper-horizontal', 'swiper-backface-hidden');
   carouselWrapper.setAttribute('role', 'group');
   carouselWrapper.setAttribute('aria-live', 'polite');
@@ -112,7 +119,10 @@ export default function decorate(block) {
     // Handle Image
     const img = imageCell?.querySelector('img');
     if (img) {
-      const optimizedPic = createOptimizedPicture(img.src, img.alt);
+      // Corrected call for createOptimizedPicture
+      const optimizedPic = createOptimizedPicture(img.src, img.alt, img.loading === 'eager');
+      optimizedPic.querySelector('img').setAttribute('fetchpriority', img.fetchPriority || 'auto');
+      
       moveInstrumentation(img, optimizedPic.querySelector('img'));
       optimizedPic.querySelector('img').classList.add('carousel-w-100', 'carousel-h-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-image');
       sectionWrapper.append(optimizedPic);
@@ -179,4 +189,60 @@ export default function decorate(block) {
 
   block.textContent = '';
   block.append(carouselWrapper);
+
+  // --- NEW SWIPER INITIALIZATION LOGIC ---
+
+  /**
+   * Initializes Swiper on the newly created carousel structure.
+   * Assumes the Swiper library (Swiper, SwiperModule, etc.) is globally available.
+   */
+  if (typeof window.Swiper !== 'undefined') {
+    const swiperOptions = {
+      // Core Swiper settings
+      loop: carouselWrapper.dataset.isLoop === 'true',
+      autoplay: carouselWrapper.dataset.isAutoplay === 'true' ? {
+        delay: parseInt(carouselWrapper.dataset.delay, 10) || 5000,
+        disableOnInteraction: carouselWrapper.dataset.autopauseDisabled !== 'true',
+      } : false,
+
+      // Navigation (based on your custom DOM structure)
+      navigation: {
+        nextEl: '.carousel-primary-swiper__buttonNext', 
+        prevEl: '.carousel-primary-swiper__buttonPrev',
+      },
+
+      // Pagination
+      pagination: {
+        el: '.carousel-primary-swiper-pagination',
+        clickable: true,
+      },
+      
+      // Accessibility
+      a11y: {
+        prevSlideMessage: 'Previous slide',
+        nextSlideMessage: 'Next slide',
+        firstSlideMessage: 'This is the first slide',
+        lastSlideMessage: 'This is the last slide',
+      },
+
+      // Watch for DOM changes if content is loaded dynamically
+      observer: true,
+      observeParents: true,
+    };
+
+    // Initialize the Swiper instance
+    // Uses the unique ID we set on the carouselWrapper
+    // 
+    // Note: The swiper class is applied to the carouselWrapper element itself.
+    // The selector is the ID of the container element.
+    const swiper = new window.Swiper(`#${swiperId}`, swiperOptions);
+
+    // Optional: Add event listeners for custom video controls (if needed)
+    // The complexity of video controls might require a separate logic file,
+    // but the Swiper instance is now available via the 'swiper' variable.
+
+  } else {
+    // eslint-disable-next-line no-console
+    console.warn('Swiper library not found. Carousel interactivity is disabled.');
+  }
 }
