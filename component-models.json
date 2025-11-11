@@ -218,14 +218,8 @@
       },
       {
         "component": "reference",
-        "label": "Header Logo",
-        "name": "headerLogo",
-        "valueType": "string"
-      },
-      {
-        "component": "reference",
-        "label": "Side Logo",
-        "name": "sideLogo",
+        "label": "Logo",
+        "name": "logo",
         "valueType": "string"
       },
       {
@@ -241,15 +235,48 @@
         "valueType": "string"
       },
       {
-        "component": "reference",
-        "label": "Footer Logo 1",
-        "name": "footerLogo1",
-        "valueType": "string"
+        "component": "container",
+        "fields": [
+          {
+            "component": "reference",
+            "label": "Header Menu Item",
+            "name": "headerMenuItem",
+            "valueType": "string"
+          }
+        ],
+        "label": "Header Menu Items",
+        "name": "menuItems"
+      },
+      {
+        "component": "container",
+        "fields": [
+          {
+            "component": "reference",
+            "label": "Footer Link",
+            "name": "footerLink",
+            "valueType": "string"
+          }
+        ],
+        "label": "Footer Links",
+        "name": "footerLinks"
+      },
+      {
+        "component": "container",
+        "fields": [
+          {
+            "component": "reference",
+            "label": "Social Link",
+            "name": "socialLink",
+            "valueType": "string"
+          }
+        ],
+        "label": "Social Links",
+        "name": "socialLinks"
       },
       {
         "component": "reference",
-        "label": "Footer Logo 2",
-        "name": "footerLogo2",
+        "label": "Footer Copyright",
+        "name": "footerCopyright",
         "valueType": "string"
       }
     ]
@@ -260,55 +287,55 @@
     "fields": [
       {
         "component": "reference",
-        "label": "Menu Icon",
+        "label": "Icon",
         "name": "icon",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Menu Label",
-        "name": "label",
+        "label": "Menu Text",
+        "name": "text",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Menu Link",
+        "label": "Link URL",
         "name": "link",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "headerFooterLink",
+    "id": "footerLink",
     "description": "",
     "fields": [
       {
         "component": "text",
-        "label": "Footer Link Label",
-        "name": "label",
+        "label": "Link Text",
+        "name": "text",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Footer Link",
+        "label": "Link URL",
         "name": "link",
         "valueType": "string"
       }
     ]
   },
   {
-    "id": "headerSocialLink",
+    "id": "socialLink",
     "description": "",
     "fields": [
       {
         "component": "reference",
-        "label": "Social Icon",
+        "label": "Icon",
         "name": "icon",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Social Link",
+        "label": "Link URL",
         "name": "link",
         "valueType": "string"
       }
