@@ -1,16 +1,111 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-export default function decorate(block) {
-  // --- EXISTING DOM CONSTRUCTION LOGIC ---
+/**
+ * Initializes a basic slider functionality using pure JavaScript.
+ * This function handles slide transitions, navigation clicks, and pagination updates.
+ * @param {HTMLElement} wrapper The main carousel container.
+ */
+function initializeCustomSlider(wrapper) {
+  const slides = wrapper.querySelectorAll('.swiper-slide');
+  const nextButton = wrapper.querySelector('.swiper-button-next') || wrapper.querySelector('.carousel-primary-swiper__buttonNext');
+  const prevButton = wrapper.querySelector('.swiper-button-prev') || wrapper.querySelector('.carousel-primary-swiper__buttonPrev');
+  const pagination = wrapper.querySelector('.carousel-swiper-pagination');
 
+  if (slides.length === 0) return;
+
+  let currentIndex = 0;
+  const isLoop = wrapper.dataset.isLoop === 'true';
+
+  // --- Core Slide Visibility Logic ---
+  const showSlide = (index) => {
+    // Clamp index for non-looping carousels
+    if (!isLoop) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+    }
+    
+    // Handle looping (using modulus operator)
+    currentIndex = index % slides.length;
+    if (currentIndex < 0) currentIndex += slides.length; // Handle negative index for reverse looping
+
+    slides.forEach((slide, i) => {
+      slide.classList.remove('swiper-slide-active');
+      if (i === currentIndex) {
+        slide.classList.add('swiper-slide-active');
+      }
+    });
+
+    // Update pagination dots (assuming they are children of the pagination container)
+    if (pagination) {
+      [...pagination.children].forEach((dot, i) => {
+        dot.classList.remove('swiper-pagination-bullet-active');
+        dot.setAttribute('aria-current', 'false');
+        if (i === currentIndex) {
+          dot.classList.add('swiper-pagination-bullet-active');
+          dot.setAttribute('aria-current', 'true');
+        }
+      });
+    }
+
+    // Update button states (for non-looping)
+    if (nextButton) nextButton.disabled = !isLoop && currentIndex === slides.length - 1;
+    if (prevButton) prevButton.disabled = !isLoop && currentIndex === 0;
+  };
+
+  // --- Navigation Handlers ---
+  if (nextButton) {
+    nextButton.addEventListener('click', () => showSlide(currentIndex + 1));
+  }
+  if (prevButton) {
+    prevButton.addEventListener('click', () => showSlide(currentIndex - 1));
+  }
+
+  // --- Pagination Handlers (if dynamically generated) ---
+  if (pagination) {
+    pagination.addEventListener('click', (e) => {
+      const dot = e.target.closest('.swiper-pagination-bullet');
+      if (dot) {
+        // Find the index of the clicked dot
+        const dotIndex = Array.from(pagination.children).indexOf(dot);
+        if (dotIndex !== -1) {
+          showSlide(dotIndex);
+        }
+      }
+    });
+  }
+
+  // --- Autoplay Logic (if requested) ---
+  if (wrapper.dataset.isAutoplay === 'true') {
+    const delay = parseInt(wrapper.dataset.delay, 10) || 5000;
+    let autoplayTimer = setInterval(() => showSlide(currentIndex + 1), delay);
+    
+    // Stop autoplay on hover/interaction (if not disabled)
+    if (wrapper.dataset.autopauseDisabled !== 'true') {
+        const resetAutoplay = () => {
+            clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(() => showSlide(currentIndex + 1), delay);
+        };
+        
+        wrapper.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+        wrapper.addEventListener('mouseleave', resetAutoplay);
+        if (nextButton) nextButton.addEventListener('click', resetAutoplay);
+        if (prevButton) prevButton.addEventListener('click', resetAutoplay);
+    }
+  }
+  
+  // --- Initial Setup ---
+  showSlide(0);
+}
+
+export default function decorate(block) {
+  // --- Start DOM Construction ---
   const carouselWrapper = document.createElement('div');
-  // NOTE: Swiper initialization typically requires a unique ID on the container
-  // Let's generate a unique ID for the Swiper container
   const swiperId = `carousel-${Math.random().toString(36).substring(2, 11)}`;
   carouselWrapper.id = swiperId; 
   
-  carouselWrapper.classList.add('swiper', 'carousel-primary-swiper', 'carousel-primary-swiper-carousel-419d8524f7', 'swiper-initialized', 'swiper-horizontal', 'swiper-backface-hidden');
+  // Keep only essential classes for styling and the root container
+  carouselWrapper.classList.add('swiper', 'carousel-primary-swiper');
   carouselWrapper.setAttribute('role', 'group');
   carouselWrapper.setAttribute('aria-live', 'polite');
   carouselWrapper.setAttribute('aria-roledescription', 'carousel');
@@ -24,12 +119,14 @@ export default function decorate(block) {
   swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
   carouselWrapper.append(swiperWrapper);
 
-  [...block.children].forEach((row) => {
+  [...block.children].forEach((row, index) => {
     const swiperSlide = document.createElement('div');
     moveInstrumentation(row, swiperSlide);
     swiperSlide.classList.add('swiper-slide', 'carousel-primary-swiper-slide');
     swiperSlide.setAttribute('role', 'tabpanel');
     swiperSlide.setAttribute('aria-roledescription', 'slide');
+    // Hide all slides initially
+    swiperSlide.style.display = 'none';
 
     const carouselBanner = document.createElement('div');
     carouselBanner.classList.add('carousel-banner');
@@ -119,7 +216,7 @@ export default function decorate(block) {
     // Handle Image
     const img = imageCell?.querySelector('img');
     if (img) {
-      // Corrected call for createOptimizedPicture
+      // Corrected call: uses boolean for eager, omits breakpoints (uses default array)
       const optimizedPic = createOptimizedPicture(img.src, img.alt, img.loading === 'eager');
       optimizedPic.querySelector('img').setAttribute('fetchpriority', img.fetchPriority || 'auto');
       
@@ -174,7 +271,11 @@ export default function decorate(block) {
   // Add navigation and pagination elements
   const actionsDiv = document.createElement('div');
   actionsDiv.classList.add('carousel-cmp-carousel__actions');
-  actionsDiv.innerHTML = block.querySelector('.carousel-cmp-carousel__actions')?.innerHTML || '';
+  
+  // Assuming the inner content includes elements that can be used as next/prev buttons, 
+  // like children with classes 'swiper-button-prev' and 'swiper-button-next'.
+  actionsDiv.innerHTML = block.querySelector('.carousel-cmp-carousel__actions')?.innerHTML || 
+                         '<button class="swiper-button-prev">Prev</button><button class="swiper-button-next">Next</button>'; 
   carouselWrapper.append(actionsDiv);
 
   const swiperContainer = document.createElement('div');
@@ -183,66 +284,24 @@ export default function decorate(block) {
   carouselWrapper.append(swiperContainer);
 
   const paginationDiv = document.createElement('div');
-  paginationDiv.classList.add('carousel-swiper-pagination', 'carousel-primary-swiper-pagination', 'carousel-pagination-set', 'carousel-mb-md-8', 'carousel-mb-10', 'carousel-mt-6', 'carousel-position-absolute', 'carousel-swiper-pagination-clickable', 'carousel-swiper-pagination-bullets', 'carousel-swiper-pagination-horizontal');
-  paginationDiv.innerHTML = block.querySelector('.carousel-swiper-pagination')?.innerHTML || '';
+  paginationDiv.classList.add('carousel-swiper-pagination', 'carousel-primary-swiper-pagination');
+  
+  // Dynamically generate pagination dots based on the number of slides
+  const slideCount = block.children.length;
+  for(let i = 0; i < slideCount; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('swiper-pagination-bullet');
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.setAttribute('tabindex', '0');
+      paginationDiv.append(dot);
+  }
+  
   carouselWrapper.append(paginationDiv);
 
   block.textContent = '';
   block.append(carouselWrapper);
-
-  // --- NEW SWIPER INITIALIZATION LOGIC ---
-
-  /**
-   * Initializes Swiper on the newly created carousel structure.
-   * Assumes the Swiper library (Swiper, SwiperModule, etc.) is globally available.
-   */
-  if (typeof window.Swiper !== 'undefined') {
-    const swiperOptions = {
-      // Core Swiper settings
-      loop: carouselWrapper.dataset.isLoop === 'true',
-      autoplay: carouselWrapper.dataset.isAutoplay === 'true' ? {
-        delay: parseInt(carouselWrapper.dataset.delay, 10) || 5000,
-        disableOnInteraction: carouselWrapper.dataset.autopauseDisabled !== 'true',
-      } : false,
-
-      // Navigation (based on your custom DOM structure)
-      navigation: {
-        nextEl: '.carousel-primary-swiper__buttonNext', 
-        prevEl: '.carousel-primary-swiper__buttonPrev',
-      },
-
-      // Pagination
-      pagination: {
-        el: '.carousel-primary-swiper-pagination',
-        clickable: true,
-      },
-      
-      // Accessibility
-      a11y: {
-        prevSlideMessage: 'Previous slide',
-        nextSlideMessage: 'Next slide',
-        firstSlideMessage: 'This is the first slide',
-        lastSlideMessage: 'This is the last slide',
-      },
-
-      // Watch for DOM changes if content is loaded dynamically
-      observer: true,
-      observeParents: true,
-    };
-
-    // Initialize the Swiper instance
-    // Uses the unique ID we set on the carouselWrapper
-    // 
-    // Note: The swiper class is applied to the carouselWrapper element itself.
-    // The selector is the ID of the container element.
-    const swiper = new window.Swiper(`#${swiperId}`, swiperOptions);
-
-    // Optional: Add event listeners for custom video controls (if needed)
-    // The complexity of video controls might require a separate logic file,
-    // but the Swiper instance is now available via the 'swiper' variable.
-
-  } else {
-    // eslint-disable-next-line no-console
-    console.warn('Swiper library not found. Carousel interactivity is disabled.');
-  }
+  
+  // --- Initialize Custom Slider Logic ---
+  initializeCustomSlider(carouselWrapper);
 }
