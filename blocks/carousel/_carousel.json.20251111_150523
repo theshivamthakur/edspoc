@@ -17,15 +17,15 @@
       }
     },
     {
-      "title": "Slide",
-      "id": "slide",
+      "title": "Carousel Item",
+      "id": "carouselItem",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "model": "slide",
-              "name": "Slide"
+              "model": "carouselItem",
+              "name": "carouselItem"
             }
           }
         }
@@ -50,15 +50,15 @@
           "valueType": "string"
         },
         {
-          "component": "text",
-          "label": "Alt Text",
-          "name": "altText",
+          "component": "aem-tag",
+          "label": "CTA Link",
+          "name": "ctaLink",
           "valueType": "string"
         },
         {
-          "component": "aem-tag",
-          "label": "CTA",
-          "name": "cta",
+          "component": "text",
+          "label": "CTA Text",
+          "name": "ctaText",
           "valueType": "string"
         }
       ]
@@ -68,7 +68,7 @@
     {
       "id": "carousel",
       "components": [
-        "slide"
+        "carouselItem"
       ]
     }
   ]

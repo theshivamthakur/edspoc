@@ -177,15 +177,15 @@
         "valueType": "string"
       },
       {
-        "component": "aem-tag",
-        "label": "CTA Link",
-        "name": "ctaLink",
+        "component": "text",
+        "label": "Alt Text",
+        "name": "altText",
         "valueType": "string"
       },
       {
-        "component": "text",
-        "label": "CTA Text",
-        "name": "ctaText",
+        "component": "aem-tag",
+        "label": "CTA",
+        "name": "cta",
         "valueType": "string"
       }
     ]
