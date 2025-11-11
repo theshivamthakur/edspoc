@@ -121,7 +121,8 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "filter": "carousel",
-                  "name": "carousel"
+                  "model": "carousel",
+                  "name": "Carousel"
                 }
               }
             }
@@ -129,14 +130,14 @@
         },
         {
           "title": "Carousel Item",
-          "id": "carousel-item",
+          "id": "carouselItem",
           "plugins": {
             "xwalk": {
               "page": {
                 "resourceType": "core/franklin/components/block/v1/block/item",
                 "template": {
-                  "model": "carousel-item",
-                  "name": "carousel-item"
+                  "model": "carouselItem",
+                  "name": "carouselItem"
                 }
               }
             }
