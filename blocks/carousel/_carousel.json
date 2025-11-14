@@ -34,7 +34,7 @@
   ],
   "models": [
     {
-      "id": "carousel",
+      "id": "carouselItem",
       "description": "",
       "fields": [
         {
