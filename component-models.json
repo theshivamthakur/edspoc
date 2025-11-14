@@ -161,31 +161,37 @@
     ]
   },
   {
-    "id": "slide",
+    "id": "carousel",
     "description": "",
     "fields": [
       {
         "component": "reference",
-        "label": "Video",
+        "label": "Video Source",
         "name": "video",
         "valueType": "string"
       },
       {
         "component": "reference",
-        "label": "Image",
+        "label": "Image Source",
         "name": "image",
         "valueType": "string"
       },
       {
         "component": "text",
-        "label": "Alt Text",
-        "name": "altText",
+        "label": "Image Alt Text",
+        "name": "alt",
         "valueType": "string"
       },
       {
         "component": "aem-tag",
-        "label": "CTA",
+        "label": "CTA Link",
         "name": "cta",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "label": "CTA Text",
+        "name": "ctaText",
         "valueType": "string"
       }
     ]

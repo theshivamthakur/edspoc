@@ -1,405 +1,249 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-/**
- * Handles the video controls (Play/Pause/Mute) and binds event listeners.
- */
-function handleVideoControls(videoElement, playButton, pauseButton, muteButton, unmuteButton, noAudioButton) {
-    const hasAudioTrack = videoElement.audioTracks && videoElement.audioTracks.length > 0;
-
-    // --- Initial State ---
-    if (hasAudioTrack) {
-        if (videoElement.muted) {
-            muteButton.classList.remove('carousel-d-none');
-        } else {
-            unmuteButton.classList.remove('carousel-d-none');
-        }
-    } else {
-        // Show 'No Audio' icon if no audio track exists
-        noAudioButton.classList.remove('carousel-d-none');
-    }
-    
-    // Set initial play/pause state
-    if (videoElement.paused) {
-        playButton.classList.remove('carousel-d-none');
-        pauseButton.classList.add('carousel-d-none');
-    } else {
-        playButton.classList.add('carousel-d-none');
-        pauseButton.classList.remove('carousel-d-none');
-    }
-
-    // --- Toggle Mute/Unmute ---
-    muteButton.addEventListener('click', () => {
-        videoElement.muted = false;
-        muteButton.classList.add('carousel-d-none');
-        unmuteButton.classList.remove('carousel-d-none');
-    });
-
-    unmuteButton.addEventListener('click', () => {
-        videoElement.muted = true;
-        muteButton.classList.remove('carousel-d-none');
-        unmuteButton.classList.add('carousel-d-none');
-    });
-
-    // --- Toggle Play/Pause ---
-    playButton.addEventListener('click', () => {
-        videoElement.play().catch(e => console.error('Video play failed:', e));
-        playButton.classList.add('carousel-d-none');
-        pauseButton.classList.remove('carousel-d-none');
-    });
-
-    pauseButton.addEventListener('click', () => {
-        videoElement.pause();
-        playButton.classList.remove('carousel-d-none');
-        pauseButton.classList.add('carousel-d-none');
-    });
-}
-
-/**
- * Implements a simple vanilla JavaScript carousel/slider.
- */
-function initVanillaSlider(carouselWrapper, slides) {
-    const isLoop = carouselWrapper.getAttribute('data-is-loop') === 'true';
-    const isAutoplay = carouselWrapper.getAttribute('data-is-autoplay') === 'true';
-    const delay = parseInt(carouselWrapper.getAttribute('data-delay'), 10) || 5000;
-    const totalSlides = slides.length;
-    let currentSlide = 0;
-    let autoplayInterval;
-
-    const paginationContainer = carouselWrapper.querySelector('.carousel-primary-swiper-pagination');
-    const nextButton = carouselWrapper.querySelector('.swiper-button-next');
-    const prevButton = carouselWrapper.querySelector('.swiper-button-prev');
-
-    /**
-     * Updates slide visibility and video state.
-     */
-    const goToSlide = (index) => {
-        // Calculate the next index, handling loop boundaries
-        let nextIndex = index;
-        if (nextIndex >= totalSlides) {
-            nextIndex = isLoop ? 0 : totalSlides - 1;
-        } else if (nextIndex < 0) {
-            nextIndex = isLoop ? totalSlides - 1 : 0;
-        }
-
-        // Only proceed if the slide actually changes (or if it's the first initialization)
-        if (nextIndex === currentSlide && currentSlide !== 0) return;
-
-        // 1. Pause all videos and remove active classes
-        slides.forEach((slide, i) => {
-            const video = slide.querySelector('.carousel-banner-video');
-            if (video && !video.paused) {
-                video.pause();
-            }
-            slide.classList.remove('swiper-slide-active');
-            slide.style.transform = `translateX(-${nextIndex * 100}%)`; // Simple translateX for movement
-            slide.style.opacity = '0'; // Hide slides
-        });
-        
-        // 2. Set new active slide
-        currentSlide = nextIndex;
-        const activeSlide = slides[currentSlide];
-        activeSlide.classList.add('swiper-slide-active');
-        activeSlide.style.opacity = '1';
-        
-        // 3. Update pagination bullets
-        if (paginationContainer) {
-            Array.from(paginationContainer.children).forEach((bullet, i) => {
-                if (i === currentSlide) {
-                    bullet.classList.add('swiper-pagination-bullet-active');
-                    bullet.setAttribute('aria-current', 'true');
-                } else {
-                    bullet.classList.remove('swiper-pagination-bullet-active');
-                    bullet.removeAttribute('aria-current');
-                }
-            });
-        }
-        
-        // 4. Play video on the active slide (if configured to autoplay)
-        const activeVideo = activeSlide.querySelector('.carousel-banner-video');
-        if (activeVideo && activeVideo.getAttribute('data-is-autoplay') === 'true') {
-            activeVideo.play().catch(e => console.warn('Autoplay failed for slide video:', e));
-        }
-    };
-
-    // --- Autoplay Logic ---
-    const startAutoplay = () => {
-        if (isAutoplay && !autoplayInterval) {
-            autoplayInterval = setInterval(() => {
-                goToSlide(currentSlide + 1);
-            }, delay);
-        }
-    };
-
-    const stopAutoplay = () => {
-        if (autoplayInterval) {
-            clearInterval(autoplayInterval);
-            autoplayInterval = null;
-        }
-    };
-    
-    // Add interaction pause on hover
-    carouselWrapper.addEventListener('mouseenter', stopAutoplay);
-    carouselWrapper.addEventListener('mouseleave', startAutoplay);
-
-    // --- Navigation Controls (Next/Prev) ---
-    if (nextButton) {
-        nextButton.addEventListener('click', () => {
-            stopAutoplay();
-            goToSlide(currentSlide + 1);
-            startAutoplay();
-        });
-    }
-
-    if (prevButton) {
-        prevButton.addEventListener('click', () => {
-            stopAutoplay();
-            goToSlide(currentSlide - 1);
-            startAutoplay();
-        });
-    }
-
-    // --- Pagination Creation & Controls (Since these are likely empty placeholders) ---
-    if (paginationContainer && paginationContainer.children.length === 0) {
-        for (let i = 0; i < totalSlides; i++) {
-            const bullet = document.createElement('span');
-            bullet.classList.add('swiper-pagination-bullet');
-            bullet.setAttribute('tabindex', '0');
-            bullet.setAttribute('role', 'button');
-            bullet.setAttribute('aria-label', `Go to slide ${i + 1}`);
-            bullet.addEventListener('click', () => {
-                stopAutoplay();
-                goToSlide(i);
-                startAutoplay();
-            });
-            paginationContainer.append(bullet);
-        }
-    } else if (paginationContainer) {
-        // If bullets are already there (copied from the original block structure)
-        Array.from(paginationContainer.children).forEach((bullet, i) => {
-            bullet.addEventListener('click', () => {
-                stopAutoplay();
-                goToSlide(i);
-                startAutoplay();
-            });
-        });
-    }
-
-    // Initialize the first slide and start autoplay
-    goToSlide(0);
-    startAutoplay();
-}
-
 export default function decorate(block) {
-    const carouselWrapper = document.createElement('div');
-    carouselWrapper.classList.add('swiper', 'carousel-primary-swiper', 'carousel-primary-swiper-carousel-419d8524f7', 'swiper-horizontal', 'swiper-backface-hidden');
-    // Remove swiper-initialized class as we are manually managing the state
-    carouselWrapper.setAttribute('role', 'group');
-    carouselWrapper.setAttribute('aria-live', 'polite');
-    carouselWrapper.setAttribute('aria-roledescription', 'carousel');
-    carouselWrapper.setAttribute('data-is-autoplay', block.dataset.isAutoplay || 'true');
-    carouselWrapper.setAttribute('data-delay', block.dataset.delay || '5000');
-    carouselWrapper.setAttribute('data-autopause-disabled', block.dataset.autopauseDisabled || 'true');
-    carouselWrapper.setAttribute('data-is-loop', block.dataset.isLoop || 'false');
-    carouselWrapper.setAttribute('data-placeholder-text', block.dataset.placeholderText || 'false');
+  const carouselPositionRelative = document.createElement('div');
+  carouselPositionRelative.classList.add('carousel-position-relative');
 
-    const swiperWrapper = document.createElement('div');
-    swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
-    // Add custom style for vanilla JS transition
-    swiperWrapper.style.display = 'flex';
-    swiperWrapper.style.width = '100%';
-    swiperWrapper.style.height = '100%';
-    carouselWrapper.append(swiperWrapper);
+  const swiper = document.createElement('div');
+  swiper.classList.add('swiper', 'carousel-primary-swiper');
+  // Transfer data attributes from the main swiper div if available in the original block
+  // For simplicity, we'll add common ones based on the HTML provided
+  swiper.setAttribute('role', 'group');
+  swiper.setAttribute('aria-live', 'polite');
+  swiper.setAttribute('aria-roledescription', 'carousel');
+  swiper.setAttribute('data-is-autoplay', 'true');
+  swiper.setAttribute('data-delay', '5000');
+  swiper.setAttribute('data-autopause-disabled', 'true');
+  swiper.setAttribute('data-is-loop', 'false');
+  swiper.setAttribute('data-placeholder-text', 'false');
 
-    const slides = [];
+  const swiperWrapper = document.createElement('div');
+  swiperWrapper.classList.add('swiper-wrapper', 'carousel-primary-swiper-wrapper', 'carousel-z-0');
 
-    [...block.children].forEach((row) => {
-        const swiperSlide = document.createElement('div');
-        moveInstrumentation(row, swiperSlide);
-        swiperSlide.classList.add('swiper-slide', 'carousel-primary-swiper-slide');
-        swiperSlide.setAttribute('role', 'tabpanel');
-        swiperSlide.setAttribute('aria-roledescription', 'slide');
-        // Add custom styles for vanilla JS slide positioning
-        swiperSlide.style.flexShrink = '0';
-        swiperSlide.style.width = '100%';
-        swiperSlide.style.position = 'absolute';
-        swiperSlide.style.transition = 'opacity 0.5s ease-in-out';
-        swiperSlide.style.top = '0';
-        swiperSlide.style.left = '0';
-        swiperSlide.style.opacity = '0'; // Start hidden
-        
-        slides.push(swiperSlide);
+  [...block.children].forEach((row) => {
+    const swiperSlide = document.createElement('div');
+    moveInstrumentation(row, swiperSlide);
+    swiperSlide.classList.add('swiper-slide', 'carousel-primary-swiper-slide');
+    swiperSlide.setAttribute('role', 'tabpanel');
+    swiperSlide.setAttribute('aria-roledescription', 'slide');
 
-        const carouselBanner = document.createElement('div');
-        carouselBanner.classList.add('carousel-banner');
-        swiperSlide.append(carouselBanner);
+    const carouselBanner = document.createElement('div');
+    carouselBanner.classList.add('carousel-banner');
 
-        const section = document.createElement('section');
-        section.classList.add('carousel-banner-section');
-        carouselBanner.append(section);
+    const section = document.createElement('section');
+    section.classList.add('carousel-banner-section');
 
-        const sectionWrapper = document.createElement('div');
-        sectionWrapper.classList.add('carousel-position-relative', 'carousel-boing', 'carousel-banner-section__wrapper');
-        section.append(sectionWrapper);
+    const wrapperDiv = document.createElement('div');
+    wrapperDiv.classList.add('carousel-position-relative', 'carousel-boing', 'carousel-banner-section__wrapper');
 
-        const cells = [...row.children];
-        const videoCell = cells[0];
-        const imageCell = cells[1];
-        const ctaCell = cells[2];
+    const cells = [...row.children];
 
-        // Handle Video
-        const video = videoCell?.querySelector('video');
-        if (video) {
-            const videoWrapper = document.createElement('div');
-            videoWrapper.classList.add('carousel-video-wrapper');
-            sectionWrapper.append(videoWrapper);
+    // Assuming the order of content in cells corresponds to the model fields
+    const videoSrc = cells[0]?.querySelector('a')?.href || cells[0]?.textContent.trim();
+    const imgSrc = cells[1]?.querySelector('img')?.src;
+    const imgAlt = cells[2]?.textContent.trim();
+    const ctaLink = cells[3]?.querySelector('a')?.href;
+    const ctaText = cells[4]?.textContent.trim();
 
-            const newVideo = document.createElement('video');
-            newVideo.classList.add('carousel-w-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-video');
-            newVideo.title = video.title;
-            newVideo.ariaLabel = video.ariaLabel;
-            newVideo.setAttribute('data-is-autoplay', video.dataset.isAutoplay);
-            newVideo.playsInline = video.playsInline;
-            newVideo.preload = video.preload;
-            newVideo.fetchPriority = video.fetchPriority;
-            newVideo.loop = video.loop;
-            newVideo.muted = video.muted;
-            newVideo.autoplay = video.autoplay;
+    if (videoSrc && videoSrc.endsWith('.mp4')) {
+      const videoWrapper = document.createElement('div');
+      videoWrapper.classList.add('carousel-video-wrapper');
 
-            [...video.querySelectorAll('source')].forEach((source) => {
-                const newSource = document.createElement('source');
-                newSource.src = source.src;
-                newSource.type = source.type;
-                newVideo.append(newSource);
-            });
-            videoWrapper.append(newVideo);
+      const video = document.createElement('video');
+      video.classList.add('carousel-w-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-video');
+      video.setAttribute('title', 'Video');
+      video.setAttribute('aria-label', 'Video');
+      video.setAttribute('data-is-autoplay', 'true');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('preload', 'metadata');
+      video.setAttribute('fetchpriority', 'high');
+      video.setAttribute('loop', 'false');
+      video.setAttribute('muted', 'true');
+      video.setAttribute('autoplay', 'true');
 
-            // Add play/pause buttons
-            const playPauseWrapper = document.createElement('div');
-            playPauseWrapper.classList.add('carousel-position-absolute', 'carousel-w-100', 'carousel-h-100', 'carousel-start-0', 'carousel-top-0', 'carousel-d-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-cursor-pointer');
-            videoWrapper.append(playPauseWrapper);
+      const sourceMp4 = document.createElement('source');
+      sourceMp4.src = videoSrc;
+      sourceMp4.type = 'video/mp4';
+      video.append(sourceMp4);
 
-            const playButton = document.createElement('button');
-            playButton.type = 'button';
-            playButton.classList.add('carousel-d-none', 'carousel-video-icon', 'carousel-icon-play', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer');
-            playButton.innerHTML = videoCell.querySelector('.carousel-icon-play')?.innerHTML || '';
-            playPauseWrapper.append(playButton);
+      // Add webm source if available or assume it's the same for simplicity
+      const sourceWebm = document.createElement('source');
+      sourceWebm.src = videoSrc.replace('.mp4', '.webm'); // Assuming .webm exists
+      sourceWebm.type = 'video/webm';
+      video.append(sourceWebm);
 
-            const pauseButton = document.createElement('button');
-            pauseButton.type = 'button';
-            pauseButton.classList.add('carousel-d-block', 'carousel-video-icon', 'carousel-icon-pause', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer');
-            pauseButton.innerHTML = videoCell.querySelector('.carousel-icon-pause')?.innerHTML || '';
-            playPauseWrapper.append(pauseButton);
+      videoWrapper.append(video);
 
-            // Add mute/unmute buttons
-            const muteWrapper = document.createElement('div');
-            muteWrapper.classList.add('carousel-position-absolute', 'carousel-z-2', 'carousel-d-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-cursor-pointer', 'carousel-mute-icon');
-            videoWrapper.append(muteWrapper);
+      // Add play/pause buttons (simplified, assuming SVG content is not directly in block)
+      const playPauseDiv = document.createElement('div');
+      playPauseDiv.classList.add('carousel-position-absolute', 'carousel-w-100', 'carousel-h-100', 'carousel-start-0', 'carousel-top-0', 'carousel-d-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-cursor-pointer');
+      const playButton = document.createElement('button');
+      playButton.type = 'button';
+      playButton.classList.add('carousel-d-none', 'carousel-video-icon', 'carousel-icon-play', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer');
+      playPauseDiv.append(playButton);
+      const pauseButton = document.createElement('button');
+      pauseButton.type = 'button';
+      pauseButton.classList.add('carousel-d-block', 'carousel-video-icon', 'carousel-icon-pause', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer');
+      playPauseDiv.append(pauseButton);
+      videoWrapper.append(playPauseDiv);
 
-            const muteButton = document.createElement('button');
-            muteButton.type = 'button';
-            muteButton.classList.add('carousel-video-icon-volume', 'carousel-icon-mute', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer', 'carousel-d-none');
-            muteButton.innerHTML = videoCell.querySelector('.carousel-icon-mute')?.innerHTML || '';
-            muteWrapper.append(muteButton);
+      // Add mute/unmute buttons (simplified)
+      const muteDiv = document.createElement('div');
+      muteDiv.classList.add('carousel-position-absolute', 'carousel-z-2', 'carousel-d-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-cursor-pointer', 'carousel-mute-icon');
+      const muteButton = document.createElement('button');
+      muteButton.type = 'button';
+      muteButton.classList.add('carousel-video-icon-volume', 'carousel-icon-mute', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer', 'carousel-d-none');
+      muteDiv.append(muteButton);
+      const unmuteButton = document.createElement('button');
+      unmuteButton.type = 'button';
+      unmuteButton.classList.add('carousel-video-icon-volume', 'carousel-icon-unmute', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer', 'carousel-d-none');
+      muteDiv.append(unmuteButton);
+      const noAudioButton = document.createElement('button');
+      noAudioButton.type = 'button';
+      noAudioButton.classList.add('carousel-video-icon-volume', 'carousel-no-audio-icon', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer');
+      muteDiv.append(noAudioButton);
+      videoWrapper.append(muteDiv);
 
-            const unmuteButton = document.createElement('button');
-            unmuteButton.type = 'button';
-            unmuteButton.classList.add('carousel-video-icon-volume', 'carousel-icon-unmute', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer', 'carousel-d-none');
-            unmuteButton.innerHTML = videoCell.querySelector('.carousel-icon-unmute')?.innerHTML || '';
-            muteWrapper.append(unmuteButton);
-
-            const noAudioButton = document.createElement('button');
-            noAudioButton.type = 'button';
-            noAudioButton.classList.add('carousel-video-icon-volume', 'carousel-no-audio-icon', 'carousel-bg-transparent', 'carousel-d-flex', 'carousel-align-items-center', 'carousel-justify-content-center', 'carousel-cursor-pointer');
-            noAudioButton.innerHTML = videoCell.querySelector('.carousel-no-audio-icon')?.innerHTML || '';
-            muteWrapper.append(noAudioButton);
-            
-            // Apply controls logic
-            handleVideoControls(newVideo, playButton, pauseButton, muteButton, unmuteButton, noAudioButton);
-        }
-
-        // Handle Image
-        const img = imageCell?.querySelector('img');
-        if (img) {
-            const optimizedPic = createOptimizedPicture(img.src, img.alt);
-            moveInstrumentation(img, optimizedPic.querySelector('img'));
-            optimizedPic.querySelector('img').classList.add('carousel-w-100', 'carousel-h-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-image');
-            sectionWrapper.append(optimizedPic);
-        }
-
-        // Handle CTA
-        const ctaLink = ctaCell?.querySelector('a');
-        if (ctaLink) {
-            const ctaWrapper = document.createElement('div');
-            ctaWrapper.classList.add('carousel-position-absolute', 'carousel-start-50', 'carousel-translate-middle-x', 'carousel-w-100', 'carousel-boing__banner--cta');
-            sectionWrapper.append(ctaWrapper);
-
-            const bannerCta = document.createElement('div');
-            bannerCta.classList.add('carousel-banner-cta');
-            ctaWrapper.append(bannerCta);
-
-            const textCenter = document.createElement('div');
-            textCenter.classList.add('carousel-text-center');
-            bannerCta.append(textCenter);
-
-            const newCtaLink = document.createElement('a');
-            newCtaLink.id = ctaLink.id;
-            newCtaLink.classList.add('carousel-cmp-button', 'carousel-analytics_cta_click', 'carousel-text-center', 'carousel-cta-layout');
-            newCtaLink.setAttribute('data-link-region', ctaLink.dataset.linkRegion);
-            newCtaLink.setAttribute('data-is-internal', ctaLink.dataset.isInternal);
-            newCtaLink.setAttribute('data-enable-gating', ctaLink.dataset.enableGating);
-            newCtaLink.href = ctaLink.href;
-            newCtaLink.target = ctaLink.target;
-
-            const spanText = document.createElement('span');
-            spanText.classList.add('carousel-cmp-button__text', 'carousel-primary-btn', 'carousel-w-75', 'carousel-p-5', 'carousel-rounded-pill', 'carousel-d-inline-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-famlf-cta-btn');
-            spanText.textContent = ctaLink.textContent.trim();
-            newCtaLink.append(spanText);
-            textCenter.append(newCtaLink);
-
-            // Add popup elements if they exist
-            const popUp = ctaCell.querySelector('.carousel-pop-up');
-            if (popUp) {
-                textCenter.append(popUp.cloneNode(true));
-            }
-            const externalLinkPopup = ctaCell.querySelector('.carousel-external-link-popup');
-            if (externalLinkPopup) {
-                bannerCta.append(externalLinkPopup.cloneNode(true));
-            }
-        }
-        swiperWrapper.append(swiperSlide);
-    });
-
-    // Add navigation and pagination elements
-    const actionsDiv = document.createElement('div');
-    actionsDiv.classList.add('carousel-cmp-carousel__actions');
-    actionsDiv.innerHTML = block.querySelector('.carousel-cmp-carousel__actions')?.innerHTML || '';
-    // If navigation buttons are not present in the block HTML, we manually add them
-    if (actionsDiv.children.length === 0) {
-        actionsDiv.innerHTML = `
-            <button type="button" class="swiper-button-prev" aria-label="Previous slide"></button>
-            <button type="button" class="swiper-button-next" aria-label="Next slide"></button>
-        `;
+      wrapperDiv.append(videoWrapper);
+    } else if (imgSrc) {
+      const picture = createOptimizedPicture(imgSrc, imgAlt || '');
+      moveInstrumentation(cells[1]?.querySelector('img'), picture.querySelector('img'));
+      picture.querySelector('img').classList.add('carousel-w-100', 'carousel-h-100', 'carousel-object-fit-cover', 'carousel-banner-media', 'carousel-banner-image');
+      picture.querySelector('img').setAttribute('loading', 'eager');
+      picture.querySelector('img').setAttribute('fetchpriority', 'high');
+      picture.querySelector('img').setAttribute('decoding', 'async');
+      wrapperDiv.append(picture);
     }
-    carouselWrapper.append(actionsDiv);
 
-    const swiperContainer = document.createElement('div');
-    swiperContainer.classList.add('carousel-swiper-container');
-    swiperContainer.innerHTML = block.querySelector('.carousel-swiper-container')?.innerHTML || '';
-    carouselWrapper.append(swiperContainer);
+    if (ctaLink && ctaText) {
+      const ctaWrapper = document.createElement('div');
+      ctaWrapper.classList.add('carousel-position-absolute', 'carousel-start-50', 'carousel-translate-middle-x', 'carousel-w-100', 'carousel-boing__banner--cta');
 
-    const paginationDiv = document.createElement('div');
-    paginationDiv.classList.add('carousel-swiper-pagination', 'carousel-primary-swiper-pagination', 'carousel-pagination-set', 'carousel-mb-md-8', 'carousel-mb-10', 'carousel-mt-6', 'carousel-position-absolute', 'carousel-swiper-pagination-clickable', 'carousel-swiper-pagination-bullets', 'carousel-swiper-pagination-horizontal');
-    paginationDiv.innerHTML = block.querySelector('.carousel-swiper-pagination')?.innerHTML || '';
-    carouselWrapper.append(paginationDiv);
+      const bannerCta = document.createElement('div');
+      bannerCta.classList.add('carousel-banner-cta');
 
-    block.textContent = '';
-    block.append(carouselWrapper);
-    
-    // ------------------------------------------------------------------
-    // 🚀 PURE JS SLIDER IMPLEMENTATION CALL
-    // ------------------------------------------------------------------
-    if (slides.length > 0) {
-        initVanillaSlider(carouselWrapper, slides);
+      const textCenterDiv = document.createElement('div');
+      textCenterDiv.classList.add('carousel-text-center');
+
+      const link = document.createElement('a');
+      link.id = `cta-${Math.random().toString(36).substring(2, 11)}`; // Generate unique ID
+      link.classList.add('carousel-cmp-button', 'carousel-analytics_cta_click', 'carousel-text-center', 'carousel-cta-layout');
+      link.setAttribute('data-link-region', 'CTA');
+      link.setAttribute('data-is-internal', 'false');
+      link.setAttribute('data-enable-gating', 'false');
+      link.href = ctaLink;
+      link.target = '_blank';
+
+      const span = document.createElement('span');
+      span.classList.add('carousel-cmp-button__text', 'carousel-primary-btn', 'carousel-w-75', 'carousel-p-5', 'carousel-rounded-pill', 'carousel-d-inline-flex', 'carousel-justify-content-center', 'carousel-align-items-center', 'carousel-famlf-cta-btn');
+      span.textContent = ctaText;
+      link.append(span);
+      textCenterDiv.append(link);
+
+      // Simplified pop-up and external link popup structure
+      const popUpDiv = document.createElement('div');
+      popUpDiv.classList.add('carousel-pop-up', 'carousel-d-none');
+      popUpDiv.innerHTML = '<input type="hidden" class="carousel-popup-message"><input type="hidden" class="carousel-proceed-button-label"><input type="hidden" class="carousel-cancel-button-label"><input type="hidden" class="carousel-background-color">';
+      textCenterDiv.append(popUpDiv);
+
+      const externalLinkPopup = document.createElement('div');
+      externalLinkPopup.classList.add('carousel-external-link-popup');
+      const genericPopup = document.createElement('div');
+      genericPopup.classList.add('carousel-generic-popup');
+      const offcanvas = document.createElement('div');
+      offcanvas.classList.add('carousel-offcanvas', 'carousel-offcanvas-bottom', 'carousel-boing-container', 'carousel-gating_offcanvas_bottom--wrapper', 'carousel-gating_offcanvas_bottom');
+      offcanvas.setAttribute('tabindex', '-1');
+      offcanvas.setAttribute('aria-labelledby', 'offcanvasBottomLabel');
+      offcanvas.innerHTML = `
+        <div class="carousel-offcanvas-header carousel-position-relative">
+          <button type="button" class="carousel-close-btn carousel-position-absolute" data-bs-dismiss="offcanvas" aria-label="Close">
+            /content/dam/aemigrate/uploaded-folder/image/1761293302317.svg+xml
+          </button>
+        </div>
+        <div class="carousel-offcanvas-body">
+          <div class="carousel-pop-content carousel-d-flex carousel-flex-column carousel-align-items-center">
+            <div class="carousel-pop-image_text-container carousel-d-flex carousel-flex-column carousel-align-items-center">
+              <div class="carousel-img_holder carousel-d-flex carousel-justify-content-center carousel-align-items-center">
+                <img alt="Popup Icon" class="carousel-icon-svg">
+              </div>
+              <div class="carousel-text_box carousel-d-flex carousel-flex-column carousel-text-center carousel-mt-4">
+              </div>
+            </div>
+            <div class="carousel-cta_box">
+              <a href="${ctaLink}" class="carousel-text-white carousel-popup-login-cta carousel-text-decoration-none carousel-boing--text__title-4 carousel-rounded-pill carousel-bg-boing-primary carousel-py-5 carousel-px-11 carousel-analytics_cta_click carousel-d-flex carousel-justify-content-center carousel-align-items-center">
+                /content/dam/aemigrate/uploaded-folder/image/1761293302327.svg+xml
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+      genericPopup.append(offcanvas);
+      externalLinkPopup.append(genericPopup);
+      textCenterDiv.append(externalLinkPopup);
+
+      bannerCta.append(textCenterDiv);
+      ctaWrapper.append(bannerCta);
+      wrapperDiv.append(ctaWrapper);
     }
+
+    section.append(wrapperDiv);
+    carouselBanner.append(section);
+    swiperSlide.append(carouselBanner);
+    swiperWrapper.append(swiperSlide);
+  });
+
+  swiper.append(swiperWrapper);
+
+  // Add carousel actions (previous, next, pause, play buttons)
+  const actionsDiv = document.createElement('div');
+  actionsDiv.classList.add('carousel-cmp-carousel__actions');
+  actionsDiv.innerHTML = `
+    <button class="carousel-cmp-carousel__action carousel-cmp-carousel__action--previous" type="button" aria-label="Previous" data-cmp-hook-carousel="previous">
+        <span class="carousel-cmp-carousel__action-icon"></span>
+        <span class="carousel-cmp-carousel__action-text">Previous</span>
+    </button>
+    <button class="carousel-cmp-carousel__action carousel-cmp-carousel__action--next" type="button" aria-label="Next" data-cmp-hook-carousel="next">
+        <span class="carousel-cmp-carousel__action-icon"></span>
+        <span class="carousel-cmp-carousel__action-text">Next</span>
+    </button>
+    <button class="carousel-cmp-carousel__action carousel-cmp-carousel__action--pause" type="button" aria-label="Pause" data-cmp-hook-carousel="pause">
+        <span class="carousel-cmp-carousel__action-icon"></span>
+        <span class="carousel-cmp-carousel__action-text">Pause</span>
+    </button>
+    <button class="carousel-cmp-carousel__action carousel-cmp-carousel__action--play carousel-cmp-carousel__action--disabled" type="button" aria-label="Play" data-cmp-hook-carousel="play">
+        <span class="carousel-cmp-carousel__action-icon"></span>
+        <span class="carousel-cmp-carousel__action-text">Play</span>
+    </button>
+  `;
+  swiper.append(actionsDiv);
+
+  // Add swiper navigation buttons (next/prev)
+  const swiperContainer = document.createElement('div');
+  swiperContainer.classList.add('carousel-swiper-container');
+  swiperContainer.innerHTML = `
+    <div>
+        <button class="carousel-primary-swiper__buttonNext carousel-position-absolute carousel-top-50 carousel-swiper-buttonBg carousel-d-none carousel-d-sm-block carousel-cursor-pointer carousel-analytics_cta_click carousel-disabled">
+            /content/dam/aemigrate/uploaded-folder/image/1761293302341.svg+xml
+        </button>
+    </div>
+    <div>
+        <button class="carousel-primary-swiper__buttonPrev carousel-position-absolute carousel-top-50 carousel-swiper-buttonBg carousel-d-none carousel-d-sm-block carousel-cursor-pointer carousel-analytics_cta_click">
+            /content/dam/aemigrate/uploaded-folder/image/1761293302355.svg+xml
+        </button>
+    </div>
+  `;
+  swiper.append(swiperContainer);
+
+  // Add swiper pagination
+  const paginationDiv = document.createElement('div');
+  paginationDiv.classList.add('carousel-swiper-pagination', 'carousel-primary-swiper-pagination', 'carousel-pagination-set', 'carousel-mb-md-8', 'carousel-mb-10', 'carousel-mt-6', 'carousel-position-absolute', 'carousel-swiper-pagination-clickable', 'carousel-swiper-pagination-bullets', 'carousel-swiper-pagination-horizontal');
+  // Add bullets dynamically if needed, or just a placeholder span
+  paginationDiv.innerHTML = '<span class="carousel-swiper-pagination-bullet"></span><span class="carousel-swiper-pagination-bullet carousel-swiper-pagination-bullet-active"></span>';
+  swiper.append(paginationDiv);
+
+  carouselPositionRelative.append(swiper);
+
+  block.textContent = '';
+  block.append(carouselPositionRelative);
 }
