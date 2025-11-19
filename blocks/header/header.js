@@ -2,145 +2,134 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  const mainSection = document.createElement('section');
-  mainSection.className = 'header-position-relative header-mb-15';
-  moveInstrumentation(block, mainSection);
+  const section = document.createElement('section');
+  section.className = 'header-position-relative header-mb-15';
+  moveInstrumentation(block, section);
 
   // App Name
   const appNameSpan = document.createElement('span');
   appNameSpan.className = 'header-d-none header-app-name';
-  const appNameCell = block.children[0]?.children[0]; // Assuming appName is the first cell of the first row
-  if (appNameCell) {
-    appNameSpan.textContent = appNameCell.textContent.trim();
-    appNameSpan.setAttribute('data-app-name', appNameCell.textContent.trim());
-    moveInstrumentation(appNameCell, appNameSpan);
-  }
-  mainSection.append(appNameSpan);
+  appNameSpan.setAttribute('data-app-name', 'boing');
+  appNameSpan.textContent = 'boing';
+  section.append(appNameSpan);
 
   // Header Container
-  const headerContainer = document.createElement('header');
-  headerContainer.className = 'header-boing-container header-d-flex header-justify-content-between header-align-items-center header-h-15 header-px-5 header-py-2 header-fixed-top header-w-100 header-bg-white';
-  mainSection.append(headerContainer);
+  const header = document.createElement('header');
+  header.className = 'header-boing-container header-header header-d-flex header-justify-content-between header-align-items-center header-h-15 header-px-5 header-py-2 header-fixed-top header-w-100 header-bg-white';
+  section.append(header);
 
-  // Header Left Div (for menu icon, if any)
+  // Header Left Div
   const headerLeftDiv = document.createElement('div');
   headerLeftDiv.className = 'header-d-flex header-w-25';
-  // No direct content in the provided HTML for this div, so leaving it empty for now.
-  // If there's an implicit menu icon, it would be added here.
-  headerContainer.append(headerLeftDiv);
+  header.append(headerLeftDiv);
 
-  // Header Logo
-  const headerLogoDiv = document.createElement('div');
-  headerLogoDiv.className = 'header-d-flex  header-justify-content-center header-w-25';
+  // Header Middle Div (Logo)
+  const headerMiddleDiv = document.createElement('div');
+  headerMiddleDiv.className = 'header-d-flex  header-justify-content-center header-w-25';
+  header.append(headerMiddleDiv);
+
   const logoLink = document.createElement('a');
   logoLink.href = '/';
   logoLink.className = 'header-analytics_cta_click';
   logoLink.setAttribute('data-ct', '');
   logoLink.setAttribute('a-label', 'header-logo-boing');
+  headerMiddleDiv.append(logoLink);
 
   const logoDiv = document.createElement('div');
-  logoDiv.className = 'header__logo header-d-flex header-align-items-center';
-
-  const logoImageCell = block.children[0]?.children[1]; // Assuming logo image is the second cell of the first row
-  if (logoImageCell) {
-    const img = logoImageCell.querySelector('img');
-    if (img) {
-      const optimizedPic = createOptimizedPicture(img.src, img.alt);
-      optimizedPic.querySelector('img').className = 'header__logo-img';
-      moveInstrumentation(img, optimizedPic.querySelector('img'));
-      logoDiv.append(optimizedPic);
-    }
-    moveInstrumentation(logoImageCell, logoLink);
-  }
+  logoDiv.className = 'header-header__logo header-d-flex header-align-items-center';
   logoLink.append(logoDiv);
-  headerLogoDiv.append(logoLink);
-  headerContainer.append(headerLogoDiv);
+
+  const logoImg = document.createElement('img');
+  logoImg.src = '/content/dam/aemigrate/uploaded-folder/image/lets-boing-logo?fmt=webp-alpha.webp';
+  logoImg.alt = 'Let\'s Boing';
+  logoImg.className = 'header-header__logo-img';
+  logoDiv.append(logoImg);
 
   // Header Right Div (Login Button)
   const headerRightDiv = document.createElement('div');
   headerRightDiv.className = 'header-d-flex header-w-25 header-justify-content-end';
+  header.append(headerRightDiv);
 
-  const loginLinkCell = block.children[0]?.children[2]; // Assuming login link is the third cell of the first row
-  if (loginLinkCell) {
-    const loginLink = loginLinkCell.querySelector('a');
-    if (loginLink) {
-      const newLoginLink = document.createElement('a');
-      newLoginLink.href = loginLink.href;
-      newLoginLink.className = 'header__login-btn-wrapper header-analytics_cta_click';
-      newLoginLink.style.display = 'inline';
+  const loginLink = document.createElement('a');
+  loginLink.href = '/login.html';
+  loginLink.className = 'header-header__login-btn-wrapper header-analytics_cta_click';
+  loginLink.style.display = 'inline';
+  headerRightDiv.append(loginLink);
 
-      const loginButton = document.createElement('button');
-      loginButton.className = 'header__login-btn header-btn header-text-boing-primary header-bg-transparent header-fw-semibold header-rounded-4 header-btn-sm header-py-3 header-px-4';
-      loginButton.textContent = loginLink.textContent.trim();
-      newLoginLink.append(loginButton);
-      headerRightDiv.append(newLoginLink);
-      moveInstrumentation(loginLink, newLoginLink);
-    }
-    moveInstrumentation(loginLinkCell, headerRightDiv);
-  }
-  headerContainer.append(headerRightDiv);
+  const loginButton = document.createElement('button');
+  loginButton.className = 'header-header__login-btn header-btn header-text-boing-primary header-bg-transparent header-fw-semibold header-rounded-4 header-btn-sm header-py-3 header-px-4';
+  loginButton.textContent = 'Login';
+  loginLink.append(loginButton);
 
-  // Submenu Container (Sidebar)
+  // Submenu Container
   const submenuContainer = document.createElement('div');
   submenuContainer.className = 'header-submenu-container header-position-fixed header-top-0 header-start-0 header-end-0 header-m-auto header-overflow-hidden';
-  mainSection.append(submenuContainer);
+  section.append(submenuContainer);
 
-  const sidebar = document.createElement('aside');
-  sidebar.className = 'header-sidebar header-start-0 header-bg-white header-position-absolute';
-  submenuContainer.append(sidebar);
+  const aside = document.createElement('aside');
+  aside.className = 'header-sidebar header-start-0 header-bg-white header-position-absolute';
+  submenuContainer.append(aside);
 
-  const sidebarMenuUl = document.createElement('ul');
-  sidebarMenuUl.className = 'header-sidebar__menu header-list-unstyled header-px-4';
-  sidebar.append(sidebarMenuUl);
+  const ul = document.createElement('ul');
+  ul.className = 'header-sidebar__menu header-list-unstyled header-px-4';
+  aside.append(ul);
 
-  // Sidebar Menu Items
-  // Assuming sidebar menu items start from the second row in the block
-  let sidebarMenuItemIndex = 1;
-  while (block.children[sidebarMenuItemIndex] && block.children[sidebarMenuItemIndex].children.length === 3) {
-    const row = block.children[sidebarMenuItemIndex];
+  // Loop through menu items
+  const menuItems = block.querySelectorAll('.menu-item');
+  menuItems.forEach((row) => {
     const li = document.createElement('li');
-    li.className = 'header-sidebar__menu-item  header-py-6 header-border-bottom header-border-boing-neutral-gray-200';
     moveInstrumentation(row, li);
+    li.className = 'header-sidebar__menu-item  header-py-6 header-border-bottom header-border-boing-neutral-gray-200';
 
-    const iconCell = row.children[0];
-    const labelCell = row.children[1];
-    const linkCell = row.children[2];
+    const link = row.querySelector('a');
+    const img = row.querySelector('img');
+    const label = row.querySelector('p:last-of-type'); // Assuming label is the last paragraph
 
-    const link = linkCell.querySelector('a');
-    if (link) {
+    if (link && img && label) {
       const newLink = document.createElement('a');
       newLink.href = link.href;
       newLink.className = 'header-sidebar__menu-link header-d-flex header-align-items-center header-text-decoration-none header-px-6 header-fw-medium header-analytics_cta_click';
-      newLink.setAttribute('data-link', link.getAttribute('data-link') || link.href);
+      newLink.setAttribute('data-link', link.getAttribute('data-link'));
 
-      const img = iconCell.querySelector('img');
-      if (img) {
-        const optimizedPic = createOptimizedPicture(img.src, img.alt);
-        optimizedPic.querySelector('img').className = 'header-sidebar__menu-icon header-me-4';
-        optimizedPic.querySelector('img').setAttribute('loading', 'lazy');
-        moveInstrumentation(img, optimizedPic.querySelector('img'));
-        newLink.append(optimizedPic);
-      }
-      newLink.append(labelCell.textContent.trim());
+      const optimizedPic = createOptimizedPicture(img.src, img.alt);
+      moveInstrumentation(img, optimizedPic.querySelector('img'));
+      optimizedPic.querySelector('img').className = 'header-sidebar__menu-icon header-me-4';
+      optimizedPic.querySelector('img').loading = 'lazy';
+      newLink.append(optimizedPic);
+      newLink.append(document.createTextNode(label.textContent.trim()));
       li.append(newLink);
-      moveInstrumentation(link, newLink);
     }
-    sidebarMenuUl.append(li);
-    sidebarMenuItemIndex++;
-  }
+    ul.append(li);
+  });
 
-  // Logout item (if present in block, currently not explicitly handled by structure)
-  // The HTML shows a logout item with display: none, implying it's dynamic.
-  // If it were a static block item, it would follow the pattern above.
+  // Logout menu item (static, as per HTML)
+  const logoutLi = document.createElement('li');
+  logoutLi.className = 'header-sidebar__menu-item header-sidebar__menu-item--logout header-py-6 header-border-bottom header-border-boing-neutral-gray-200';
+  logoutLi.style.display = 'none';
+  ul.append(logoutLi);
+
+  const logoutLink = document.createElement('a');
+  logoutLink.href = '/';
+  logoutLink.className = 'header-sidebar__menu-link header-d-flex header-align-items-center header-text-decoration-none header-px-6 header-fw-medium header-analytics_cta_click';
+  logoutLink.setAttribute('data-link', '/content/boing/in/en/home');
+
+  const logoutImg = document.createElement('img');
+  logoutImg.src = '/content/dam/aemigrate/uploaded-folder/image/logout-3?fmt=webp-alpha.webp';
+  logoutImg.alt = 'Logout';
+  logoutImg.className = 'header-sidebar__menu-icon header-me-4';
+  logoutImg.loading = 'lazy';
+  logoutLink.append(logoutImg);
+  logoutLink.append(document.createTextNode('Logout'));
+  logoutLi.append(logoutLink);
 
   const sidebarCurve = document.createElement('div');
   sidebarCurve.className = 'header-sidebar__curve';
-  sidebar.append(sidebarCurve);
+  aside.append(sidebarCurve);
 
   // Footer Brand
   const footerBrandDiv = document.createElement('div');
   footerBrandDiv.className = 'header-footer-brand header-w-100 header-bg-boing-neutral-gray-600';
-  sidebar.append(footerBrandDiv);
+  aside.append(footerBrandDiv);
 
   const footerPrimarySection = document.createElement('section');
   footerPrimarySection.className = 'header-footer-brand__primary';
@@ -151,152 +140,125 @@ export default function decorate(block) {
   footerContainer.className = 'header-container';
   footerPrimarySection.append(footerContainer);
 
-  const footerPrimaryContent = document.createElement('div');
-  footerPrimaryContent.className = 'header-footer-brand__primary--content header-d-flex header-flex-column header-flex-md-row header-justify-content-md-between header-align-items-center';
-  footerContainer.append(footerPrimaryContent);
+  const footerContent = document.createElement('div');
+  footerContent.className = 'header-footer-brand__primary--content header-d-flex header-flex-column header-flex-md-row header-justify-content-md-between header-align-items-center';
+  footerContainer.append(footerContent);
 
-  // Footer Brand Left (ITC and FSSI Logos)
-  const footerBrandLeft = document.createElement('section');
-  footerBrandLeft.className = 'header-footer-brand__left header-d-flex header-gap-16 header-px-10 header-align-items-center header-justify-content-center';
-  footerPrimaryContent.append(footerBrandLeft);
+  const footerLeftSection = document.createElement('section');
+  footerLeftSection.className = 'header-footer-brand__left header-d-flex header-gap-16 header-px-10 header-align-items-center header-justify-content-center';
+  footerContent.append(footerLeftSection);
 
-  // Assuming footer logos are in subsequent rows after sidebar menu items
-  let currentRowIndex = sidebarMenuItemIndex;
+  // Brand Logo
+  const brandLogoLink = document.createElement('a');
+  brandLogoLink.href = 'https://www.itcportal.com/';
+  brandLogoLink.target = '_blank';
+  brandLogoLink.className = 'header-footer-brand__logo header-d-inline-block header-analytics_cta_click';
+  brandLogoLink.setAttribute('data-cta-region', 'Footer');
+  brandLogoLink.setAttribute('aria-label', 'ITC Logo');
+  footerLeftSection.append(brandLogoLink);
 
-  // ITC Logo
-  const itcLogoCell = block.children[currentRowIndex]?.children[0];
-  if (itcLogoCell) {
-    const itcLink = itcLogoCell.querySelector('a');
-    if (itcLink) {
-      const newItcLink = document.createElement('a');
-      newItcLink.href = itcLink.href;
-      newItcLink.target = '_blank';
-      newItcLink.className = 'header-footer-brand__logo header-d-inline-block header-analytics_cta_click';
-      newItcLink.setAttribute('data-cta-region', 'Footer');
-      newItcLink.setAttribute('aria-label', 'ITC Logo');
+  const brandLogoImg = document.createElement('img');
+  brandLogoImg.src = '/content/dam/aemigrate/uploaded-folder/image/itc-logo-2?fmt=webp-alpha.webp';
+  brandLogoImg.alt = 'ITC Logo';
+  brandLogoImg.className = 'header-object-fit-contain header-w-100 header-h-100';
+  brandLogoImg.loading = 'lazy';
+  brandLogoLink.append(brandLogoImg);
 
-      const img = itcLogoCell.querySelector('img');
-      if (img) {
-        const optimizedPic = createOptimizedPicture(img.src, img.alt);
-        optimizedPic.querySelector('img').className = 'header-object-fit-contain header-w-100 header-h-100';
-        optimizedPic.querySelector('img').setAttribute('loading', 'lazy');
-        moveInstrumentation(img, optimizedPic.querySelector('img'));
-        newItcLink.append(optimizedPic);
-      }
-      footerBrandLeft.append(newItcLink);
-      moveInstrumentation(itcLink, newItcLink);
-    }
-    currentRowIndex++;
-  }
+  // Secondary Logo
+  const secondaryLogoDiv = document.createElement('div');
+  secondaryLogoDiv.className = 'header-footer-brand__secondary--logo header-d-inline-block';
+  footerLeftSection.append(secondaryLogoDiv);
 
-  // FSSI Logo
-  const fssiLogoCell = block.children[currentRowIndex]?.children[0];
-  if (fssiLogoCell) {
-    const fssiDiv = document.createElement('div');
-    fssiDiv.className = 'header-footer-brand__secondary--logo header-d-inline-block';
-    const img = fssiLogoCell.querySelector('img');
-    if (img) {
-      const optimizedPic = createOptimizedPicture(img.src, img.alt);
-      optimizedPic.querySelector('img').className = 'header-object-fit-contain header-w-100';
-      optimizedPic.querySelector('img').setAttribute('loading', 'lazy');
-      moveInstrumentation(img, optimizedPic.querySelector('img'));
-      fssiDiv.append(optimizedPic);
-    }
-    footerBrandLeft.append(fssiDiv);
-    moveInstrumentation(fssiLogoCell, fssiDiv);
-    currentRowIndex++;
-  }
+  const secondaryLogoImg = document.createElement('img');
+  secondaryLogoImg.className = 'header-object-fit-contain header-w-100';
+  secondaryLogoImg.src = '/content/dam/aemigrate/uploaded-folder/image/fssi-logo-update?fmt=webp-alpha.webp';
+  secondaryLogoImg.alt = 'FSSI Logo';
+  secondaryLogoImg.loading = 'lazy';
+  secondaryLogoDiv.append(secondaryLogoImg);
 
-  // Footer Brand Right (Navigation)
-  const footerBrandRight = document.createElement('section');
-  footerBrandRight.className = 'header-footer-brand__right';
-  footerPrimaryContent.append(footerBrandRight);
+  const footerRightSection = document.createElement('section');
+  footerRightSection.className = 'header-footer-brand__right';
+  footerContent.append(footerRightSection);
 
   const footerNav = document.createElement('nav');
   footerNav.className = 'header-footer-brand__navbar header-d-grid header-d-md-flex';
   footerNav.setAttribute('aria-label', 'footer navbar');
-  footerBrandRight.append(footerNav);
+  footerRightSection.append(footerNav);
 
-  const footerNavbarLeft = document.createElement('div');
-  footerNavbarLeft.className = 'header-footer-brand__navbar--left header-d-flex header-flex-column header-flex-md-row ';
-  footerNav.append(footerNavbarLeft);
+  const footerNavLeft = document.createElement('div');
+  footerNavLeft.className = 'header-footer-brand__navbar--left header-d-flex header-flex-column header-flex-md-row ';
+  footerNav.append(footerNavLeft);
 
-  // Footer Nav Lists - assuming each column of links in the block corresponds to a 'footerList' div
-  // This part needs careful mapping from block structure to the desired HTML.
-  // Assuming each row after the logos represents a list of footer nav items.
-  // The block JSON defines 'footerNav' as a container of 'footerNavItem's.
-  // This implies the block might have rows where each row is a footer list, or each cell in a row is a list.
-  // Given the HTML structure, it's likely multiple columns of links.
-  // Let's assume the block has rows, and each row contains a set of links for one `footerList`.
+  // Footer Link Lists
+  const footerLinkLists = block.querySelectorAll('.footer-link-list');
+  footerLinkLists.forEach((listRow) => {
+    const footerListDiv = document.createElement('div');
+    footerListDiv.className = 'header-footerList';
+    footerNavLeft.append(footerListDiv);
 
-  const footerNavItems = [];
-  // Collect all footer nav items first
-  while (block.children[currentRowIndex] && block.children[currentRowIndex].children.length > 0) {
-    const row = block.children[currentRowIndex];
-    const linksInRow = [];
-    [...row.children].forEach((cell) => {
-      const link = cell.querySelector('a');
+    const footerUl = document.createElement('ul');
+    footerUl.className = 'header-footer-list header-d-flex header-align-items-center header-justify-content-center header-align-items-md-start header-flex-column';
+    footerListDiv.append(footerUl);
+
+    [...listRow.children].forEach((linkCell) => {
+      const link = linkCell.querySelector('a');
       if (link) {
-        linksInRow.push({ link: link.href, label: link.textContent.trim() });
-        moveInstrumentation(cell, link);
+        const li = document.createElement('li');
+        li.className = 'header-footer-list__item';
+        moveInstrumentation(linkCell, li);
+
+        const newLink = document.createElement('a');
+        newLink.href = link.href;
+        newLink.className = 'header-cta-analytics header-analytics_cta_click header-footer-list__item--link header-d-inline-block';
+        newLink.setAttribute('data-link-region', 'Footer List');
+        if (link.target) {
+          newLink.target = link.target;
+        }
+        newLink.textContent = link.textContent.trim();
+        li.append(newLink);
+        footerUl.append(li);
       }
     });
-    if (linksInRow.length > 0) {
-      footerNavItems.push(linksInRow);
-    }
-    currentRowIndex++;
-  }
-
-  // Distribute footer nav items into two columns as per HTML
-  const numLists = footerNavItems.length;
-  const leftColumnLists = footerNavItems.slice(0, Math.ceil(numLists / 2));
-  const rightColumnLists = footerNavItems.slice(Math.ceil(numLists / 2));
-
-  leftColumnLists.forEach((listItems) => {
-    const footerListDiv = document.createElement('div');
-    footerListDiv.className = 'header-footerList';
-    const ul = document.createElement('ul');
-    ul.className = 'header-footer-list header-d-flex header-align-items-center header-justify-content-center header-align-items-md-start header-flex-column';
-    listItems.forEach((item) => {
-      const li = document.createElement('li');
-      li.className = 'header-footer-list__item';
-      const a = document.createElement('a');
-      a.href = item.link;
-      a.className = 'header-cta-analytics header-analytics_cta_click header-footer-list__item--link header-d-inline-block';
-      a.setAttribute('data-link-region', 'Footer List');
-      a.textContent = item.label;
-      li.append(a);
-      ul.append(li);
-    });
-    footerListDiv.append(ul);
-    footerNavbarLeft.append(footerListDiv);
   });
 
-  const footerNavbarRight = document.createElement('div');
-  footerNavbarRight.className = 'header-footer-brand__navbar--right header-d-flex header-flex-column header-flex-md-row';
-  footerNav.append(footerNavbarRight);
+  const footerNavRight = document.createElement('div');
+  footerNavRight.className = 'header-footer-brand__navbar--right header-d-flex header-flex-column header-flex-md-row';
+  footerNav.append(footerNavRight);
 
-  rightColumnLists.forEach((listItems) => {
+  // Assuming there are two more footer link lists for the right section
+  // You would need to adapt this based on how the block JSON structures these
+  // For now, I'll simulate by taking the next two 'footer-link-list' if they exist
+  const remainingFooterLinkLists = Array.from(block.querySelectorAll('.footer-link-list')).slice(2);
+  remainingFooterLinkLists.forEach((listRow) => {
     const footerListDiv = document.createElement('div');
     footerListDiv.className = 'header-footerList';
-    const ul = document.createElement('ul');
-    ul.className = 'header-footer-list header-d-flex header-align-items-center header-justify-content-center header-align-items-md-start header-flex-column';
-    listItems.forEach((item) => {
-      const li = document.createElement('li');
-      li.className = 'header-footer-list__item';
-      const a = document.createElement('a');
-      a.href = item.link;
-      a.className = 'header-cta-analytics header-analytics_cta_click header-footer-list__item--link header-d-inline-block';
-      a.setAttribute('data-link-region', 'Footer List');
-      a.textContent = item.label;
-      li.append(a);
-      ul.append(li);
+    footerNavRight.append(footerListDiv);
+
+    const footerUl = document.createElement('ul');
+    footerUl.className = 'header-footer-list header-d-flex header-align-items-center header-justify-content-center header-align-items-md-start header-flex-column';
+    footerListDiv.append(footerUl);
+
+    [...listRow.children].forEach((linkCell) => {
+      const link = linkCell.querySelector('a');
+      if (link) {
+        const li = document.createElement('li');
+        li.className = 'header-footer-list__item';
+        moveInstrumentation(linkCell, li);
+
+        const newLink = document.createElement('a');
+        newLink.href = link.href;
+        newLink.className = 'header-cta-analytics header-analytics_cta_click header-footer-list__item--link header-d-inline-block';
+        newLink.setAttribute('data-link-region', 'Footer List');
+        if (link.target) {
+          newLink.target = link.target;
+        }
+        newLink.textContent = link.textContent.trim();
+        li.append(newLink);
+        footerUl.append(li);
+      }
     });
-    footerListDiv.append(ul);
-    footerNavbarRight.append(footerListDiv);
   });
 
-  // Footer Secondary Section (Social Links and Copyright)
   const footerSecondarySection = document.createElement('section');
   footerSecondarySection.className = 'header-footer-brand__secondary';
   footerSecondarySection.style.backgroundColor = '';
@@ -310,105 +272,83 @@ export default function decorate(block) {
   footerSecondaryContent.className = 'header-footer-brand__secondary--content header-d-flex header-flex-column  header-justify-content-md-between header-align-items-center';
   footerSecondaryContainer.append(footerSecondaryContent);
 
-  // Social Media Links
-  const socialMediaRight = document.createElement('section');
-  socialMediaRight.className = 'header-footer-brand__right header-d-flex header-flex-column header-pb-5';
-  footerSecondaryContent.append(socialMediaRight);
+  const footerSocialSection = document.createElement('section');
+  footerSocialSection.className = 'header-footer-brand__right header-d-flex header-flex-column header-pb-5';
+  footerSecondaryContent.append(footerSocialSection);
 
   const socialTitle = document.createElement('h3');
   socialTitle.className = 'header-social_media--title';
   socialTitle.textContent = 'Follow Us On';
-  socialMediaRight.append(socialTitle);
+  footerSocialSection.append(socialTitle);
 
   const socialUl = document.createElement('ul');
   socialUl.className = 'header-footer-brand__right--list header-d-flex header-align-items-center header-justify-content-center header-px-10 header-flex-wrap';
-  socialMediaRight.append(socialUl);
+  footerSocialSection.append(socialUl);
 
-  // Assuming social links are in subsequent rows after footer nav items
-  // Each row has an icon and a link
-  while (block.children[currentRowIndex] && block.children[currentRowIndex].children.length === 2) {
-    const row = block.children[currentRowIndex];
-    const iconCell = row.children[0];
-    const linkCell = row.children[1];
-
+  // Loop through social links
+  const socialLinks = block.querySelectorAll('.social-link');
+  socialLinks.forEach((row) => {
     const li = document.createElement('li');
     li.className = 'header-footer-brand__right--item header-d-flex header-justify-content-center header-align-items-center';
     moveInstrumentation(row, li);
 
-    const link = linkCell.querySelector('a');
-    if (link) {
+    const link = row.querySelector('a');
+    const img = row.querySelector('img');
+
+    if (link && img) {
       const newLink = document.createElement('a');
       newLink.href = link.href;
-      newLink.target = '_blank';
       newLink.className = 'header-footer-brand__right--link header-d-flex header-justify-content-center header-align-items-center header-analytics_cta_click';
       newLink.setAttribute('data-cta-region', 'Footer');
-      newLink.setAttribute('data-cta-label', `footer-${link.textContent.trim().toLowerCase()}`); // Infer label from link text
-      newLink.setAttribute('data-platform-name', link.textContent.trim().toLowerCase());
+      newLink.setAttribute('data-cta-label', link.getAttribute('data-cta-label'));
+      newLink.target = '_blank';
+      newLink.setAttribute('data-platform-name', link.getAttribute('data-platform-name'));
       newLink.setAttribute('data-social-linktype', 'follow');
 
-      const img = iconCell.querySelector('img');
-      if (img) {
-        const optimizedPic = createOptimizedPicture(img.src, img.alt || link.href);
-        optimizedPic.querySelector('img').setAttribute('aria-label', link.textContent.trim().toLowerCase());
-        optimizedPic.querySelector('img').className = 'header-object-fit-contain header-w-100 header-h-100';
-        optimizedPic.querySelector('img').setAttribute('loading', 'lazy');
-        moveInstrumentation(img, optimizedPic.querySelector('img'));
-        newLink.append(optimizedPic);
-      }
+      const optimizedPic = createOptimizedPicture(img.src, img.alt);
+      moveInstrumentation(img, optimizedPic.querySelector('img'));
+      optimizedPic.querySelector('img').setAttribute('aria-label', img.getAttribute('aria-label'));
+      optimizedPic.querySelector('img').className = 'header-object-fit-contain header-w-100 header-h-100';
+      optimizedPic.querySelector('img').loading = 'lazy';
+      newLink.append(optimizedPic);
       li.append(newLink);
-      moveInstrumentation(link, newLink);
     }
     socialUl.append(li);
-    currentRowIndex++;
-  }
+  });
 
-  // Footer Brand Left (ITC Portal and Copyright)
-  const footerBrandLeftBottom = document.createElement('section');
-  footerBrandLeftBottom.className = 'header-footer-brand__left header-py-5 header-d-flex header-flex-column header-gap-3';
-  footerSecondaryContent.append(footerBrandLeftBottom);
+  const footerCopyrightSection = document.createElement('section');
+  footerCopyrightSection.className = 'header-footer-brand__left header-py-5 header-d-flex header-flex-column header-gap-3';
+  footerSecondaryContent.append(footerCopyrightSection);
 
-  const footerLeftUl = document.createElement('ul');
-  footerLeftUl.className = 'header-footer-brand__left--list header-d-flex header-align-items-center header-justify-content-center header-flex-wrap';
-  footerBrandLeftBottom.append(footerLeftUl);
+  const copyrightUl = document.createElement('ul');
+  copyrightUl.className = 'header-footer-brand__left--list header-d-flex header-align-items-center header-justify-content-center header-flex-wrap';
+  footerCopyrightSection.append(copyrightUl);
 
-  // ITC Portal Link - assuming it's the next row with a single link
-  const itcPortalCell = block.children[currentRowIndex]?.children[0];
-  if (itcPortalCell) {
-    const itcPortalLink = itcPortalCell.querySelector('a');
-    if (itcPortalLink) {
-      const li = document.createElement('li');
-      li.className = 'header-footer-brand__left--item header-foot_link';
-      const a = document.createElement('a');
-      a.href = itcPortalLink.href;
-      a.target = '_blank';
-      a.className = 'header-footer-brand__left--link header-analytics_cta_click';
-      a.setAttribute('data-cta-region', 'Footer');
-      a.textContent = itcPortalLink.textContent.trim();
-      li.append(a);
-      footerLeftUl.append(li);
-      moveInstrumentation(itcPortalLink, a);
-    }
-    currentRowIndex++;
-  }
+  const copyrightLi = document.createElement('li');
+  copyrightLi.className = 'header-footer-brand__left--item header-foot_link';
+  copyrightUl.append(copyrightLi);
 
-  // Copyright
-  const copyrightCell = block.children[currentRowIndex]?.children[0];
-  if (copyrightCell) {
-    const copyrightDiv = document.createElement('div');
-    copyrightDiv.className = 'header-footer-brand__left--copyright header-text-center ';
-    const copyrightSpan = document.createElement('span');
-    copyrightSpan.className = 'header-footer-brand__left--text header-text-white';
-    copyrightSpan.innerHTML = copyrightCell.innerHTML;
-    copyrightDiv.append(copyrightSpan);
-    footerBrandLeftBottom.append(copyrightDiv);
-    moveInstrumentation(copyrightCell, copyrightDiv);
-  }
+  const copyrightLink = document.createElement('a');
+  copyrightLink.href = 'https://www.itcportal.com/';
+  copyrightLink.target = '_blank';
+  copyrightLink.className = 'header-footer-brand__left--link header-analytics_cta_click';
+  copyrightLink.setAttribute('data-cta-region', 'Footer');
+  copyrightLink.textContent = 'ITC portal';
+  copyrightLi.append(copyrightLink);
 
-  // Overlay
+  const copyrightDiv = document.createElement('div');
+  copyrightDiv.className = 'header-footer-brand__left--copyright header-text-center ';
+  footerCopyrightSection.append(copyrightDiv);
+
+  const copyrightSpan = document.createElement('span');
+  copyrightSpan.className = 'header-footer-brand__left--text header-text-white';
+  copyrightSpan.textContent = '© 2025 Bingo! All Rights Reserved.';
+  copyrightDiv.append(copyrightSpan);
+
   const overlayDiv = document.createElement('div');
   overlayDiv.className = 'header-overlay header-position-absolute header-top-0 header-start-0 header-w-100 header-h-100 header-bg-black header-opacity-25';
   submenuContainer.append(overlayDiv);
 
   block.textContent = '';
-  block.append(mainSection);
+  block.append(section);
 }

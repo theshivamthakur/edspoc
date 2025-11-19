@@ -18,7 +18,18 @@
       "fragment",
       "test",
       "header",
-      "carousel"
+      "carousel",
+      "featureCards",
+      "latestBlogs",
+      "spaceadderContainer",
+      "footerBrand",
+      "Header",
+      "Carousel",
+      "Featurecards",
+      "Latest-Blogs",
+      "Spaceadder",
+      "Footer-Brand",
+      "Sticky-Navigation-Bottom-Nav"
     ]
   },
   {
@@ -30,7 +41,7 @@
   {
     "id": "carousel",
     "components": [
-      "carouselItem"
+      "carouselSlide"
     ]
   },
   {
@@ -49,11 +60,42 @@
     ]
   },
   {
+    "id": "featurecards",
+    "components": [
+      "featurecard"
+    ]
+  },
+  {
+    "id": "footerBrand",
+    "components": [
+      "footerNavColumn",
+      "footerSocialLink"
+    ]
+  },
+  {
     "id": "header",
     "components": [
-      "sidebarMenuItem",
-      "footerNavItem",
+      "menuItem",
+      "footerLink",
       "socialLink"
+    ]
+  },
+  {
+    "id": "latestBlogs",
+    "components": [
+      "blogCard"
+    ]
+  },
+  {
+    "id": "spaceadder"
+  },
+  {
+    "id": "spaceadderContainer"
+  },
+  {
+    "id": "stickyNavigationBottomNav",
+    "components": [
+      "navItem"
     ]
   }
 ]
