@@ -142,6 +142,58 @@
     ]
   },
   {
+    "id": "latestBlogs",
+    "fields": [
+      {
+        "component": "richtext",
+        "label": "Title",
+        "name": "title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "Description",
+        "name": "description",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "label": "View All Link",
+        "name": "viewAllLink",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "blogItem",
+    "fields": [
+      {
+        "component": "aem-content",
+        "label": "Blog Link",
+        "name": "blogLink",
+        "valueType": "string"
+      },
+      {
+        "component": "reference",
+        "label": "Image",
+        "name": "image",
+        "valueType": "string"
+      },
+      {
+        "component": "date-time",
+        "label": "Published Date",
+        "name": "publishedDate",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "label": "Blog Title",
+        "name": "blogTitle",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {

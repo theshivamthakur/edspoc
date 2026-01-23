@@ -33,6 +33,12 @@
     ]
   },
   {
+    "id": "latestBlogs",
+    "components": [
+      "blogItem"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
